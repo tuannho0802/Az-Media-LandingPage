@@ -177,11 +177,73 @@
 		document.addEventListener( 'visibilitychange', function () { if ( document.hidden ) { show( false ); } } );
 	}
 
+	/* Nút lên đầu trang (mọi trang): ẩn ở đầu trang, cuộn xuống một chút thì trượt vào từ góc phải,
+	 * vòng ngoài được tô dần theo tiến độ cuộn. Bấm: cuộn mượt về đầu và trượt ra khuất góc phải,
+	 * ở yên đó cho tới khi người dùng cuộn xuống lại. */
+	function initBackToTop() {
+		var SHOW_AFTER = 240; /* px cuộn tới đâu thì nút xuất hiện */
+		var C = 2 * Math.PI * 21; /* chu vi vòng r=21 trong viewBox 48 */
+		var btn = document.createElement( 'button' );
+		btn.type = 'button';
+		btn.className = 'az-top';
+		btn.setAttribute( 'aria-label', 'Lên đầu trang' );
+		btn.setAttribute( 'tabindex', '-1' );
+		btn.innerHTML = '<svg class="az-top__ring" viewBox="0 0 48 48" aria-hidden="true" focusable="false">' +
+			'<circle class="az-top__track" cx="24" cy="24" r="21"/>' +
+			'<circle class="az-top__bar" cx="24" cy="24" r="21"/></svg>' +
+			'<svg class="az-top__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 15 6-6 6 6"/></svg>';
+		document.body.appendChild( btn );
+		var bar = btn.querySelector( '.az-top__bar' );
+		bar.style.strokeDasharray = C.toFixed( 2 );
+
+		var dismissed = false; /* true từ lúc bấm nút đến khi người dùng tự cuộn lại */
+		var shown = false;
+		var ticking = false;
+
+		function update() {
+			ticking = false;
+			var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+			var max = Math.max( 1, document.documentElement.scrollHeight - window.innerHeight );
+			bar.style.strokeDashoffset = ( C * ( 1 - Math.min( 1, Math.max( 0, y / max ) ) ) ).toFixed( 2 );
+			if ( y < 8 ) { dismissed = false; }
+			var want = y > SHOW_AFTER && ! dismissed;
+			if ( want !== shown ) {
+				shown = want;
+				btn.classList.toggle( 'is-visible', want );
+				btn.setAttribute( 'tabindex', want ? '0' : '-1' );
+			}
+		}
+
+		function request() {
+			if ( ! ticking ) { ticking = true; requestAnimationFrame( update ); }
+		}
+
+		window.addEventListener( 'scroll', request, { passive: true } );
+		window.addEventListener( 'resize', request );
+
+		/* Người dùng tự điều khiển cuộn (lăn chuột, chạm, phím) thì cho nút hiện lại như bình thường. */
+		[ 'wheel', 'touchstart', 'keydown' ].forEach( function ( type ) {
+			window.addEventListener( type, function () { if ( dismissed ) { dismissed = false; request(); } }, { passive: true } );
+		} );
+
+		btn.addEventListener( 'click', function () {
+			dismissed = true;
+			shown = false;
+			btn.classList.remove( 'is-visible' );
+			btn.setAttribute( 'tabindex', '-1' );
+			btn.blur();
+			window.scrollTo( { top: 0, behavior: reduceMotion ? 'auto' : 'smooth' } );
+		} );
+
+		update();
+	}
+
 	ready( function () {
 		initAnnouncement();
 		initHeader();
 		initCounters();
 		initFaq();
 		initCursor();
+		initBackToTop();
 	} );
 }() );

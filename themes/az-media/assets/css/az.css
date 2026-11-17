@@ -653,6 +653,21 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 .az-cursor--ring.is-dark { border-color: #fff; }
 .az-cursor--ring.is-dark.is-active { background: rgba(255, 255, 255, .12); }
 
+/* Nút lên đầu trang (tạo bằng az.js): vòng tiến độ cuộn + mũi tên, trượt vào/ra ở góc phải dưới */
+.az-top { position: fixed; right: max(32px, env(safe-area-inset-right)); bottom: max(32px, env(safe-area-inset-bottom)); z-index: 90; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; color: var(--az-primary-dark); background: #fff; border: 0; border-radius: 50%; box-shadow: 0 2px 4px rgba(10, 42, 102, .08), 0 8px 20px rgba(10, 42, 102, .12); cursor: pointer; visibility: hidden; opacity: 0; transform: translateX(calc(100% + 40px)); transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .3s, visibility 0s .45s, background-color .2s; }
+.az-top.is-visible { visibility: visible; opacity: 1; transform: none; transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .3s, visibility 0s, background-color .2s; }
+.az-top:hover { background: var(--az-tint); }
+.az-top__ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.az-top__track, .az-top__bar { fill: none; stroke-width: 2; }
+.az-top__track { stroke: var(--az-border); }
+.az-top__bar { stroke: var(--az-primary-dark); stroke-linecap: round; transition: stroke-dashoffset .12s linear; }
+.az-top__arrow { position: relative; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
+.az-top:hover .az-top__arrow { transform: translateY(-2px); }
+@media (max-width: 600px) {
+	.az-top { right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); width: 44px; height: 44px; }
+}
+@media print { .az-top { display: none; } }
+
 /* 9. MOTION */
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

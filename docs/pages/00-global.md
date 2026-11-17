@@ -94,3 +94,10 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 - Chỉ chạy khi `(hover: hover) and (pointer: fine)` và không bật `prefers-reduced-motion`. Trên cảm ứng không có gì được thêm vào trang.
 - Trạng thái: rê vào link/nút/input thì vòng phóng 1.5×; nhấn chuột thì vòng thu nhỏ; trên `.az-why-us`, `.az-cta__box`, footer dưới, announcement thì đổi sang màu trắng.
 
+## Nút lên đầu trang
+
+- Tạo bằng `az.js` (`initBackToTop`) và CSS `.az-top*`, nên có trên mọi trang mà không cần sửa template. Cố định góc phải dưới (32px, 16px trên điện thoại).
+- Hiện khi cuộn quá `SHOW_AFTER` (240px). Vòng ngoài là tiến độ cuộn: rỗng ở đầu trang, đầy ở cuối trang.
+- Bấm: cuộn mượt về đầu (tức thì nếu bật `prefers-reduced-motion`) và trượt ra khuất góc phải. Nút ở yên đó đến khi người dùng cuộn lại (lăn chuột, chạm, phím) hoặc về tới đầu trang rồi cuộn xuống.
+- Khi ẩn, nút `visibility: hidden` và `tabindex=-1` nên không bị focus bằng bàn phím.
+
