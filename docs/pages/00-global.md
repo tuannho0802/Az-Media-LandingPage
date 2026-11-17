@@ -23,7 +23,7 @@ Các thành phần xuất hiện ở mọi trang. Làm và nghiệm thu trước
 | 2 | Header | Logo trái; menu: Home, Pricing, Services, Pages (dropdown: Blog, FAQs, Career, Contact, Maintenance Mode), About; hai nút phải: Pricing (viền) và Contact (đặc). Sticky | parts/header | Menu Primary | ✅ |
 | 3 | Page hero (trang con) | Tiêu đề trang + breadcrumb, nền nhạt/lưới. Dùng cho mọi trang con | az-page-hero | Tiêu đề trang | ✅ |
 | 4 | CTA cuối trang | Eyebrow, H2, mô tả, nút, ảnh bên cạnh. Tái sử dụng nhiều trang | az-cta | Nội dung pattern | ✅ |
-| 5 | Footer | Giới thiệu + email + điện thoại; 4 cột link (Company, Support, Quick Links, Resources); social (Behance, Instagram, Meta, X); hàng cuối copyright và 3 link pháp lý | parts/footer | Menu Footer 1-4 | ✅ |
+| 5 | Footer | Dải trên nền nhạt: tagline trái, email + điện thoại (icon tròn) phải; lưới 5 cột link có mũi tên (Công ty, Hỗ trợ, Liên kết nhanh, Tài nguyên, Mạng xã hội); thanh dưới nền đậm: copyright trái, 3 link pháp lý phải | parts/footer | Menu Footer 1-4 | ✅ |
 
 ## 3. Nội dung AZ Media cần chuẩn bị
 
@@ -44,7 +44,7 @@ Các thành phần xuất hiện ở mọi trang. Làm và nghiệm thu trước
 Kiểm tra ở 1200 / 1024 / 768 / 480: không cuộn ngang, ảnh không méo, chữ không tràn, nút cao tối thiểu 44px.
 
 - Dưới 1024px: menu thành hamburger, hai nút phải xuống cuối menu.
-- Footer: 4 cột thành 2 cột (768px) rồi 1 cột (480px).
+- Footer: 5 cột thành 3 cột (1100px), 2 cột (600px) rồi 1 cột (480px).
 
 ## 6. SEO và hiệu năng
 
@@ -68,7 +68,7 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 | ☐ | Không dùng lại ảnh, logo, tên, nội dung của demo | Rà ảnh, alt, tên người, số liệu | |
 | ☐ | Chiều cao header và khoảng cách logo-menu-nút | Đo bằng DevTools ở 1440px | |
 | ☐ | Dropdown Pages (độ rộng, bóng, khoảng cách mục) | Mở dropdown và so | |
-| ☐ | Bố cục 4 cột footer và hàng copyright | So ở 1440px và 768px | |
+| ☐ | Bố cục 5 cột footer, dải tagline và hàng copyright | So ở 1440px và 768px | Đã làm lại theo `OG-Home.png`, cần xác nhận bằng mắt |
 
 Ảnh đối chiếu: lưu `docs/references/global-demo.png` và `docs/references/global-az.png`.
 
@@ -84,3 +84,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
 | 17/11/2026 | Dựng announcement bar, header, footer. Chờ review thiết kế | |
+| 17/11/2026 | Header: logo và menu không xuống dòng, ẩn nút Bảng giá/Liên hệ dành cho mobile ở desktop. Footer làm lại theo ref (dải tagline + 5 cột + thanh đậm) | |

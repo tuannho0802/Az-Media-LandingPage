@@ -52,13 +52,19 @@
 <!-- /wp:image -->
 
 <!-- wp:group {"className":"az-hero__card"} -->
-<div class="wp-block-group az-hero__card"><!-- wp:paragraph {"className":"az-hero__card-num"} -->
+<div class="wp-block-group az-hero__card"><!-- wp:paragraph {"className":"az-hero__avatar"} -->
+<p class="az-hero__avatar" aria-hidden="true">AZ</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:group {"className":"az-hero__card-text"} -->
+<div class="wp-block-group az-hero__card-text"><!-- wp:paragraph {"className":"az-hero__card-num"} -->
 <p class="az-hero__card-num"><span data-az-count="120" data-az-suffix="+">120+</span></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"az-hero__card-label"} -->
-<p class="az-hero__card-label">Thương hiệu đồng hành</p>
+<p class="az-hero__card-label">Khách hàng hài lòng</p>
 <!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"az-hero__rating"} -->
@@ -67,9 +73,10 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"az-hero__score"} -->
-<p class="az-hero__score"><strong>4,9</strong>/5 điểm hài lòng</p>
+<p class="az-hero__score"><strong>4,9</strong> /5,0</p>
 <!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
+<!-- /wp:group -->
+</div>
 <!-- /wp:group --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->

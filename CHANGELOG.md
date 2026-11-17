@@ -15,22 +15,33 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 
 ### Added
 - [theme] Khung block theme `az-media`: `theme.json` (palette xanh đậm, font Plus Jakarta Sans tự host kèm subset tiếng Việt), `functions.php`, `assets/css/az.css`, `assets/js/az.js`, template `front-page`, `index`, `page`, `single`, `404`.
-- [global] Part `announcement-bar` (nút đóng, nhớ trạng thái bằng localStorage), `header` (sticky, dropdown Trang, hamburger dưới 1024px), `footer` (giới thiệu, 4 cột link, social, copyright, link pháp lý).
-- [home] 9 pattern trang chủ: `az-hero`, `az-logos`, `az-why-us`, `az-specialization`, `az-solutions`, `az-pricing`, `az-testimonials`, `az-cta`, `az-faq`, kèm counter, slider scroll-snap, accordion `<details>`.
+- [global] Part `announcement-bar` (nút đóng, nhớ trạng thái bằng localStorage), `header` (sticky, dropdown Trang, hamburger dưới 1024px), `footer` (dải tagline + liên hệ, lưới 5 cột link, thanh copyright và link pháp lý).
+- [home] 9 pattern trang chủ: `az-hero`, `az-logos`, `az-why-us`, `az-specialization`, `az-solutions`, `az-pricing`, `az-testimonials`, `az-cta`, `az-faq`, kèm counter và accordion `<details>`.
 - [core] Plugin `az-media-core`: CPT `pricing_plan`, `testimonial`, `faq` (+ taxonomy `faq_group`), meta box, block `az-media/faq-list` (kèm schema FAQPage), lệnh `wp az seed` tạo dữ liệu mẫu và các trang rỗng.
 - [docs] Plan riêng cho từng trang trong `docs/pages/` (00-global đến 13-404-search) kèm bảng kiểm tra bám sát thiết kế.
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
-- (chưa có)
+- [home] Làm lại layout theo ảnh ref `docs/reference-images/OG-Home.png`: hero (ảnh chạm đáy, card khách hàng và card rating chồng góc), Trusted by (nền tint, logo trong thẻ), Why choose us (nền đậm có lưới, ảnh kèm 3 counter, 4 card 2×2), Specialization (tầm nhìn trái, 4 thẻ sứ mệnh có icon phải), Solutions (ảnh trái, lưới 2×3 thẻ có icon mạng xã hội), Pricing (thẻ căn giữa, gói giữa nền đậm, không nâng lên), Testimonials (lưới 3×2, sao ở đáy thẻ, mobile vuốt ngang), CTA (khối đậm không ảnh), FAQ (ô câu hỏi nền nhạt, câu trả lời bên dưới).
+- [global] Footer làm lại theo ref: dải tagline + email/điện thoại, lưới 5 cột link có mũi tên (thêm cột Mạng xã hội), thanh copyright nền đậm.
+- [theme] Badge/eyebrow đổi sang kiểu nền nhạt viền trái đậm; nút viền đổi sang nền trắng viền xám.
+- [theme] Ảnh tạm: thêm `placeholder-team.svg`, `placeholder-solutions.svg` cho các chỗ cần ảnh.
 
 ### Fixed
+- [global] Header bị xuống dòng (logo "az-/media", menu hai hàng, nút gãy chữ) và nút Bảng giá/Liên hệ dành cho mobile hiện nhầm ở desktop.
+- [theme] Khi plugin `az-media-core` chưa bật, Query Loop của core tự đổi post type về `post` nên Pricing/Testimonials hiện nhầm bài "Hello world". Thêm filter `query_loop_block_query_vars` để hiển thị rỗng, và admin notice nhắc bật plugin + chạy `wp az seed`.
 - [core] CPT đặt `publicly_queryable` để Query Loop nhận đúng post type, không bật rewrite nên không sinh URL công khai.
 - [theme] Chữ nhấn dùng token `accent-text` (`#1D4ED8`) thay vì `accent` để đạt WCAG AA (accent chỉ dùng cho nền, icon, trang trí).
 
+### Removed
+- [home] Code slider testimonials trong `az.js` và CSS tương ứng (ref dùng lưới 3×2).
+- [home] Ảnh `cta-visual.svg` (CTA của ref không có ảnh).
+- [home] Icon +/- của accordion FAQ (ref không có).
+
 ### Known issues
 - [home] Toàn bộ số liệu, lời nhận xét, giá, logo, email, điện thoại là PLACEHOLDER, cần thay bằng dữ liệu thật trước khi public.
-- [home] Chưa có ảnh đối chiếu trong `docs/references/`, mục Design Fidelity Review của `01-home.md` chưa được tích.
+- [home] Layout đã làm lại theo ref nhưng chưa được xem bằng trình duyệt: các mục khoảng cách, typography, hover, responsive (đặc biệt 600–1023px) trong Design Fidelity Review của `01-home.md` còn để trống, chờ bạn xác nhận.
+- [home] CTA vẫn giữ nút "Đặt lịch tư vấn" dù ref không có nút.
 
 ## [0.0.1] - 2026-11-17
 

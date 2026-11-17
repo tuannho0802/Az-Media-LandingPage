@@ -51,3 +51,25 @@ add_action( 'wp_head', function () {
 	}
 	echo '<script>try{if(localStorage.getItem("az_announce_closed")==="1"){document.documentElement.classList.add("az-announce-closed")}}catch(e){}</script>' . "\n";
 }, 1 );
+
+/**
+ * Query Loop của core tự đổi post type chưa đăng ký về "post", nên khi plugin az-media-core chưa bật,
+ * Pricing và Testimonials sẽ hiện nhầm bài "Hello world". Chặn lại để các khối này hiển thị rỗng thay vì sai dữ liệu.
+ */
+add_filter( 'query_loop_block_query_vars', function ( $query, $block ) {
+	$wanted = $block->context['query']['postType'] ?? '';
+	if ( $wanted && ! post_type_exists( $wanted ) ) {
+		$query['post__in'] = array( 0 );
+	}
+	return $query;
+}, 10, 2 );
+
+/**
+ * Nhắc quản trị viên bật plugin dữ liệu và chạy seed.
+ */
+add_action( 'admin_notices', function () {
+	if ( ! current_user_can( 'activate_plugins' ) || post_type_exists( 'pricing_plan' ) ) {
+		return;
+	}
+	echo '<div class="notice notice-warning"><p><strong>AZ Media:</strong> hãy kích hoạt plugin <em>AZ Media Core</em> (và chạy <code>wp az seed</code>) để Bảng giá, Nhận xét và FAQ hiển thị dữ liệu.</p></div>';
+} );

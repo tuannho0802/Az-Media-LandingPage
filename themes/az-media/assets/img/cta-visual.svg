@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" role="img" aria-label="Minh họa placeholder">
-  <rect width="560" height="420" rx="24" fill="#E8EEFB"/>
-  <rect x="60" y="250" width="60" height="110" rx="10" fill="#2F6BFF" opacity=".35"/>
-  <rect x="150" y="200" width="60" height="160" rx="10" fill="#2F6BFF" opacity=".55"/>
-  <rect x="240" y="140" width="60" height="220" rx="10" fill="#2F6BFF" opacity=".8"/>
-  <rect x="330" y="80" width="60" height="280" rx="10" fill="#0A2A66"/>
-  <path d="M70 150 190 110 280 70 400 40" fill="none" stroke="#0A2A66" stroke-width="6" stroke-linecap="round"/>
-  <circle cx="400" cy="40" r="10" fill="#0A2A66"/>
-</svg>

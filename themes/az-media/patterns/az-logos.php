@@ -3,12 +3,13 @@
  * Title: AZ Trusted by
  * Slug: az-media/logos
  * Categories: az-media
- * Description: Hàng 6 logo khách hàng (placeholder).
+ * Description: Nhãn bên trái và hàng 6 logo khách hàng (placeholder) trong thẻ, nền tint.
  */
 ?>
 <!-- wp:group {"tagName":"section","align":"full","className":"az-section az-section--tight az-logos","layout":{"type":"constrained"}} -->
-<section class="wp-block-group alignfull az-section az-section--tight az-logos"><!-- wp:paragraph {"align":"center","className":"az-logos__title"} -->
-<p class="has-text-align-center az-logos__title">Được tin tưởng bởi các thương hiệu đang tăng trưởng</p>
+<section class="wp-block-group alignfull az-section az-section--tight az-logos"><!-- wp:group {"className":"az-logos__inner"} -->
+<div class="wp-block-group az-logos__inner"><!-- wp:paragraph {"className":"az-logos__title"} -->
+<p class="az-logos__title">Được tin tưởng bởi các thương hiệu đang tăng trưởng</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"az-logos__row"} -->
@@ -37,5 +38,6 @@
 <figure class="wp-block-image size-full az-logos__item"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/logo-placeholder-6.svg' ) ); ?>" alt="Logo khách hàng 6 (placeholder)"/></figure>
 <!-- /wp:image -->
 </div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->

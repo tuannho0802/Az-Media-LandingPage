@@ -3,19 +3,20 @@
  * Title: AZ Why choose us
  * Slug: az-media/why-us
  * Categories: az-media
- * Description: Eyebrow, H2, 3 counter và 4 card đánh số 01–04.
+ * Description: Nền đậm: badge, H2, nút; ảnh kèm 3 counter bên trái; 4 card đánh số 01–04 xếp 2x2 bên phải.
  */
 ?>
 <!-- wp:group {"tagName":"section","align":"full","className":"az-section az-why-us","layout":{"type":"constrained"}} -->
-<section class="wp-block-group alignfull az-section az-why-us"><!-- wp:group {"className":"az-split"} -->
-<div class="wp-block-group az-split"><!-- wp:group {"className":"az-split__main"} -->
-<div class="wp-block-group az-split__main"><!-- wp:paragraph {"className":"az-eyebrow"} -->
+<section class="wp-block-group alignfull az-section az-why-us"><!-- wp:group {"className":"az-why-us__head"} -->
+<div class="wp-block-group az-why-us__head"><!-- wp:group {"className":"az-head"} -->
+<div class="wp-block-group az-head"><!-- wp:paragraph {"className":"az-eyebrow"} -->
 <p class="az-eyebrow">Vì sao chọn AZ Media</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"className":"az-h2"} -->
 <h2 class="wp-block-heading az-h2">Đối tác marketing lấy kết quả làm thước đo</h2>
-<!-- /wp:heading -->
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
@@ -24,8 +25,14 @@
 <!-- /wp:buttons --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"az-stats"} -->
-<div class="wp-block-group az-stats">
+<!-- wp:group {"className":"az-why-us__body"} -->
+<div class="wp-block-group az-why-us__body"><!-- wp:group {"className":"az-why-us__media"} -->
+<div class="wp-block-group az-why-us__media"><!-- wp:image {"sizeSlug":"large","className":"az-why-us__img"} -->
+<figure class="wp-block-image size-large az-why-us__img"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/placeholder-team.svg' ) ); ?>" alt="Ảnh đội ngũ AZ Media (ảnh tạm, thay bằng ảnh thật)"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:group {"className":"az-why-us__stats"} -->
+<div class="wp-block-group az-why-us__stats">
 <!-- wp:group {"className":"az-stat"} -->
 <div class="wp-block-group az-stat"><!-- wp:paragraph {"className":"az-stat__num"} -->
 <p class="az-stat__num"><span data-az-count="8" data-az-suffix="+">8+</span></p>
@@ -42,7 +49,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"az-stat__label"} -->
-<p class="az-stat__label">Chuyên gia trong đội ngũ</p>
+<p class="az-stat__label">Chuyên gia</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
@@ -52,15 +59,15 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"az-stat__label"} -->
-<p class="az-stat__label">Giải thưởng ngành</p>
+<p class="az-stat__label">Giải thưởng</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 </div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"az-grid az-grid--4"} -->
-<div class="wp-block-group az-grid az-grid--4">
+<!-- wp:group {"className":"az-why-us__cards"} -->
+<div class="wp-block-group az-why-us__cards">
 <!-- wp:group {"className":"az-card az-card--num"} -->
 <div class="wp-block-group az-card az-card--num"><!-- wp:paragraph {"className":"az-card__num"} -->
 <p class="az-card__num">01</p>
@@ -117,5 +124,6 @@
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 </div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->

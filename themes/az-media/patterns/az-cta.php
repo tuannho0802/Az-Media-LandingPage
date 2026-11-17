@@ -3,7 +3,7 @@
  * Title: AZ CTA
  * Slug: az-media/cta
  * Categories: az-media
- * Description: CTA: eyebrow, H2, mô tả, nút và ảnh. Dùng lại ở nhiều trang.
+ * Description: Khối CTA nền đậm có lưới: badge, H2, mô tả, nút. Dùng lại ở nhiều trang.
  */
 ?>
 <!-- wp:group {"tagName":"section","align":"full","className":"az-section az-cta","layout":{"type":"constrained"}} -->
@@ -26,10 +26,6 @@
 <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/contact/">Đặt lịch tư vấn</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
-<!-- /wp:group -->
-
-<!-- wp:image {"sizeSlug":"large","className":"az-cta__img"} -->
-<figure class="wp-block-image size-large az-cta__img"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/cta-visual.svg' ) ); ?>" alt="Minh họa biểu đồ tăng trưởng (ảnh tạm)"/></figure>
-<!-- /wp:image --></div>
+<!-- /wp:group --></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->

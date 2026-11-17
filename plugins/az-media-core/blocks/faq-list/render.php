@@ -35,7 +35,7 @@ foreach ( $faqs as $i => $faq ) {
 		'acceptedAnswer' => array( '@type' => 'Answer', 'text' => wp_strip_all_tags( $answer_html ) ),
 	);
 	$items .= sprintf(
-		'<details class="az-faq__item"%1$s><summary class="az-faq__summary"><span class="az-faq__num">%2$s</span><span class="az-faq__q">%3$s</span><span class="az-faq__icon" aria-hidden="true"></span></summary><div class="az-faq__a">%4$s</div></details>',
+		'<details class="az-faq__item"%1$s><summary class="az-faq__summary"><span class="az-faq__num">%2$s.</span><span class="az-faq__q">%3$s</span></summary><div class="az-faq__a">%4$s</div></details>',
 		0 === $i ? ' open' : '',
 		esc_html( str_pad( (string) ( $i + 1 ), 2, '0', STR_PAD_LEFT ) ),
 		esc_html( get_the_title( $faq ) ),
