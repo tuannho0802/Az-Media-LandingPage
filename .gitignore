@@ -9,6 +9,7 @@
 !/plugins/
 /plugins/*
 !/plugins/az-media-core/
+!CHANGELOG.md
 
 node_modules/
 .env
