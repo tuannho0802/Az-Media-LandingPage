@@ -19,6 +19,8 @@ require_once AZ_CORE_DIR . 'includes/post-types.php';
 require_once AZ_CORE_DIR . 'includes/meta-boxes.php';
 require_once AZ_CORE_DIR . 'includes/faq-block.php';
 
-if ( defined( 'WP_CLI' ) && WP_CLI ) {
-	require_once AZ_CORE_DIR . 'cli/seed.php';
+require_once AZ_CORE_DIR . 'cli/seed.php';
+
+if ( is_admin() ) {
+	require_once AZ_CORE_DIR . 'includes/admin-seed.php';
 }

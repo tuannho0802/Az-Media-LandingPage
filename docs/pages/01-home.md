@@ -113,7 +113,7 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 - Solutions: 6 thẻ chuyển sang theo nền tảng (Facebook, X, Instagram, LinkedIn, Behance, TikTok) để có icon như ref. Số liệu là placeholder.
 - CTA: ref không có nút và không có ảnh. AZ bỏ ảnh nhưng giữ nút "Đặt lịch tư vấn" để có hành động; muốn giống tuyệt đối thì xóa khối `wp:buttons` trong `patterns/az-cta.php`.
 - Chỗ cần ảnh (hero, Why us, Solutions) đang dùng placeholder SVG trong `assets/img/`. Thay bằng ảnh thật khi có.
-- Nếu Pricing/Testimonials/FAQ trống: bật plugin `az-media-core` rồi chạy `wp az seed`. Admin sẽ thấy cảnh báo, và Query Loop không còn hiện nhầm bài "Hello world".
+- Nếu Pricing/Testimonials/FAQ trống: bật plugin `az-media-core`, rồi vào wp-admin → Công cụ → AZ Media Seed bấm "Tạo dữ liệu mẫu" (hoặc chạy `wp az seed` nếu có WP-CLI). Admin sẽ thấy cảnh báo, và Query Loop không còn hiện nhầm bài "Hello world".
 - Pricing: gói giữa (`:nth-child(2)`) được làm nổi bật bằng CSS. Nếu muốn chọn gói nổi bật tùy ý cần thêm meta `az_featured` và class riêng.
 - Avatar testimonial hiện là chữ cái đầu (meta `az_initials`), chưa dùng ảnh thật.
 - Hamburger đổi ở 1024px bằng CSS ghi đè breakpoint 600px mặc định của block Navigation. Kiểm tra kỹ ở 600–1023px.

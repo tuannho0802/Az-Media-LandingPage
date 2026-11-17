@@ -1,6 +1,6 @@
 <?php
 /**
- * WP-CLI: wp az seed
+ * Dữ liệu mẫu: chạy bằng WP-CLI (`wp az seed`) hoặc trong wp-admin (Công cụ → AZ Media Seed).
  *
  * Tạo dữ liệu mẫu (idempotent, chạy nhiều lần không nhân đôi): gói giá, nhận xét, FAQ,
  * các trang rỗng để link menu không bị 404, đặt trang chủ tĩnh. Mọi nội dung là PLACEHOLDER của AZ Media,
@@ -24,12 +24,40 @@ class AZ_Core_Seed_Command {
 	 * @param array $assoc_args Flags.
 	 */
 	public function __invoke( $args, $assoc_args ) {
+		$this->run();
+		WP_CLI::success( 'Seed xong.' );
+	}
+
+	/**
+	 * Các dòng nhật ký của lần chạy gần nhất (dùng cho trang wp-admin).
+	 *
+	 * @var string[]
+	 */
+	private $lines = array();
+
+	/**
+	 * Chạy toàn bộ seed. Dùng được cả trong WP-CLI lẫn wp-admin.
+	 *
+	 * @return string[] Nhật ký các việc đã làm.
+	 */
+	public function run() {
+		$this->lines = array();
 		$this->seed_plans();
 		$this->seed_testimonials();
 		$this->seed_faqs();
 		$this->seed_pages();
 		flush_rewrite_rules();
-		WP_CLI::success( 'Seed xong.' );
+		return $this->lines;
+	}
+
+	/**
+	 * Ghi nhật ký; có WP-CLI thì in ra terminal.
+	 */
+	private function out( $message, $level = 'log' ) {
+		$this->lines[] = $message;
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			'warning' === $level ? WP_CLI::warning( $message ) : WP_CLI::log( $message );
+		}
 	}
 
 	/**
@@ -44,7 +72,7 @@ class AZ_Core_Seed_Command {
 			'fields'      => 'ids',
 		) );
 		if ( $existing ) {
-			WP_CLI::log( "Bỏ qua (đã có): [$type] $title" );
+			$this->out( "Bỏ qua (đã có): [$type] $title" );
 			return (int) $existing[0];
 		}
 		$id = wp_insert_post( array(
@@ -57,13 +85,13 @@ class AZ_Core_Seed_Command {
 			'meta_input'   => $meta,
 		), true );
 		if ( is_wp_error( $id ) ) {
-			WP_CLI::warning( $id->get_error_message() );
+			$this->out( $id->get_error_message(), 'warning' );
 			return 0;
 		}
 		foreach ( $terms as $taxonomy => $names ) {
 			wp_set_object_terms( $id, $names, $taxonomy );
 		}
-		WP_CLI::log( "Đã tạo: [$type] $title" );
+		$this->out( "Đã tạo: [$type] $title" );
 		return (int) $id;
 	}
 
@@ -132,7 +160,7 @@ class AZ_Core_Seed_Command {
 				// WordPress tạo sẵn bản nháp privacy-policy; xuất bản để link chân trang không bị 404.
 				if ( 'draft' === $page->post_status ) {
 					wp_update_post( array( 'ID' => $page->ID, 'post_status' => 'publish' ) );
-					WP_CLI::log( "Đã xuất bản bản nháp: {$page->post_title} (/$slug/)" );
+					$this->out( "Đã xuất bản bản nháp: {$page->post_title} (/$slug/)" );
 				}
 				continue;
 			}
@@ -144,7 +172,7 @@ class AZ_Core_Seed_Command {
 				'post_status'  => 'publish',
 				'post_content' => $content,
 			) );
-			WP_CLI::log( "Đã tạo trang: $title (/$slug/)" );
+			$this->out( "Đã tạo trang: $title (/$slug/)" );
 		}
 		update_option( 'show_on_front', 'page' );
 		update_option( 'page_on_front', $ids['home'] );
@@ -152,4 +180,6 @@ class AZ_Core_Seed_Command {
 	}
 }
 
-WP_CLI::add_command( 'az seed', 'AZ_Core_Seed_Command' );
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	WP_CLI::add_command( 'az seed', 'AZ_Core_Seed_Command' );
+}

@@ -71,5 +71,5 @@ add_action( 'admin_notices', function () {
 	if ( ! current_user_can( 'activate_plugins' ) || post_type_exists( 'pricing_plan' ) ) {
 		return;
 	}
-	echo '<div class="notice notice-warning"><p><strong>AZ Media:</strong> hãy kích hoạt plugin <em>AZ Media Core</em> (và chạy <code>wp az seed</code>) để Bảng giá, Nhận xét và FAQ hiển thị dữ liệu.</p></div>';
+	echo '<div class="notice notice-warning"><p><strong>AZ Media:</strong> hãy kích hoạt plugin <em>AZ Media Core</em>, rồi vào Công cụ → AZ Media Seed (hoặc chạy <code>wp az seed</code>) để Bảng giá, Nhận xét và FAQ hiển thị dữ liệu.</p></div>';
 } );
