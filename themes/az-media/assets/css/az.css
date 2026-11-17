@@ -169,7 +169,6 @@ html { scroll-behavior: smooth; }
 @media (min-width: 600px) and (max-width: 1023.98px) {
 	/* Kéo breakpoint hamburger của core (600px) lên 1024px theo plan */
 	.az-site-header .az-nav .wp-block-navigation__responsive-container-open:not(.always-shown) { display: flex; }
-	.az-site-header .az-nav .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) { display: none; }
 }
 @media (max-width: 1023.98px) {
 	/* Selector 2 lớp để thắng .is-layout-flex của core, nếu không 2 nút vẫn hiện và làm trang tràn ngang trên mobile */
@@ -881,4 +880,95 @@ html.has-modal-open .az-site-header { z-index: 100001; }
 /* Ảnh thành viên ở About: ép 16/10 thay vì cao 280px+ mỗi thẻ */
 @media (max-width: 480px) {
 	.az-section .az-member__photo { min-height: 0; aspect-ratio: 16 / 10; }
+}
+
+/* 13. MENU MOBILE: drawer trượt từ phải (fix/mobile-menu)
+   Lõi WordPress chỉ bật/tắt display nên menu "bật ra" tức thì. Ở đây container luôn được render và ẩn bằng visibility,
+   nên cả mở lẫn đóng đều có chuyển động: nền mờ hiện dần, ngăn kéo trượt vào, các mục hiện lần lượt.
+   Chỉ áp dụng dưới 1024px (desktop giữ menu ngang). Selector dùng .az-nav lặp để thắng độ ưu tiên của core. */
+@media (max-width: 1023.98px) {
+	/* --- Nút hamburger: ô bo góc, 3 vạch (vạch giữa ngắn, dài ra khi hover) --- */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container-open { box-sizing: border-box; width: 44px; height: 44px; margin: 0; padding: 0; align-items: center; justify-content: center; color: var(--az-primary-dark); background: var(--az-soft); border: 1px solid var(--az-border); border-radius: 12px; transition: background-color .3s ease, border-color .3s ease, transform .35s var(--az-ease); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container-open svg { display: none; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container-open::before { content: ""; width: 20px; height: 14px; background:
+		linear-gradient(currentColor, currentColor) 0 0 / 100% 2px no-repeat,
+		linear-gradient(currentColor, currentColor) 100% 50% / 13px 2px no-repeat,
+		linear-gradient(currentColor, currentColor) 0 100% / 100% 2px no-repeat;
+		transition: background-size .35s var(--az-ease); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container-open:hover { background: var(--az-tint); border-color: var(--az-accent); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container-open:hover::before { background-size: 100% 2px, 100% 2px, 100% 2px; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container-open:active { transform: scale(.94); }
+
+	/* --- Container = lớp phủ toàn màn hình, luôn render, ẩn bằng visibility (trễ khi đóng để kịp animation) --- */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container { display: flex; flex-direction: column; position: fixed; inset: 0; width: auto; padding: 0; z-index: 100000; overflow: hidden; animation: none; background: transparent !important; color: var(--az-text);
+		visibility: hidden; pointer-events: none; transition: visibility 0s linear .5s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open { visibility: visible; pointer-events: auto; transition-delay: 0s; animation: none; }
+	/* Nền mờ nằm ở ::before để chuyển opacity độc lập với container */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container::before { content: ""; position: absolute; inset: 0; background: rgba(6, 23, 61, .5); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: 0; transition: opacity .45s ease; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open::before { opacity: 1; }
+
+	/* --- Ngăn kéo (dialog) trượt từ phải --- */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-close { position: relative; flex: 1 1 auto; display: flex; justify-content: flex-end; width: 100%; max-width: none; margin: 0; min-height: 0; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-dialog { box-sizing: border-box; display: flex; flex-direction: column; width: min(88vw, 400px); height: 100%; margin: 0; overflow: hidden; background: #fff; border-radius: 24px 0 0 24px; box-shadow: -24px 0 60px rgba(6, 23, 61, .2);
+		transform: translateX(104%); transition: transform .55s var(--az-ease); will-change: transform; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog { transform: none; }
+	.admin-bar .az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-dialog, .admin-bar .az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-dialog { margin-top: var(--wp-admin--admin-bar--height, 46px) !important; height: calc(100% - var(--wp-admin--admin-bar--height, 46px)); }
+	/* Thanh trên của ngăn kéo: nhãn "Menu" + nút đóng, đường kẻ dưới */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-dialog::before { content: "Menu"; flex: 0 0 auto; display: flex; align-items: center; height: 72px; padding: 0 24px; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--az-muted); border-bottom: 1px solid var(--az-border); }
+
+	/* --- Nút đóng: ô bo góc, 2 vạch xoay thành dấu X khi mở --- */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-close { box-sizing: border-box; display: flex; align-items: center; justify-content: center; top: 14px; right: 16px; width: 44px; height: 44px; margin: 0; padding: 0; color: var(--az-primary-dark); background: var(--az-soft); border: 1px solid var(--az-border); border-radius: 12px; transition: background-color .3s ease, border-color .3s ease, transform .4s var(--az-ease); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-close svg { display: none; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-close::before, .az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-close::after { content: ""; position: absolute; width: 18px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .5s var(--az-ease) .1s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-close::before { transform: translateY(-4px) rotate(0); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-close::after { transform: translateY(4px) rotate(0); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close::before { transform: rotate(45deg); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close::after { transform: rotate(-45deg); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-close:hover { background: var(--az-tint); border-color: var(--az-accent); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-close:active { transform: scale(.94); }
+
+	/* --- Danh sách: cuộn trong ngăn kéo, nút CTA ghim đáy --- */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__responsive-container-content { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-start; overflow-y: auto; overscroll-behavior: contain; padding: 8px 24px calc(24px + env(safe-area-inset-bottom, 0px)); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container { flex: 1 1 auto; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-start; gap: 0; width: 100%; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .wp-block-navigation-item { display: block; opacity: 0; transform: translateY(16px); transition: opacity .25s ease, transform .3s ease; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item { opacity: 1; transform: none; transition: opacity .5s ease, transform .6s var(--az-ease); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item:nth-child(1) { transition-delay: .12s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item:nth-child(2) { transition-delay: .17s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item:nth-child(3) { transition-delay: .22s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item:nth-child(4) { transition-delay: .27s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item:nth-child(5) { transition-delay: .32s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item:nth-child(6) { transition-delay: .37s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item:nth-child(7) { transition-delay: .42s; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container > .wp-block-navigation-item:nth-child(n+8) { transition-delay: .47s; }
+
+	/* --- Link cấp 1: chữ lớn, vùng chạm 56px, mũi tên bên phải nhích khi hover --- */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .wp-block-navigation-item:not(.az-nav__mobile-btn) > .wp-block-navigation-item__content { display: flex; align-items: center; justify-content: space-between; gap: 12px; box-sizing: border-box; min-height: 56px; padding: 0 4px; font-size: 1.125rem; font-weight: 600; color: var(--az-primary-dark); border-bottom: 1px solid var(--az-border); border-radius: 0; text-decoration: none; transition: color .3s ease, padding-left .35s var(--az-ease); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .wp-block-navigation-item:not(.az-nav__mobile-btn) > .wp-block-navigation-item__content::after { content: ""; flex: 0 0 18px; width: 18px; height: 18px; background: currentColor; opacity: .3; transition: transform .35s var(--az-ease), opacity .3s ease;
+		-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14m-6-6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14m-6-6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .wp-block-navigation-item:not(.az-nav__mobile-btn) > .wp-block-navigation-item__content:hover,
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .current-menu-item > .wp-block-navigation-item__content { color: var(--az-accent-text); padding-left: 8px; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .wp-block-navigation-item:not(.az-nav__mobile-btn) > .wp-block-navigation-item__content:hover::after { opacity: 1; transform: translateX(4px); }
+
+	/* --- Mục có submenu ("Trang"): nhãn nhỏ + danh sách con thụt vào có vạch trái, không còn thẻ nổi --- */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__submenu-icon { display: none; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .has-child > .wp-block-navigation-item__content { min-height: 0; padding: 22px 4px 6px; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--az-muted); border-bottom: 0; pointer-events: none; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .has-child > .wp-block-navigation-item__content::after { display: none; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation-item.has-child > .wp-block-navigation__submenu-container { position: static; display: flex; flex-direction: column; gap: 0; width: auto; min-width: 0; height: auto; overflow: visible; opacity: 1; visibility: visible; transform: none; margin: 0 0 8px 4px; padding: 0 0 0 14px !important; background: transparent !important; border: 0 !important; border-left: 2px solid var(--az-tint) !important; border-radius: 0; box-shadow: none !important; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container .wp-block-navigation-item__content { display: flex; align-items: center; box-sizing: border-box; min-height: 48px; padding: 0 4px; font-size: 1rem; font-weight: 500; color: var(--az-text); border-radius: 0; transition: color .3s ease, padding-left .35s var(--az-ease); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover, .az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container .current-menu-item > .wp-block-navigation-item__content { color: var(--az-accent-text); padding-left: 10px; background: transparent; }
+
+	/* --- Hai nút CTA ghim đáy ngăn kéo --- */
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .az-nav__mobile-btn { display: block; margin: 0; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .az-nav__mobile-btn--outline { margin-top: auto; padding-top: 24px; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .az-nav__mobile-btn--solid { margin-top: 12px; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .az-nav__mobile-btn > .wp-block-navigation-item__content { display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 100%; min-height: 52px; padding: 0 1.25rem; font-size: 1rem; font-weight: 700; border-radius: 12px; text-decoration: none; transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .35s var(--az-ease), box-shadow .35s ease; }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .az-nav__mobile-btn--outline > .wp-block-navigation-item__content { color: var(--az-primary-dark); background: #fff; border: 1px solid var(--az-border); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .az-nav__mobile-btn--outline > .wp-block-navigation-item__content:hover { border-color: var(--az-primary); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .az-nav__mobile-btn--solid > .wp-block-navigation-item__content { color: #fff; background: var(--az-primary); border: 1px solid var(--az-primary); box-shadow: 0 8px 20px rgba(10, 42, 102, .22); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .az-nav__mobile-btn--solid > .wp-block-navigation-item__content:hover { background: var(--az-primary-dark); transform: translateY(-1px); }
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .az-nav__mobile-btn > .wp-block-navigation-item__content:active { transform: scale(.98); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .wp-block-navigation-item { opacity: 1; transform: none; }
 }

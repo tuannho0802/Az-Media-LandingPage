@@ -63,6 +63,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [global] Menu mobile (dưới 1024px) làm lại: ngăn kéo trượt từ phải trên nền mờ (blur), nút hamburger và nút đóng dạng ô bo góc (vạch xoay thành dấu X), các mục cấp 1 chữ lớn có mũi tên và hiện lần lượt, "Trang" thành nhãn + danh sách con thụt vào (bỏ thẻ nổi có bóng), hai nút CTA ghim đáy. Mở và đóng đều có animation (container luôn render, ẩn bằng `visibility` có độ trễ thay vì `display: none` của core). Bấm nền mờ để đóng (`az.js`). Chỉ ảnh hưởng dưới 1024px; desktop giữ nguyên.
 - [global] Header: “Blog” thành mục cấp 1 (đứng sau “Dịch vụ”), bỏ khỏi menu con “Trang” (còn FAQs, Tuyển dụng, Liên hệ).
 - [theme] Hover header mượt hơn (desktop): link cấp 1 đổi màu mềm kèm gạch chân chạy từ trái; mũi tên dropdown xoay; dropdown "Trang" trượt lên và hiện dần (trước đây bật lên tức thì), mở trễ 80ms, đóng trễ 150ms để rê chuột chéo không bị đóng, các mục hiện lần lượt; nút Bảng giá/Liên hệ đổi màu và nhấc nhẹ.
 - [theme] Con trỏ tuỳ biến: dot và vòng tròn di chuyển trôi mượt (làm mượt dạng hàm mũ, độc lập fps) thay vì bám tức thì; tổng độ trễ vẫn giữ đúng `DOT_DELAY` / `RING_DELAY`. Thêm `DOT_EASE` / `RING_EASE` để chỉnh độ trôi.
@@ -112,6 +113,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [global] Menu mobile mới chưa xem bằng trình duyệt thật (đã mô phỏng cascade CSS với CSS lõi WordPress): cần kiểm animation mở/đóng, cuộn trong ngăn kéo ở 844×390, focus bằng bàn phím, và khi đăng nhập có admin bar.
 - [404-search] Chuỗi "Search results for", "Skip to content" phụ thuộc locale của WordPress. Cần đặt Cài đặt → Chung → Ngôn ngữ site = Tiếng Việt (hoặc Việt hóa cứng trong theme nếu muốn không phụ thuộc locale).
 - [global] Các sửa mobile ở mục Fixed chưa kiểm bằng thiết bị thật: cần thử iPhone Safari (zoom khi focus), xoay ngang 844×390, 320px.
 - [legal] Sau khi `git pull`: vào Công cụ → AZ Media Seed, bấm **Tạo dữ liệu mẫu** một lần để tạo trang `/legal/` và nâng cấp nội dung 3 văn bản; chưa bấm thì `/legal/` vẫn 404. Nếu trang pháp lý đã được sửa tay và đã xóa dòng nháp, nội dung mới sẽ KHÔNG tự thay; chép tay từ `includes/legal-content.php` nếu muốn.

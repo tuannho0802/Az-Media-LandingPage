@@ -25,6 +25,17 @@
 		}
 	}
 
+	/* Menu mobile: bấm vào vùng nền mờ ngoài ngăn kéo để đóng (core chỉ đóng bằng nút X hoặc Esc). */
+	function initMobileMenu() {
+		document.addEventListener( 'click', function ( e ) {
+			var t = e.target;
+			if ( ! t.classList || ! ( t.classList.contains( 'wp-block-navigation__responsive-container' ) || t.classList.contains( 'wp-block-navigation__responsive-close' ) ) ) { return; }
+			var box = t.closest( '.wp-block-navigation__responsive-container' );
+			var btn = box && box.classList.contains( 'is-menu-open' ) ? box.querySelector( '.wp-block-navigation__responsive-container-close' ) : null;
+			if ( btn ) { btn.click(); }
+		} );
+	}
+
 	/* Header: thêm class khi đã cuộn. */
 	function initHeader() {
 		var header = document.querySelector( '.az-site-header' );
@@ -250,6 +261,7 @@
 	ready( function () {
 		initAnnouncement();
 		initHeader();
+		initMobileMenu();
 		initCounters();
 		initFaq();
 		initCursor();

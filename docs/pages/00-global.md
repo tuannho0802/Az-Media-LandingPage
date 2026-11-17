@@ -43,7 +43,7 @@ Các thành phần xuất hiện ở mọi trang. Làm và nghiệm thu trước
 
 Kiểm tra ở 1200 / 1024 / 768 / 480: không cuộn ngang, ảnh không méo, chữ không tràn, nút cao tối thiểu 44px.
 
-- Dưới 1024px: menu thành hamburger, hai nút phải xuống cuối menu.
+- Dưới 1024px: menu thành hamburger (ô bo góc 44px, 3 vạch). Bấm mở ra ngăn kéo trượt từ phải (rộng tối đa 400px) trên nền mờ; các mục hiện lần lượt, mục "Trang" là nhãn nhỏ kèm danh sách con thụt vào, hai nút Bảng giá/Liên hệ ghim đáy. Đóng bằng nút X (vạch xoay thành dấu X), bấm nền mờ hoặc phím Esc; có animation cả khi đóng. Tôn trọng `prefers-reduced-motion`.
 - Footer: 5 cột thành 3 cột (1100px), 2 cột (600px) rồi 1 cột (480px).
 
 ## 6. SEO và hiệu năng
@@ -88,6 +88,7 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 | 17/11/2026 | Sửa header theo ref: nền trong suốt (trắng 78%) có blur 10px, announcement bar và header cùng dính khi cuộn (header nằm dưới bar), menu căn trái cạnh logo thay vì căn giữa, chiều cao 70px không co khi cuộn, mũi tên dropdown sát chữ. Chưa xem bằng trình duyệt | |
 | 17/11/2026 | Gỡ mục "Bảo trì" khỏi dropdown Trang: trang bảo trì chỉ hiện khi bật chế độ bảo trì hoặc xem trước bằng URL, xem `11-maintenance.md` | |
 | 17/11/2026 | Mobile: announcement bar không dính dưới 1024px, ô nhập 16px chống zoom iOS, gap footer 2 cột | |
+| 17/11/2026 | Làm lại menu mobile: nút hamburger/đóng mới, ngăn kéo trượt từ phải + nền mờ, mục hiện lần lượt, submenu thụt vào thay vì thẻ nổi, bấm nền để đóng. Chưa xem bằng trình duyệt | |
 
 ## Con trỏ chuột tuỳ biến
 
