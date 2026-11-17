@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Ảnh tạm cho bài viết">
+  <rect width="600" height="400" fill="#F5F7FD"/>
+  <circle cx="300" cy="200" r="150" fill="#DCE6FB"/>
+  <circle cx="300" cy="200" r="96" fill="#2F6BFF"/>
+  <circle cx="300" cy="200" r="42" fill="#0A2A66"/>
+  <circle cx="468" cy="96" r="22" fill="#9DB9FF"/>
+  <circle cx="120" cy="312" r="30" fill="#C9D8F8"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Ảnh tạm cho bài viết">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1D4ED8"/><stop offset="1" stop-color="#0A2A66"/></linearGradient></defs>
+  <rect width="600" height="400" fill="url(#g)"/>
+  <rect x="70" y="250" width="70" height="90" rx="8" fill="#DCE6FB" opacity=".9"/>
+  <rect x="170" y="200" width="70" height="140" rx="8" fill="#9DB9FF"/>
+  <rect x="270" y="150" width="70" height="190" rx="8" fill="#6C97FF"/>
+  <rect x="370" y="90" width="70" height="250" rx="8" fill="#fff" opacity=".92"/>
+  <circle cx="500" cy="90" r="34" fill="#2F6BFF" opacity=".5"/>
+</svg>

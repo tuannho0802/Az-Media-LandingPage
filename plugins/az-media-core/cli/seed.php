@@ -48,6 +48,7 @@ class AZ_Core_Seed_Command {
 		$this->seed_team();
 		$this->seed_faqs();
 		$this->seed_careers();
+		$this->seed_blog();
 		$this->seed_pages();
 		flush_rewrite_rules();
 		return $this->lines;
@@ -381,6 +382,134 @@ class AZ_Core_Seed_Command {
 		if ( $hub && 'page-legal-hub' !== get_post_meta( $hub->ID, '_wp_page_template', true ) ) {
 			update_post_meta( $hub->ID, '_wp_page_template', 'page-legal-hub' );
 			$this->out( 'Đã gán template Trang tổng pháp lý: /legal/' );
+		}
+	}
+
+	/**
+	 * 5 bài blog mẫu (PLACEHOLDER) về marketing và truyền thông, dạng "sự thật" và hướng dẫn ngắn.
+	 * Chỉ dùng thông tin ổn định (mốc ra đời nền tảng, định nghĩa chỉ số, mô hình kinh điển), không có số liệu thống kê dễ lỗi thời.
+	 * Idempotent: so theo tiêu đề, chạy lại không nhân đôi. Bài đã có sẽ được gán chuyên mục nếu chưa có.
+	 */
+	private function seed_blog() {
+		$p  = static function ( $text ) {
+			return "<!-- wp:paragraph -->\n<p>$text</p>\n<!-- /wp:paragraph -->\n\n";
+		};
+		$h  = static function ( $text ) {
+			return "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">$text</h2>\n<!-- /wp:heading -->\n\n";
+		};
+		$ul = static function ( $items, $ordered = false ) {
+			$tag   = $ordered ? 'ol' : 'ul';
+			$attrs = $ordered ? ' {"ordered":true}' : '';
+			$out   = "<!-- wp:list$attrs -->\n<$tag class=\"wp-block-list\">";
+			foreach ( $items as $item ) {
+				$out .= "<!-- wp:list-item -->\n<li>$item</li>\n<!-- /wp:list-item -->";
+			}
+			return $out . "</$tag>\n<!-- /wp:list -->\n\n";
+		};
+		$q  = static function ( $text ) {
+			return "<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><!-- wp:paragraph -->\n<p>$text</p>\n<!-- /wp:paragraph --></blockquote>\n<!-- /wp:quote -->\n\n";
+		};
+		$note = $p( '<em>Bài viết mẫu (PLACEHOLDER) của AZ Media, cần biên tập lại trước khi public.</em>' );
+
+		$posts = array(
+			array(
+				'title'    => 'Mô hình AIDA: công thức hơn 100 năm tuổi vẫn dùng tốt cho content hôm nay',
+				'excerpt'  => 'AIDA (Attention, Interest, Desire, Action) ra đời từ cuối thế kỷ 19 nhưng vẫn là khung viết nội dung quen thuộc của các đội marketing. Cùng xem cách áp dụng cho bài đăng mạng xã hội.',
+				'cat'      => 'Marketing',
+				'days'     => 3,
+				'content'  => $p( 'AIDA là mô hình bốn bước mô tả hành trình của người xem từ lúc biết đến một thông điệp cho tới khi hành động. Mô hình thường được gắn với E. St. Elmo Lewis từ cuối thế kỷ 19, và hơn một thế kỷ sau, nó vẫn là cách đơn giản nhất để kiểm tra một bài đăng có "đi đến đích" hay chưa.' )
+					. $h( 'Bốn bước của AIDA' )
+					. $ul( array(
+						'<strong>Attention (Chú ý):</strong> dòng đầu tiên, hình ảnh hoặc 3 giây đầu video phải làm người xem dừng lại.',
+						'<strong>Interest (Quan tâm):</strong> đưa ra một thông tin hoặc góc nhìn khiến họ muốn xem tiếp.',
+						'<strong>Desire (Mong muốn):</strong> cho thấy lợi ích cụ thể, bằng ví dụ, số liệu của chính bạn hoặc câu chuyện khách hàng.',
+						'<strong>Action (Hành động):</strong> một lời kêu gọi duy nhất, rõ ràng: nhắn tin, đăng ký, xem bảng giá.',
+					), true )
+					. $h( 'Áp dụng cho một bài đăng Facebook' )
+					. $p( 'Mở bài bằng một câu hỏi hoặc một sự thật gây bất ngờ về ngành của bạn. Phần thân giải thích ngắn gọn vì sao điều đó quan trọng với khách hàng, kèm một ví dụ. Kết bài bằng đúng một nút hành động thay vì ba lời mời khác nhau.' )
+					. $q( 'Một bài đăng tốt chỉ cần làm tốt một việc: đưa người xem đi thêm một bước.' )
+					. $note,
+			),
+			array(
+				'title'    => 'Lịch sử ngắn của mạng xã hội: từ Facebook 2004 đến TikTok toàn cầu',
+				'excerpt'  => 'Biết mỗi nền tảng ra đời khi nào và vì mục đích gì giúp bạn hiểu vì sao cách làm nội dung trên từng nơi lại khác nhau đến vậy.',
+				'cat'      => 'Truyền thông',
+				'days'     => 8,
+				'content'  => $p( 'Mỗi nền tảng mạng xã hội sinh ra để giải một bài toán riêng, và điều đó vẫn định hình văn hóa nội dung của nó đến hôm nay. Dưới đây là các mốc đáng nhớ.' )
+					. $h( 'Các mốc thời gian' )
+					. $ul( array(
+						'<strong>2003:</strong> LinkedIn ra mắt, tập trung vào mạng lưới nghề nghiệp.',
+						'<strong>2004:</strong> Facebook ra đời tại Đại học Harvard, ban đầu dành cho sinh viên.',
+						'<strong>2005:</strong> YouTube được thành lập, mở đường cho video do người dùng tạo.',
+						'<strong>2006:</strong> Twitter xuất hiện với giới hạn ký tự ngắn, nay là X.',
+						'<strong>2010:</strong> Instagram ra mắt như một ứng dụng chia sẻ ảnh trên di động.',
+						'<strong>2016–2017:</strong> Douyin ra mắt tại Trung Quốc năm 2016; bản quốc tế TikTok xuất hiện năm 2017.',
+					) )
+					. $h( 'Bài học cho người làm nội dung' )
+					. $p( 'LinkedIn thưởng cho chuyên môn, Instagram thưởng cho hình ảnh, TikTok thưởng cho video ngắn và nhịp nhanh. Cùng một ý tưởng nhưng cần được kể lại theo ngôn ngữ riêng của từng nền tảng, thay vì đăng nguyên bản lên mọi nơi.' )
+					. $note,
+			),
+			array(
+				'title'    => '6 chỉ số cần theo dõi thay vì chỉ đếm lượt thích',
+				'excerpt'  => 'Lượt thích dễ đẹp nhưng khó chứng minh doanh thu. Đây là 6 chỉ số giúp bạn nói chuyện bằng kết quả với ban lãnh đạo.',
+				'cat'      => 'Marketing',
+				'days'     => 14,
+				'content'  => $p( 'Lượt thích cho biết nội dung có dễ chịu hay không, nhưng không cho biết nó có mang lại khách hàng. Khi báo cáo, hãy gắn mỗi chỉ số với một câu hỏi kinh doanh cụ thể.' )
+					. $h( '6 chỉ số nên có trong báo cáo' )
+					. $ul( array(
+						'<strong>Reach (Phạm vi tiếp cận):</strong> số người khác nhau đã nhìn thấy nội dung.',
+						'<strong>Engagement rate (Tỷ lệ tương tác):</strong> tổng tương tác chia cho phạm vi tiếp cận hoặc số người theo dõi.',
+						'<strong>CTR (Tỷ lệ nhấp):</strong> số lượt nhấp chia cho số lượt hiển thị, đo sức hấp dẫn của lời kêu gọi.',
+						'<strong>CPC (Chi phí mỗi lượt nhấp):</strong> tiền quảng cáo chia cho số lượt nhấp.',
+						'<strong>CPA (Chi phí mỗi hành động):</strong> tiền quảng cáo chia cho số khách đăng ký hoặc mua hàng.',
+						'<strong>ROAS (Lợi nhuận trên chi tiêu quảng cáo):</strong> doanh thu từ quảng cáo chia cho chi phí quảng cáo.',
+					) )
+					. $h( 'Cách đọc nhanh' )
+					. $p( 'Phạm vi tiếp cận thấp là vấn đề của nội dung hoặc phân phối. CTR thấp là vấn đề của thông điệp. CPA cao khi CTR tốt thường là vấn đề của trang đích hoặc ưu đãi. Chẩn đoán đúng tầng sẽ tiết kiệm rất nhiều ngân sách.' )
+					. $note,
+			),
+			array(
+				'title'    => 'Video ngắn: 4 yếu tố giữ chân người xem trong vài giây đầu tiên',
+				'excerpt'  => 'Trong video dọc, người xem quyết định ở lại hay lướt đi gần như ngay lập tức. Bốn nguyên tắc dưới đây giúp phần mở đầu của bạn đủ sức níu chân.',
+				'cat'      => 'Truyền thông',
+				'days'     => 21,
+				'content'  => $p( 'Video ngắn trên TikTok, Reels hay Shorts được lướt rất nhanh, nên phần mở đầu quyết định phần lớn hiệu quả. Đây là bốn nguyên tắc đội sản xuất của chúng tôi hay dùng làm danh sách kiểm tra.' )
+					. $h( '4 yếu tố của một phần mở đầu tốt' )
+					. $ul( array(
+						'<strong>Hình ảnh chuyển động ngay khung đầu:</strong> tránh logo hoặc màn hình tĩnh kéo dài.',
+						'<strong>Lời hứa rõ ràng:</strong> nói ngay người xem sẽ nhận được điều gì nếu xem hết.',
+						'<strong>Phụ đề lớn, dễ đọc:</strong> nhiều người xem khi tắt tiếng, nên phụ đề là một phần của nội dung.',
+						'<strong>Nhịp cắt đều và có chủ đích:</strong> mỗi cú cắt phải mang thêm một thông tin hoặc cảm xúc mới.',
+					), true )
+					. $h( 'Một lưu ý về thương hiệu' )
+					. $p( 'Đưa thương hiệu vào bằng cách kể chuyện, không phải bằng logo chiếm màn hình. Người xem nhớ điều họ học được từ video trước khi nhớ tên thương hiệu đứng sau nó.' )
+					. $note,
+			),
+			array(
+				'title'    => '5 sự thật về thương hiệu trên mạng xã hội mà đội marketing nên nhớ',
+				'excerpt'  => 'Nhất quán, lắng nghe và kiên nhẫn thường thắng chạy theo xu hướng. Năm nguyên tắc ngắn gọn để định hướng kế hoạch nội dung của bạn.',
+				'cat'      => 'Marketing',
+				'days'     => 28,
+				'content'  => $p( 'Sau nhiều năm làm việc với các thương hiệu, có những điều gần như luôn đúng bất kể nền tảng hay ngành hàng thay đổi ra sao.' )
+					. $h( 'Năm sự thật' )
+					. $ul( array(
+						'<strong>Nhất quán thắng hoành tráng:</strong> đăng đều tay với giọng điệu quen thuộc xây niềm tin tốt hơn một chiến dịch đơn lẻ.',
+						'<strong>Thuật toán thay đổi, nhu cầu con người thì không:</strong> nội dung hữu ích, giải trí hoặc truyền cảm hứng luôn có chỗ đứng.',
+						'<strong>Bình luận là dữ liệu miễn phí:</strong> câu hỏi lặp lại của khách là ý tưởng nội dung và là gợi ý cải thiện sản phẩm.',
+						'<strong>Không phải xu hướng nào cũng hợp với bạn:</strong> chỉ tham gia khi nó khớp giọng điệu thương hiệu.',
+						'<strong>Tăng trưởng bền vững cần thời gian:</strong> thường phải theo dõi theo quý, không phải theo ngày.',
+					), true )
+					. $q( 'Thương hiệu mạnh không phải là thương hiệu nói to nhất, mà là thương hiệu được nhớ đến đúng lúc.' )
+					. $note,
+			),
+		);
+
+		foreach ( $posts as $post ) {
+			$id = $this->upsert( 'post', $post['title'], $post['content'], $post['excerpt'], 0, array(), array( 'category' => array( $post['cat'] ) ), $post['days'] );
+			// Bài đã có từ lần seed trước mà chưa có chuyên mục (chỉ có "Chưa phân loại" mặc định): gán chuyên mục mẫu.
+			if ( $id && has_category( get_option( 'default_category' ), $id ) && 1 === count( wp_get_post_categories( $id ) ) ) {
+				wp_set_object_terms( $id, array( $post['cat'] ), 'category' );
+			}
 		}
 	}
 

@@ -233,3 +233,17 @@ add_filter( 'wp_robots', function ( $robots ) {
 	return is_404() ? wp_robots_no_robots( $robots ) : $robots;
 } );
 
+/**
+ * Ảnh đại diện dự phòng cho bài viết (post) chưa gán ảnh: dùng ảnh tạm của theme để thẻ bài không bị trống.
+ * Bài đã gán ảnh đại diện thì dùng ảnh thật. Chỉ áp dụng cho bài viết ở giao diện công khai.
+ */
+add_filter( 'post_thumbnail_html', function ( $html, $post_id ) {
+	if ( $html || is_admin() || 'post' !== get_post_type( $post_id ) ) {
+		return $html;
+	}
+	$n = ( (int) $post_id % 3 ) + 1;
+	return sprintf(
+		'<img src="%s" alt="" class="attachment-post-thumbnail wp-post-image az-thumb-fallback" style="aspect-ratio:3/2;object-fit:cover;width:100%%;height:100%%" loading="lazy" decoding="async" />',
+		esc_url( get_theme_file_uri( "assets/img/blog-placeholder-$n.svg" ) )
+	);
+}, 10, 2 );
