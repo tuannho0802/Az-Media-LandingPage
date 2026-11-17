@@ -387,6 +387,27 @@ html { scroll-behavior: smooth; }
 .az-member__name { margin: 0; font-size: 1.0625rem; }
 .az-member__text { margin: 0; color: var(--az-muted); font-size: .9375rem; }
 
+/* 7.14 Trang FAQs (page-faqs): hero dùng lại .az-page-hero, accordion 2 cột, Bài viết mới nhất */
+.az-faqs-list { padding-block: clamp(40px, 6vw, 72px); }
+.az-faq__list--cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px clamp(24px, 3vw, 28px); align-items: start; }
+.az-faq__col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.az-faqs-list .az-faq__summary { font-weight: 600; font-size: .9375rem; border-radius: 6px; }
+.az-faqs-list .az-faq__a { padding: 18px 20px 8px; font-size: .9375rem; }
+.az-faqs-list .az-faq__item[open] .az-faq__summary { border-color: var(--az-border); }
+.az-section .az-blog-recent__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 0; list-style: none; }
+.az-blog-recent__query { margin-top: 32px; }
+.az-section .az-post-card { display: flex; flex-direction: column; gap: 16px; }
+.az-post-card__img { margin: 0; overflow: hidden; border-radius: var(--az-radius); background: var(--az-tint); }
+.az-post-card__img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.az-section .az-post-card__body { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; padding-inline: 4px; }
+.az-post-card__title { margin: 0; font-size: 1.0625rem; font-weight: 700; line-height: 1.35; }
+.az-post-card__title a { color: var(--az-primary-dark); text-decoration: none; }
+.az-post-card__title a:hover { color: var(--az-accent-text); }
+.az-post-card__text { margin: 0; font-size: .9375rem; color: var(--az-muted); }
+.az-post-card__text p { margin: 0; }
+.az-post-card__more { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: .5rem; padding: 0 1.5rem; font-size: .9375rem; font-weight: 600; color: var(--az-primary-dark); text-decoration: none; background: #fff; border: 1px solid var(--az-border); border-radius: 8px; transition: border-color .2s, color .2s; }
+.az-post-card__more:hover { color: var(--az-accent-text); border-color: var(--az-accent); }
+
 /* 8. RESPONSIVE */
 @media (max-width: 1100px) {
 	.az-footer .az-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -406,6 +427,8 @@ html { scroll-behavior: smooth; }
 	.az-solutions__img img { aspect-ratio: 16 / 10; }
 }
 @media (max-width: 768px) {
+	.az-faq__list--cols { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+	.az-section .az-blog-recent__list { grid-template-columns: minmax(0, 1fr); }
 	/* Testimonials: vuốt ngang trên mobile */
 	.az-section .az-quotes { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 16px; padding-bottom: 8px; }
 	.az-quotes::-webkit-scrollbar { display: none; }

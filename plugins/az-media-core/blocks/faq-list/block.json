@@ -9,7 +9,8 @@
   "textdomain": "az-media-core",
   "attributes": {
     "limit": { "type": "number", "default": 5 },
-    "group": { "type": "string", "default": "" }
+    "group": { "type": "string", "default": "" },
+    "columns": { "type": "number", "default": 1 }
   },
   "supports": { "html": false, "align": false },
   "editorScript": "file:./edit.js",

@@ -193,6 +193,11 @@ class AZ_Core_Seed_Command {
 			array( 'Tôi có thể đổi gói dịch vụ giữa chừng không?', 'Có. Bạn có thể nâng hoặc hạ gói vào đầu mỗi chu kỳ thanh toán, chúng tôi sẽ điều chỉnh kế hoạch tương ứng.' ),
 			array( 'AZ Media có làm việc với ngành của tôi không?', 'Chúng tôi làm việc với nhiều ngành. Hãy liên hệ để được tư vấn cách tiếp cận phù hợp với đặc thù của bạn.' ),
 			array( 'Làm sao để bắt đầu hợp tác?', 'Bạn chỉ cần gửi form liên hệ hoặc đặt lịch tư vấn. Chúng tôi sẽ phản hồi trong vòng một ngày làm việc.' ),
+			array( 'Vì sao nên chọn AZ Media cho nhu cầu marketing của tôi?', 'Chúng tôi kết hợp chiến lược, sáng tạo nội dung và số liệu thực tế, với một đầu mối phụ trách và báo cáo minh bạch hằng tuần.' ),
+			array( 'AZ Media có làm việc với doanh nghiệp nhỏ không?', 'Có. Các gói dịch vụ được thiết kế linh hoạt cho cả doanh nghiệp nhỏ lẫn tập đoàn, bạn chọn quy mô phù hợp với ngân sách.' ),
+			array( 'AZ Media đo lường hiệu quả chiến dịch như thế nào?', 'Chúng tôi thống nhất chỉ số ngay từ đầu (tiếp cận, tương tác, chuyển đổi) và gửi báo cáo định kỳ kèm đề xuất cải thiện.' ),
+			array( 'AZ Media có hỗ trợ tái định vị hoặc ra mắt sản phẩm mới không?', 'Có. Chúng tôi xây dựng thông điệp, nội dung và kế hoạch phân phối cho giai đoạn tái định vị hoặc ra mắt sản phẩm.' ),
+			array( 'Tôi có cần ký hợp đồng dài hạn không?', 'Không bắt buộc. Bạn có thể bắt đầu với chu kỳ ngắn, sau đó gia hạn hoặc điều chỉnh tùy theo kết quả đạt được.' ),
 		);
 		foreach ( $items as $i => $f ) {
 			$this->upsert( 'faq', $f[0], '<p>' . $f[1] . '</p>', '', $i + 1, array(), array( 'faq_group' => array( 'Chung' ) ) );

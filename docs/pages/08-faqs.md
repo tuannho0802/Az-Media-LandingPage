@@ -5,13 +5,14 @@
 | Slug AZ Media | `/faqs/` |
 | Template WordPress | `templates/page-faqs.html` |
 | Trang demo tham chiếu | https://reachout.nexmotivedemo.com/faqs/ |
-| Độ tin cậy nguồn | ⚠️ Chưa đọc nội dung trang |
-| Pattern dùng | `az-page-hero`, `az-faq`, `az-cta` |
+| Ảnh ref | `docs/reference-images/OG-FAQ.png` |
+| Độ tin cậy nguồn | ✅ Cấu trúc đọc từ ảnh ref · ⚠️ màu, font, kích thước là đề xuất |
+| Pattern dùng | `az-faqs-hero`, `az-faqs-list` (block `az-media/faq-list`, 2 cột), `az-blog-recent` |
 | Dữ liệu (CPT/plugin) | CPT `faq`, taxonomy `faq_group` |
-| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☐ Chờ review · ☐ Đạt |
+| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt |
 | Ngày truy cập demo | 17/11/2026 |
 
-> **Cần xác minh trước khi dựng.** Chưa đọc được nội dung trang này của demo, nên mục 2 là cấu trúc đề xuất theo chuẩn trang agency. Việc đầu tiên: mở link demo ở trên, chụp full-page lưu vào `docs/references/faqs-demo.png`, sửa bảng mục 2 cho khớp demo, rồi đổi cột "Xác minh" từ ⚠️ sang ✅.
+> Cấu trúc ở mục 2 đọc từ ảnh ref `OG-FAQ.png` (chưa mở trang demo trực tiếp). Ref không có khối CTA trước footer nên trang không dùng `az-cta`.
 
 ## 1. Mục đích
 
@@ -21,25 +22,26 @@ Giải đáp thắc mắc thường gặp, giảm số câu hỏi lặp lại.
 
 | # | Section | Nội dung / hành vi | Pattern | Dữ liệu | Xác minh |
 |---|---|---|---|---|---|
-| 1 | Page hero | Tiêu đề + breadcrumb | az-page-hero | — | ⚠️ |
-| 2 | Nhóm FAQ | Tab hoặc nhóm tiêu đề theo chủ đề (Dịch vụ, Thanh toán, Kỹ thuật...); accordion đánh số | az-faq (tabs) | `faq` + `faq_group` | ⚠️ |
-| 3 | CTA hỗ trợ | "Vẫn cần hỗ trợ?" + nút liên hệ | az-cta | — | ⚠️ |
+| 1 | Page hero | Badge "FAQs", H1 hai dòng căn giữa, mô tả 3 dòng; nền tint có lưới | az-faqs-hero | — | ✅ |
+| 2 | Lưới FAQ | Accordion 2 cột, ô câu hỏi nền nhạt có viền, số thứ tự "01." trước câu hỏi, câu đầu mỗi cột mở sẵn và câu trả lời hiện dưới ô | az-faqs-list | `faq` (tối đa 10) | ✅ |
+| 3 | Bài viết mới nhất | Badge "Blog", H2, thẻ bài viết: ảnh lớn, tiêu đề, trích đoạn ngắn, nút "Đọc thêm" | az-blog-recent | `post` (2 bài mới nhất) | ✅ |
 
 ## 3. Nội dung AZ Media cần chuẩn bị
 
-- 10–20 câu hỏi chia nhóm, trả lời ngắn gọn.
+- 10 câu hỏi (seed đã có 10 câu mẫu, cần thay bằng nội dung thật), trả lời ngắn gọn.
+- Ít nhất 1 bài viết có ảnh đại diện để mục "Bài viết mới nhất" có nội dung.
 
 ## 4. Tương tác và hành vi
 
 - Accordion mở/đóng, hỗ trợ bàn phím.
-- Chuyển tab không tải lại trang (hoặc dùng anchor).
+- Ref không có tab, mỗi câu hỏi là một ô accordion độc lập (mở nhiều ô cùng lúc được).
 
 ## 5. Responsive
 
 Kiểm tra ở 1200 / 1024 / 768 / 480: không cuộn ngang, ảnh không méo, chữ không tràn, nút cao tối thiểu 44px.
 
 - Cột đôi chuyển thành một cột ở dưới 768px, thứ tự đọc: tiêu đề, nội dung, ảnh.
-- Tab chuyển thành danh sách cuộn ngang hoặc dropdown ở mobile.
+- Dưới 768px lưới FAQ 2 cột thành 1 cột; thẻ bài viết cũng 1 cột.
 
 ## 6. SEO và hiệu năng
 
@@ -66,7 +68,7 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/faqs/) và trang AZ Med
 | ☐ | Không dùng lại ảnh, logo, tên, nội dung của demo | Rà ảnh, alt, tên người, số liệu | |
 | ☐ | Kiểu accordion (số thứ tự, icon +/−, viền) | So với demo | |
 
-Ảnh đối chiếu: lưu `docs/references/faqs-demo.png` và `docs/references/faqs-az.png`.
+Ảnh đối chiếu: `docs/reference-images/OG-FAQ.png` (demo); lưu bản chụp AZ Media vào `docs/reference-images/` khi review.
 
 ## 8. Tiêu chí nghiệm thu
 
@@ -78,4 +80,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/faqs/) và trang AZ Med
 
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
-| | | |
+| 17/11/2026 | Dựng trang theo ảnh ref: template `page-faqs`, 3 pattern, block FAQ hỗ trợ 2 cột, seed 10 FAQ. Chưa kiểm trên WordPress thật | |

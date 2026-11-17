@@ -5,6 +5,7 @@
 	var PanelBody = wp.components.PanelBody;
 	var RangeControl = wp.components.RangeControl;
 	var TextControl = wp.components.TextControl;
+	var SelectControl = wp.components.SelectControl;
 	var ServerSideRender = wp.serverSideRender;
 
 	wp.blocks.registerBlockType( 'az-media/faq-list', {
@@ -26,6 +27,17 @@
 							value: attrs.limit,
 							onChange: function ( v ) {
 								props.setAttributes( { limit: v } );
+							},
+						} ),
+						el( SelectControl, {
+							label: 'Số cột',
+							value: String( attrs.columns || 1 ),
+							options: [
+								{ label: '1 cột', value: '1' },
+								{ label: '2 cột (trang FAQs)', value: '2' },
+							],
+							onChange: function ( v ) {
+								props.setAttributes( { columns: parseInt( v, 10 ) } );
 							},
 						} ),
 						el( TextControl, {
