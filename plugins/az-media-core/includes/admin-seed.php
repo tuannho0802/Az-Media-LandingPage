@@ -29,7 +29,7 @@ function az_core_seed_page() {
 		delete_transient( $key );
 	}
 	echo '<div class="wrap"><h1>AZ Media Seed</h1>';
-	echo '<p>Tạo dữ liệu mẫu: 3 gói giá, 6 dịch vụ, 6 nhận xét, 10 FAQ và các trang rỗng cho menu (đặt Trang chủ tĩnh). Nội dung là placeholder, cần thay bằng nội dung thật trước khi public. Bấm nhiều lần không bị nhân đôi.</p>';
+	echo '<p>Tạo dữ liệu mẫu: 3 gói giá, 6 dịch vụ, 6 nhận xét, 10 FAQ, 4 vị trí tuyển dụng và các trang rỗng cho menu (đặt Trang chủ tĩnh). Nội dung là placeholder, cần thay bằng nội dung thật trước khi public. Bấm nhiều lần không bị nhân đôi.</p>';
 	if ( isset( $_GET['done'] ) ) {
 		echo '<div class="notice notice-success inline"><p><strong>Seed xong.</strong> <a href="' . esc_url( home_url( '/' ) ) . '">Xem trang chủ</a></p></div>';
 		if ( $lines ) {

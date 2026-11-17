@@ -5,13 +5,14 @@
 | Slug AZ Media | `/career/` |
 | Template WordPress | `templates/page-career.html` |
 | Trang demo tham chiếu | https://reachout.nexmotivedemo.com/career/ |
-| Độ tin cậy nguồn | ⚠️ Chưa đọc nội dung trang |
-| Pattern dùng | `az-page-hero`, `az-benefits`, `az-jobs`, `az-cta` |
-| Dữ liệu (CPT/plugin) | CPT `career`, Contact Form 7 (form ứng tuyển, upload CV) |
-| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☐ Chờ review · ☐ Đạt |
+| Ảnh ref | `docs/reference-images/OG-Career.png` |
+| Độ tin cậy nguồn | ✅ Cấu trúc đọc từ ảnh ref · ⚠️ màu, font, kích thước là đề xuất |
+| Pattern dùng | `az-career-hero`, `az-career-jobs`, `az-career-apply` (dùng lại style `.az-values`) |
+| Dữ liệu (CPT/plugin) | CPT `career` (meta `az_job_type`, `az_salary`) |
+| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt |
 | Ngày truy cập demo | 17/11/2026 |
 
-> **Cần xác minh trước khi dựng.** Chưa đọc được nội dung trang này của demo, nên mục 2 là cấu trúc đề xuất theo chuẩn trang agency. Việc đầu tiên: mở link demo ở trên, chụp full-page lưu vào `docs/references/career-demo.png`, sửa bảng mục 2 cho khớp demo, rồi đổi cột "Xác minh" từ ⚠️ sang ✅.
+> Cấu trúc ở mục 2 đọc từ ảnh ref `OG-Career.png` (chưa mở trang demo trực tiếp). Ref không có form ứng tuyển, khối phúc lợi hay CTA cuối trang nên trang không dùng `az-benefits`, Contact Form 7 và `az-cta`.
 
 ## 1. Mục đích
 
@@ -21,28 +22,27 @@ Thu hút ứng viên, liệt kê vị trí đang mở và nhận hồ sơ.
 
 | # | Section | Nội dung / hành vi | Pattern | Dữ liệu | Xác minh |
 |---|---|---|---|---|---|
-| 1 | Page hero | Tiêu đề + breadcrumb | az-page-hero | — | ⚠️ |
-| 2 | Văn hóa & phúc lợi | Lưới icon box | az-benefits | Nội dung pattern | ⚠️ |
-| 3 | Vị trí đang tuyển | Danh sách: tên vị trí, địa điểm, hình thức, nút Ứng tuyển | az-jobs | `career` | ⚠️ |
-| 4 | Form ứng tuyển | Họ tên, email, vị trí, link/CV, lời nhắn | CF7 | CF7 | ⚠️ |
-| 5 | CTA | Gửi CV tự do | az-cta | — | ⚠️ |
+| 1 | Page hero | Badge "Gia nhập AZ Media", H1 một dòng "Tuyển dụng", mô tả 2 dòng; căn giữa, nền tint có lưới | az-career-hero | — | ✅ |
+| 2 | Vị trí đang tuyển | Badge + H2 căn giữa; lưới 2 cột thẻ nền nhạt: tên vị trí, hình thức (icon đồng hồ), mức lương (icon tiền), mô tả ngắn, "Cập nhật: ngày" | az-career-jobs | `career` (tối đa 6) | ✅ |
+| 3 | Cách ứng tuyển | Badge + H2 căn trái, nút viền bên phải; dưới là 3 thẻ đánh số 01-03 bên trái, ảnh cao bên phải | az-career-apply | Nội dung pattern | ✅ |
 
 ## 3. Nội dung AZ Media cần chuẩn bị
 
-- Mô tả văn hóa, phúc lợi.
-- Vị trí thật hoặc ẩn mục khi chưa tuyển.
+- Vị trí tuyển thật (seed có 4 vị trí mẫu): tên, hình thức, mức lương, mô tả ngắn (dùng ô Trích đoạn).
+- Ảnh thật cho khối Cách ứng tuyển (đang dùng `placeholder-team.svg`).
+- Quy trình ứng tuyển thật cho 3 bước.
 
 ## 4. Tương tác và hành vi
 
-- Nút Ứng tuyển cuộn tới form và điền sẵn vị trí.
-- Upload CV: giới hạn định dạng và dung lượng, chống spam.
-- Khi không có vị trí: hiện thông báo thay vì danh sách trống.
+- Ref không có nút Ứng tuyển, form hay upload CV: thẻ việc làm chỉ hiển thị thông tin, nút "Liên hệ" ở khối Cách ứng tuyển dẫn tới `/contact/`.
+- Ngày "Cập nhật" là ngày sửa gần nhất của bài (định dạng dd/mm/yyyy), ref hiển thị dạng "2 ngày trước".
+- Khi không có vị trí nào: hiện thông báo thay vì danh sách trống.
 
 ## 5. Responsive
 
 Kiểm tra ở 1200 / 1024 / 768 / 480: không cuộn ngang, ảnh không méo, chữ không tràn, nút cao tối thiểu 44px.
 
-- Cột đôi chuyển thành một cột ở dưới 768px, thứ tự đọc: tiêu đề, nội dung, ảnh.
+- Dưới 768px lưới thẻ việc làm thành 1 cột; dưới 900px khối Cách ứng tuyển thành 1 cột (3 thẻ rồi ảnh).
 
 ## 6. SEO và hiệu năng
 
@@ -50,7 +50,7 @@ Kiểm tra ở 1200 / 1024 / 768 / 480: không cuộn ngang, ảnh không méo, 
 - Meta title và description riêng cho trang.
 - Ảnh WebP, có `width`/`height`, `loading="lazy"` trừ ảnh đầu trang.
 - Canonical và Open Graph qua plugin SEO.
-- Schema JobPosting cho từng vị trí (tùy chọn).
+- Schema JobPosting chưa làm (cần địa điểm, ngày hết hạn, đơn vị tuyển dụng). Thêm khi có dữ liệu thật.
 
 ## 7. Kiểm tra bám sát thiết kế (Design Fidelity Review)
 
@@ -69,7 +69,7 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/career/) và trang AZ M
 | ☐ | Không dùng lại ảnh, logo, tên, nội dung của demo | Rà ảnh, alt, tên người, số liệu | |
 | ☐ | Hàng vị trí tuyển: bố cục tên/địa điểm/nút | So với demo | |
 
-Ảnh đối chiếu: lưu `docs/references/career-demo.png` và `docs/references/career-az.png`.
+Ảnh đối chiếu: `docs/reference-images/OG-Career.png` (demo); lưu bản chụp AZ Media vào `docs/reference-images/` khi review.
 
 ## 8. Tiêu chí nghiệm thu
 
@@ -82,4 +82,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/career/) và trang AZ M
 
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
-| | | |
+| 17/11/2026 | Dựng trang theo ảnh ref: template `page-career`, 3 pattern, CPT `career` + seed 4 vị trí. Chưa kiểm trên WordPress thật | |

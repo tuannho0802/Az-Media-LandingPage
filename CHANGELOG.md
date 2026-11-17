@@ -14,6 +14,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [career] Trang `/career/` dựng theo `docs/reference-images/OG-Career.png`: hero (badge, H1 "Tuyển dụng", mô tả), lưới 2 cột thẻ việc làm (hình thức, mức lương, mô tả, ngày cập nhật; hiện thông báo khi chưa có vị trí), khối Cách ứng tuyển (3 thẻ đánh số + ảnh, nút Liên hệ). Template `page-career.html`, pattern `az-career-hero`, `az-career-jobs`, `az-career-apply`. Ref không có form ứng tuyển, phúc lợi, CTA nên bỏ khỏi plan.
+- [core] CPT `career` (menu Tuyển dụng, meta `az_job_type` hình thức và `az_salary` mức lương) và seed 4 vị trí mẫu (chạy lại Seed để tạo).
 - [faqs] Trang `/faqs/` dựng theo `docs/reference-images/OG-FAQ.png`: hero (badge, H1 hai dòng, mô tả), lưới accordion 2 cột đánh số liên tục 01-10 (câu đầu mỗi cột mở sẵn), mục Blog "Bài viết mới nhất" (2 bài gần nhất, ảnh + tiêu đề + trích đoạn + nút Đọc thêm). Template `page-faqs.html`, pattern `az-faqs-hero`, `az-faqs-list`, `az-blog-recent`. Ref không có khối CTA nên bỏ `az-cta` khỏi plan.
 - [core] Block `az-media/faq-list` thêm thuộc tính `columns` (1 hoặc 2 cột, chọn trong thanh bên); schema FAQPage vẫn in một lần cho toàn bộ câu hỏi. Seed FAQ tăng từ 5 lên 10 câu (chạy lại Seed để thêm 5 câu mới).
 - [about] Trang `/about/` dựng theo `docs/reference-images/OG-About.png`: hero, Chúng tôi là ai (ảnh ngang) kèm Tầm nhìn và Sứ mệnh, thanh 4 số liệu có counter, Giá trị cốt lõi (3 thẻ đánh số + ảnh cao), Đội ngũ (lưới 2×2). Template `page-about.html`; pattern mới `az-about-hero`, `az-about-intro`, `az-vision-mission`, `az-about-stats`, `az-about-values`, `az-about-team`. Theo ref, trang không có logo đối tác, testimonials, CTA.

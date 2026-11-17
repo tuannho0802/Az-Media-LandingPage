@@ -47,6 +47,7 @@ class AZ_Core_Seed_Command {
 		$this->seed_testimonials();
 		$this->seed_team();
 		$this->seed_faqs();
+		$this->seed_careers();
 		$this->seed_pages();
 		flush_rewrite_rules();
 		return $this->lines;
@@ -201,6 +202,18 @@ class AZ_Core_Seed_Command {
 		);
 		foreach ( $items as $i => $f ) {
 			$this->upsert( 'faq', $f[0], '<p>' . $f[1] . '</p>', '', $i + 1, array(), array( 'faq_group' => array( 'Chung' ) ) );
+		}
+	}
+
+	private function seed_careers() {
+		$jobs = array(
+			array( 'Chuyên viên chiến lược mạng xã hội', 'Bạn có năng khiếu xây dựng chiến lược mạng xã hội dựa trên dữ liệu, giúp tăng tương tác và thúc đẩy tăng trưởng? Bạn sẽ chịu trách nhiệm lên kế hoạch, triển khai và tối ưu các chiến dịch.', '18 - 28 triệu / tháng' ),
+			array( 'Quản lý tài khoản khách hàng', 'Chúng tôi tìm người đảm nhận vai trò đầu mối làm việc với khách hàng: hiểu mục tiêu, xây dựng chiến lược phù hợp và đảm bảo khách hàng hài lòng với dịch vụ của AZ Media.', '16 - 25 triệu / tháng' ),
+			array( 'Chuyên viên quảng cáo số', 'Bạn đam mê quảng cáo trả phí trên mạng xã hội? Bạn sẽ quản lý và tối ưu các chiến dịch quảng cáo để đạt hiệu quả đầu tư cao nhất và độ phủ tối đa cho khách hàng.', '15 - 22 triệu / tháng' ),
+			array( 'Chuyên viên phân tích dữ liệu', 'Bạn giỏi đọc và phân tích số liệu? Hãy cùng chúng tôi đo lường, cải thiện hiệu quả chiến dịch bằng những nhận định và đề xuất giá trị từ dữ liệu.', '18 - 30 triệu / tháng' ),
+		);
+		foreach ( $jobs as $i => $j ) {
+			$this->upsert( 'career', $j[0], '<p>' . $j[1] . '</p>', $j[1], $i + 1, array( 'az_job_type' => 'Toàn thời gian', 'az_salary' => $j[2] ) );
 		}
 	}
 

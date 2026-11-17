@@ -26,6 +26,10 @@ function az_core_meta_fields() {
 		'team_member'  => array(
 			'az_role' => array( 'label' => 'Chức danh', 'placeholder' => 'Giám đốc sáng tạo' ),
 		),
+		'career'       => array(
+			'az_job_type' => array( 'label' => 'Hình thức làm việc', 'placeholder' => 'Toàn thời gian' ),
+			'az_salary'   => array( 'label' => 'Mức lương (hiển thị)', 'placeholder' => '15 - 25 triệu / tháng' ),
+		),
 	);
 }
 
@@ -66,6 +70,11 @@ add_action( 'init', function () {
 	register_post_type( 'team_member', array_merge( $common, array(
 		'labels'    => array( 'name' => 'Đội ngũ', 'singular_name' => 'Thành viên', 'add_new_item' => 'Thêm thành viên', 'edit_item' => 'Sửa thành viên' ),
 		'menu_icon' => 'dashicons-groups',
+	) ) );
+
+	register_post_type( 'career', array_merge( $common, array(
+		'labels'    => array( 'name' => 'Tuyển dụng', 'singular_name' => 'Vị trí tuyển dụng', 'add_new_item' => 'Thêm vị trí tuyển dụng', 'edit_item' => 'Sửa vị trí tuyển dụng' ),
+		'menu_icon' => 'dashicons-businessman',
 	) ) );
 
 	register_post_type( 'faq', array_merge( $common, array(

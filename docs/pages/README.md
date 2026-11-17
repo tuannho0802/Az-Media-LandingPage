@@ -17,7 +17,7 @@ Nguồn tham chiếu và URL gốc xem `docs/plan.md`, mục 11.
 | [06](06-blog.md) | Blog (danh sách bài viết) | `/blog/` | ⚠️ cần xác minh | ☐ |
 | [07](07-blog-single.md) | Bài viết (chi tiết) | `/{slug}/` | ⚠️ cần xác minh | ☐ |
 | [08](08-faqs.md) | FAQs | `/faqs/` | ✅ có ảnh ref `OG-FAQ.png` | ◐ đã dựng, chờ review (17/11) |
-| [09](09-career.md) | Tuyển dụng | `/career/` | ⚠️ cần xác minh | ☐ |
+| [09](09-career.md) | Tuyển dụng | `/career/` | ✅ có ảnh ref `OG-Career.png` | ◐ đã dựng, chờ review (17/11) |
 | [10](10-contact.md) | Liên hệ | `/contact/` | ⚠️ cần xác minh | ☐ |
 | [11](11-maintenance.md) | Bảo trì (Maintenance Mode) | `/maintenance-mode/` | ⚠️ cần xác minh | ☐ |
 | [12](12-legal.md) | Trang pháp lý (Privacy, Terms, Refund) | `/privacy-policy/, /terms-and-conditions/, /refund-policy/` | ⚠️ cần xác minh | ☐ |
