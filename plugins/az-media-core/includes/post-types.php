@@ -48,6 +48,11 @@ add_action( 'init', function () {
 		'menu_icon' => 'dashicons-money-alt',
 	) ) );
 
+	register_post_type( 'service', array_merge( $common, array(
+		'labels'    => array( 'name' => 'Dịch vụ', 'singular_name' => 'Dịch vụ', 'add_new_item' => 'Thêm dịch vụ', 'edit_item' => 'Sửa dịch vụ' ),
+		'menu_icon' => 'dashicons-megaphone',
+	) ) );
+
 	register_post_type( 'testimonial', array_merge( $common, array(
 		'labels'    => array( 'name' => 'Nhận xét', 'singular_name' => 'Nhận xét', 'add_new_item' => 'Thêm nhận xét', 'edit_item' => 'Sửa nhận xét' ),
 		'menu_icon' => 'dashicons-format-quote',

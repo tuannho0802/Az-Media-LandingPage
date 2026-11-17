@@ -43,6 +43,7 @@ class AZ_Core_Seed_Command {
 	public function run() {
 		$this->lines = array();
 		$this->seed_plans();
+		$this->seed_services();
 		$this->seed_testimonials();
 		$this->seed_faqs();
 		$this->seed_pages();
@@ -113,6 +114,20 @@ class AZ_Core_Seed_Command {
 				'az_period'  => '/tháng',
 				'az_summary' => $p[3],
 			) );
+		}
+	}
+
+	private function seed_services() {
+		$items = array(
+			array( 'Sáng tạo nội dung', 'Hình ảnh và nội dung thuyết phục, thu hút sự chú ý của khán giả mục tiêu.' ),
+			array( 'Quản trị cộng đồng', 'Xây dựng kết nối thật với cộng đồng trực tuyến của thương hiệu.' ),
+			array( 'Chiến lược mạng xã hội', 'Lộ trình rõ ràng cho từng nền tảng, bám sát mục tiêu kinh doanh.' ),
+			array( 'Hợp tác người ảnh hưởng', 'Làm việc với người ảnh hưởng phù hợp để mở rộng độ phủ một cách tự nhiên.' ),
+			array( 'Báo cáo và phân tích', 'Đo lường thành quả bằng số liệu rõ ràng để tối ưu từng chiến dịch.' ),
+			array( 'Video marketing', 'Sản xuất video ngắn và dài giúp tăng tương tác và truyền tải thông điệp.' ),
+		);
+		foreach ( $items as $i => $s ) {
+			$this->upsert( 'service', $s[0], '', $s[1], $i + 1 );
 		}
 	}
 

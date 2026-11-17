@@ -14,6 +14,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [services] Trang `/all-services/` dựng theo `docs/reference-images/OG-Services.png`: hero, khối Why choose us (thẻ trích dẫn + 3 thẻ lợi ích), 2 hàng ảnh xen kẽ, lưới 6 dịch vụ có icon, CTA, FAQ. Template `page-all-services.html`; pattern mới `az-services-hero`, `az-services-why`, `az-services-features`, `az-services-grid`.
+- [core] CPT `service` (menu Dịch vụ) và seed 6 dịch vụ mẫu; lưới dịch vụ tự lấy từ CPT.
 - [pricing] Trang `/pricing/` dựng theo ảnh ref `docs/reference-images/OG-Pricing.png`: hero (badge, H1, mô tả), Trusted by, 3 thẻ gói (gói giữa nền đậm), Why choose us, FAQ. Template `page-pricing.html`; pattern mới `az-pricing-hero`, `az-pricing-list`, dùng lại `az-logos`, `az-why-us`, `az-faq`.
 - [core] Trang wp-admin Công cụ → AZ Media Seed: tạo dữ liệu mẫu bằng một nút bấm khi không có WP-CLI (Local WP trên Windows), kèm nhắc khi chưa có gói giá. Logic seed tách khỏi WP-CLI, `wp az seed` vẫn dùng được.
 - [theme] Khung block theme `az-media`: `theme.json` (palette xanh đậm, font Plus Jakarta Sans tự host kèm subset tiếng Việt), `functions.php`, `assets/css/az.css`, `assets/js/az.js`, template `front-page`, `index`, `page`, `single`, `404`.
@@ -48,6 +50,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [services] Icon gán theo vị trí thẻ (6 icon xoay vòng), không theo từng dịch vụ; ảnh hai hàng xen kẽ là ảnh tạm; thẻ chưa có link tới trang chi tiết. Nội dung là PLACEHOLDER.
 - [pricing] Mục 7 trong `02-pricing.md` còn vài hạng mục chờ so bằng mắt trên Local WP (khoảng cách, typography, responsive 1200/1024/768/480). Giá, mô tả, logo là PLACEHOLDER.
 - [home] Toàn bộ số liệu, lời nhận xét, giá, logo, email, điện thoại là PLACEHOLDER, cần thay bằng dữ liệu thật trước khi public.
 - [home] Layout đã làm lại theo ref nhưng chưa được xem bằng trình duyệt: các mục khoảng cách, typography, hover, responsive (đặc biệt 600–1023px) trong Design Fidelity Review của `01-home.md` còn để trống, chờ bạn xác nhận.
