@@ -32,6 +32,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [global] Header làm lại theo ref: nền trắng trong suốt có blur (đặt ở `::before` để menu mobile `position: fixed` không bị ảnh hưởng), announcement bar và header cùng dính trên cùng khi cuộn (JS đo chiều cao bar vào `--az-announce-h`, xử lý cả khi đóng bar và có admin bar), menu căn trái cạnh logo thay vì căn giữa, chiều cao 70px cố định (bỏ co khi cuộn), mũi tên dropdown "Trang" sát chữ. Ảnh hưởng mọi trang.
 - [docs] `[service-detail] Đạt design review`: chủ dự án xác nhận hoàn thành trang Chi tiết dịch vụ (17/11/2026). Các mục review tích theo xác nhận, chưa có số đo; xem `docs/pages/04-service-detail.md`.
 - [docs] Thay `OG-About.png` bằng bản chụp không dính header sticky.
 - [core] CPT `service` có rewrite `/services/{slug}/` (không có trang lưu trữ). Rewrite rules tự làm mới một lần khi cập nhật (option `az_core_rewrite_ver`), không cần Save lại Permalinks.
@@ -61,6 +62,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [global] Header mới (nền mờ, bar dính) chưa xem bằng trình duyệt/WordPress thật: cần kiểm blur khi cuộn qua ảnh/khối đậm, menu mobile mở hết màn hình, bar 2 dòng trên mobile, và khi đăng nhập có admin bar.
 - [about] Chưa xem bằng trình duyệt/WordPress thật (khoảng cách, typography, responsive 1200/1024/768/480). Ref dùng slider đội ngũ có chấm phân trang, bản dựng là lưới 2×2 tĩnh. Số liệu, tên thành viên, mô tả, ảnh là PLACEHOLDER.
 - [service-detail] Bố cục theo plan đề xuất (không có ảnh ref). Chưa có form báo giá (chờ Contact Form 7 và trang Liên hệ). Nội dung dịch vụ là PLACEHOLDER.
 - [services] Icon gán theo vị trí thẻ (6 icon xoay vòng), không theo từng dịch vụ; ảnh hai hàng xen kẽ là ảnh tạm; thẻ chưa có link tới trang chi tiết. Nội dung là PLACEHOLDER.

@@ -8,12 +8,24 @@
 		if ( document.readyState !== 'loading' ) { fn(); } else { document.addEventListener( 'DOMContentLoaded', fn ); }
 	}
 
-	/* Announcement bar: đóng và nhớ trạng thái. */
+	/* Announcement bar: đóng và nhớ trạng thái. Đo chiều cao bar để header dính ngay dưới bar (--az-announce-h). */
 	function initAnnouncement() {
+		var wrap = document.querySelector( '.az-announcement-wrap' );
+		var root = document.documentElement;
+		function measure() {
+			var h = wrap && wrap.offsetParent !== null ? wrap.offsetHeight : 0;
+			root.style.setProperty( '--az-announce-h', h + 'px' );
+		}
+		if ( wrap ) {
+			measure();
+			window.addEventListener( 'resize', measure );
+			if ( 'ResizeObserver' in window ) { new ResizeObserver( measure ).observe( wrap ); }
+		}
 		var btn = document.querySelector( '.az-announcement__close' );
 		if ( ! btn ) { return; }
 		btn.addEventListener( 'click', function () {
-			document.documentElement.classList.add( 'az-announce-closed' );
+			root.classList.add( 'az-announce-closed' );
+			measure();
 			try { localStorage.setItem( 'az_announce_closed', '1' ); } catch ( e ) { /* bỏ qua */ }
 		} );
 	}

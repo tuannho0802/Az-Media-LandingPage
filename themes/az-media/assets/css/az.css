@@ -16,7 +16,7 @@
 	--az-radius-lg: 20px;
 	--az-shadow: 0 1px 2px rgba(10, 42, 102, .06), 0 8px 24px rgba(10, 42, 102, .06);
 	--az-shadow-hover: 0 2px 4px rgba(10, 42, 102, .08), 0 16px 36px rgba(10, 42, 102, .12);
-	--az-header-h: 76px;
+	--az-header-h: 70px;
 	--az-grid-line: linear-gradient(rgba(10, 42, 102, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 42, 102, .07) 1px, transparent 1px);
 	--az-grid-line-light: linear-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .07) 1px, transparent 1px);
 }
@@ -76,22 +76,39 @@ html { scroll-behavior: smooth; }
 .az-announcement__close:hover { background: rgba(255, 255, 255, .15); }
 .az-announce-closed .az-announcement-wrap { display: none; }
 
-/* 5. HEADER */
-.az-site-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--az-border); transition: box-shadow .25s; }
+/* 5. HEADER
+   Theo ref: announcement bar và header cùng dính trên cùng khi cuộn (header nằm ngay dưới bar), header nền trắng trong suốt có blur,
+   logo + menu căn trái, hai nút căn phải. Chiều cao bar đo bằng JS (--az-announce-h), 43px là giá trị dự phòng khi chưa có JS. */
+:root { --az-announce-h: 43px; }
+.az-announce-closed { --az-announce-h: 0px; }
+.az-announcement-wrap { position: sticky; top: 0; z-index: 51; }
+.admin-bar .az-announcement-wrap { top: var(--wp-admin--admin-bar--height, 32px); }
+.az-site-header { position: sticky; top: var(--az-announce-h); z-index: 50; background: transparent; border-bottom: 1px solid var(--az-border); transition: box-shadow .25s; }
+.admin-bar .az-site-header { top: calc(var(--wp-admin--admin-bar--height, 32px) + var(--az-announce-h)); }
+/* Nền mờ nằm ở ::before để backdrop-filter không biến header thành containing block của menu mobile (position: fixed) */
+.az-site-header::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: rgba(255, 255, 255, .78); -webkit-backdrop-filter: saturate(160%) blur(10px); backdrop-filter: saturate(160%) blur(10px); }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .az-site-header::before { background: rgba(255, 255, 255, .97); } }
 .az-site-header.is-scrolled { box-shadow: 0 6px 24px rgba(10, 42, 102, .08); }
-.admin-bar .az-site-header { top: var(--wp-admin--admin-bar--height, 32px); }
-.az-header__inner { display: flex; flex-wrap: nowrap; align-items: center; gap: 24px; max-width: 1200px; margin-inline: auto; padding: 0 1.25rem; min-height: var(--az-header-h); transition: min-height .25s; }
-.az-site-header.is-scrolled .az-header__inner { min-height: 64px; }
+.az-header__inner { display: flex; flex-wrap: nowrap; align-items: center; gap: 24px; max-width: 1200px; margin-inline: auto; padding: 0 1.25rem; min-height: var(--az-header-h); }
 .az-logo { flex: 0 0 auto; margin: 0; font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
 .az-logo a { display: inline-flex; align-items: center; gap: .45rem; color: var(--az-primary); text-decoration: none; white-space: nowrap; }
 .az-logo a::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em; border-radius: 3px; background: var(--az-accent); }
-.az-nav { flex: 1 1 auto; justify-content: center; font-weight: 500; }
+.az-nav { flex: 1 1 auto; justify-content: flex-start; font-weight: 500; }
 .az-nav .wp-block-navigation__container { flex-wrap: nowrap; gap: .25rem; }
 .az-nav .wp-block-navigation-item__content { color: var(--az-text); padding: .5rem .75rem; border-radius: 6px; text-decoration: none; white-space: nowrap; }
 .az-nav .wp-block-navigation-item__content:hover { color: var(--az-accent-text); }
 .az-nav .current-menu-item > .wp-block-navigation-item__content { color: var(--az-accent-text); }
+/* Mục có dropdown: mũi tên sát chữ như ref */
+.az-nav .wp-block-navigation-submenu > .wp-block-navigation-item__content { padding-right: .25rem; }
+.az-nav .wp-block-navigation__submenu-icon { margin-right: .5rem; }
 .az-nav .wp-block-navigation__submenu-container { min-width: 220px; padding: .5rem; background: #fff; border: 1px solid var(--az-border); border-radius: var(--az-radius); box-shadow: var(--az-shadow-hover); }
+.az-nav .wp-block-navigation__responsive-container.is-menu-open { background-color: #fff; }
 .az-header__actions { flex: 0 0 auto; margin: 0; flex-wrap: nowrap; }
+@media (max-width: 600px) {
+	/* Admin bar chuyển sang position: absolute và cuộn đi: bỏ offset của nó */
+	.admin-bar .az-announcement-wrap { top: 0; }
+	.admin-bar .az-site-header { top: var(--az-announce-h); }
+}
 
 /* Nút Bảng giá/Liên hệ trong menu chỉ dành cho mobile: ẩn ở desktop (ghi đè display của core) */
 @media (min-width: 1024px) {
