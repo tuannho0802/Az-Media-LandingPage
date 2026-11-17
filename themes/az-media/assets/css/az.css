@@ -103,6 +103,51 @@ html { scroll-behavior: smooth; }
 .az-nav .wp-block-navigation__submenu-icon { margin-right: .5rem; }
 .az-nav .wp-block-navigation__submenu-container { min-width: 220px; padding: .5rem; background: #fff; border: 1px solid var(--az-border); border-radius: var(--az-radius); box-shadow: var(--az-shadow-hover); }
 .az-nav .wp-block-navigation__responsive-container.is-menu-open { background-color: #fff; }
+
+/* Hover header: mượt, có "hover intent" (mở trễ nhẹ, đóng trễ hơn để kịp di chuột chéo xuống menu). Chỉ áp dụng desktop. */
+@media (min-width: 1024px) {
+	:root { --az-ease: cubic-bezier(.22, 1, .36, 1); }
+
+	/* Link cấp 1: đổi màu mềm + gạch chân chạy từ trái sang */
+	.az-site-header .az-nav .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content { position: relative; transition: color .3s var(--az-ease); }
+	.az-site-header .az-nav .wp-block-navigation__container > .wp-block-navigation-item > .wp-block-navigation-item__content::after { content: ""; position: absolute; left: .75rem; right: .75rem; bottom: .2rem; height: 2px; border-radius: 2px; background: var(--az-accent); transform: scaleX(0); transform-origin: left center; transition: transform .35s var(--az-ease); }
+	.az-site-header .az-nav .wp-block-navigation__container > .wp-block-navigation-submenu > .wp-block-navigation-item__content::after { right: .25rem; }
+	.az-site-header .az-nav .wp-block-navigation__container > .wp-block-navigation-item:hover > .wp-block-navigation-item__content::after,
+	.az-site-header .az-nav .wp-block-navigation__container > .wp-block-navigation-item:focus-within > .wp-block-navigation-item__content::after,
+	.az-site-header .az-nav .wp-block-navigation__container > .current-menu-item > .wp-block-navigation-item__content::after { transform: scaleX(1); }
+
+	/* Mũi tên dropdown xoay khi mở */
+	.az-site-header .az-nav .wp-block-navigation__submenu-icon svg { transition: transform .3s var(--az-ease); }
+	.az-site-header .az-nav .has-child:hover > .wp-block-navigation__submenu-icon svg,
+	.az-site-header .az-nav .has-child:focus-within > .wp-block-navigation__submenu-icon svg { transform: rotate(180deg); }
+
+	/* Dropdown: luôn "có mặt" nhưng trong suốt, nhích xuống 10px và hơi nhỏ; mở thì trượt lên + hiện dần.
+	   Core đặt height/width 0 + overflow hidden khi đóng nên không animate được, ghi đè về auto. */
+	.az-site-header .az-nav .has-child > .wp-block-navigation__submenu-container { height: auto; width: auto; min-width: 220px; overflow: visible; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(10px) scale(.97); transform-origin: top left; top: calc(100% + 6px); transition: opacity .3s var(--az-ease) .15s, transform .35s var(--az-ease) .15s, visibility 0s linear .45s; }
+	/* Cầu nối vô hình lấp khoảng hở 6px để rê chuột từ link xuống menu không bị đóng */
+	.az-site-header .az-nav .has-child > .wp-block-navigation__submenu-container::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
+	.az-site-header .az-nav .has-child:not(.open-on-click):hover > .wp-block-navigation__submenu-container,
+	.az-site-header .az-nav .has-child:focus-within > .wp-block-navigation__submenu-container,
+	.az-site-header .az-nav .has-child .wp-block-navigation-submenu__toggle[aria-expanded="true"] ~ .wp-block-navigation__submenu-container { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition: opacity .3s var(--az-ease) .08s, transform .4s var(--az-ease) .08s, visibility 0s linear 0s; }
+
+	/* Mục trong dropdown hiện lần lượt, hover đổi nền + nhích nhẹ */
+	.az-site-header .az-nav .wp-block-navigation__submenu-container > .wp-block-navigation-item { opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .3s var(--az-ease); }
+	.az-site-header .az-nav .has-child:not(.open-on-click):hover > .wp-block-navigation__submenu-container > .wp-block-navigation-item,
+	.az-site-header .az-nav .has-child:focus-within > .wp-block-navigation__submenu-container > .wp-block-navigation-item,
+	.az-site-header .az-nav .has-child .wp-block-navigation-submenu__toggle[aria-expanded="true"] ~ .wp-block-navigation__submenu-container > .wp-block-navigation-item { opacity: 1; transform: none; }
+	.az-site-header .az-nav .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(1) { transition-delay: .12s; }
+	.az-site-header .az-nav .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(2) { transition-delay: .16s; }
+	.az-site-header .az-nav .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(3) { transition-delay: .2s; }
+	.az-site-header .az-nav .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(4) { transition-delay: .24s; }
+	.az-site-header .az-nav .wp-block-navigation__submenu-container > .wp-block-navigation-item:nth-child(n+5) { transition-delay: .28s; }
+	.az-site-header .az-nav .wp-block-navigation__submenu-container .wp-block-navigation-item__content { transition: background-color .25s ease, color .25s ease, padding-left .3s var(--az-ease); }
+	.az-site-header .az-nav .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover { padding-left: 1rem; background: var(--az-tint); color: var(--az-accent-text); }
+}
+
+/* Nút Bảng giá / Liên hệ ở header: đổi màu mềm, nhấc nhẹ khi hover (cả nút viền lẫn nút đặc) */
+.az-header__actions .wp-block-button__link { transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease; }
+.az-header__actions .wp-block-button.is-style-outline .wp-block-button__link:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(10, 42, 102, .12); }
+.az-header__actions .wp-block-button__link:active { transform: translateY(0); box-shadow: none; }
 .az-header__actions { flex: 0 0 auto; margin: 0; flex-wrap: nowrap; }
 @media (max-width: 600px) {
 	/* Admin bar chuyển sang position: absolute và cuộn đi: bỏ offset của nó */

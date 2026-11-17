@@ -56,6 +56,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [theme] Hover header mượt hơn (desktop): link cấp 1 đổi màu mềm kèm gạch chân chạy từ trái; mũi tên dropdown xoay; dropdown "Trang" trượt lên và hiện dần (trước đây bật lên tức thì), mở trễ 80ms, đóng trễ 150ms để rê chuột chéo không bị đóng, các mục hiện lần lượt; nút Bảng giá/Liên hệ đổi màu và nhấc nhẹ.
 - [theme] Con trỏ tuỳ biến: dot và vòng tròn di chuyển trôi mượt (làm mượt dạng hàm mũ, độc lập fps) thay vì bám tức thì; tổng độ trễ vẫn giữ đúng `DOT_DELAY` / `RING_DELAY`. Thêm `DOT_EASE` / `RING_EASE` để chỉnh độ trôi.
 - [core] Nội dung 3 văn bản pháp lý viết lại đầy đủ hơn (Chính sách bảo mật 11 mục, Điều khoản 14 mục, Chính sách hoàn tiền 7 mục có quy trình và ví dụ tính tiền). Phần dữ liệu thu thập, cookie, lưu trữ bám theo hành vi thật của website (form liên hệ lưu họ tên, email, chủ đề, lời nhắn; IP chỉ dùng giới hạn gửi form dưới dạng mã băm khoảng 1 giờ; không công cụ theo dõi; phông chữ tự host). Căn cứ pháp luật là Luật Bảo vệ dữ liệu cá nhân (hiệu lực 01/01/2026); không trích Nghị định 13/2023/NĐ-CP vì đã được thay thế từ 01/01/2026. **Vẫn là bản nháp chưa qua rà soát pháp lý.**
 - [core] Seed: nâng cấp văn bản nháp cũ lên bản mới nếu trang còn dòng “Bản nháp mẫu (PLACEHOLDER)”; trang đã duyệt và xóa dòng đó thì không bị ghi đè. Bấm seed nhiều lần không đổi ngày “Cập nhật lần cuối”. Seed tạo trang `/legal/`, gán template, và đổi tiêu đề “Privacy Policy” mặc định của WordPress thành “Chính sách bảo mật”.
@@ -79,6 +80,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [theme] Ảnh tạm: thêm `placeholder-team.svg`, `placeholder-solutions.svg` cho các chỗ cần ảnh.
 
 ### Fixed
+- [theme] Con trỏ tuỳ biến: khi rê nhanh vào link/nút (ví dụ menu header), vòng tròn bị phóng to và tô nền ngay lúc con trỏ gốc chạm link trong khi vòng còn ở chỗ trống phía sau. Nay trạng thái hover (phóng to, đổi màu trên nền tối) đi theo độ trễ của từng phần tử: vòng chỉ đổi khi nó tới nơi, dot đổi theo độ trễ của dot.
 - [pricing] Local chỉ hiện khối CTA: WordPress cache danh sách pattern theo version theme, nên pattern mới thêm bằng `git pull` không được đăng ký. `functions.php` tự xóa cache khi danh sách hoặc thời gian sửa file trong `patterns/` đổi. Đã tái hiện và kiểm trên WordPress thật.
 - [core] Ô nhiều dòng (mô tả gói) bị `sanitize_text_field` gộp thành một dòng khi lưu. Dùng `sanitize_textarea_field` cho ô loại textarea, cả ở REST lẫn meta box Classic Editor.
 - [global] Dưới 1024px, 2 nút Bảng giá/Liên hệ ở header không ẩn (`.is-layout-flex` của core đè `display: none`), làm mọi trang tràn ngang trên mobile. Tăng độ ưu tiên selector. Phát hiện khi kiểm trang Bảng giá trên WordPress thật; ảnh hưởng cả trang chủ.

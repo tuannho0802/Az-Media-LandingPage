@@ -100,4 +100,11 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 - Hiện khi cuộn quá `SHOW_AFTER` (240px). Vòng ngoài là tiến độ cuộn: rỗng ở đầu trang, đầy ở cuối trang.
 - Bấm: cuộn mượt về đầu (tức thì nếu bật `prefers-reduced-motion`) và trượt ra khuất góc phải. Nút ở yên đó đến khi người dùng cuộn lại (lăn chuột, chạm, phím) hoặc về tới đầu trang rồi cuộn xuống.
 - Khi ẩn, nút `visibility: hidden` và `tabindex=-1` nên không bị focus bằng bàn phím.
+- Trạng thái hover của con trỏ (vòng phóng to trên link/nút, màu trắng trên nền tối) được lưu cùng từng mẫu vị trí và áp theo độ trễ của dot và vòng, nên không xảy ra cảnh vòng đã phóng to khi còn cách link một khoảng.
+
+## Hover ở header (desktop ≥1024px)
+
+- Link cấp 1: gạch chân `::after` chạy từ trái (`scaleX`), đổi màu .3s. Mũi tên dropdown xoay 180°.
+- Dropdown: ghi đè kiểu ẩn của core (height/width 0) về `auto` để animate được; đóng thì trong suốt, nhích xuống 10px; mở thì trượt lên + hiện dần. Trễ mở 80ms, trễ đóng 150ms (hover intent); có cầu nối vô hình 8px để rê chuột từ link xuống menu không bị đóng. Các mục hiện lần lượt cách nhau 40ms (tối đa 5 mục).
+- Chỉnh độ nhanh: các `transition` và `--az-ease` trong khối "Hover header" của `az.css`. Mobile (hamburger) giữ nguyên hành vi của core.
 

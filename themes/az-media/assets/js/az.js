@@ -97,7 +97,7 @@
 		document.body.appendChild( ring );
 		document.body.appendChild( dot );
 
-		var trail = []; /* { t, x, y } theo thời gian tăng dần */
+		var trail = []; /* { t, x, y, act, dark } theo thời gian tăng dần; act/dark là trạng thái hover tại thời điểm đó */
 		var visible = false;
 		var raf = 0;
 
@@ -108,7 +108,7 @@
 			if ( time >= trail[ n - 1 ].t ) { return trail[ n - 1 ]; }
 			for ( i = n - 1; i > 0; i-- ) { if ( trail[ i - 1 ].t <= time ) { break; } }
 			var a = trail[ i - 1 ], b = trail[ i ], k = ( time - a.t ) / ( b.t - a.t || 1 );
-			return { x: a.x + ( b.x - a.x ) * k, y: a.y + ( b.y - a.y ) * k };
+			return { x: a.x + ( b.x - a.x ) * k, y: a.y + ( b.y - a.y ) * k, act: a.act, dark: a.dark };
 		}
 
 		function place( node, x, y ) {
@@ -118,6 +118,7 @@
 		/* Vị trí đang hiển thị. Mỗi khung hình đi một phần quãng đường tới mục tiêu (độ trễ thời gian),
 		 * theo hàm mũ độc lập với fps nên chuyển động trôi mượt, tăng/giảm tốc dần thay vì bám sát tức thì. */
 		var dotPos = null, ringPos = null, lastFrame = 0;
+		var dotDark = false, ringDark = false, ringAct = false;
 
 		function glide( pos, target, ease, dt ) {
 			if ( ! target ) { return pos; }
@@ -137,6 +138,12 @@
 			ringPos = glide( ringPos, at( now - Math.max( 0, RING_DELAY - RING_EASE ) ), RING_EASE, dt );
 			if ( dotPos ) { place( dot, dotPos.x, dotPos.y ); }
 			if ( ringPos ) { place( ring, ringPos.x, ringPos.y ); }
+			/* Trạng thái hover cũng đi theo độ trễ của từng phần tử: vòng chỉ phóng to / đổi màu khi nó thật sự
+			 * tới vị trí đó, không phải lúc con trỏ gốc vừa chạm vào link (lúc ấy vòng còn ở chỗ trống phía sau). */
+			var ds = at( now - DOT_DELAY ), rs = at( now - RING_DELAY );
+			if ( ds && ds.dark !== dotDark ) { dotDark = ds.dark; dot.classList.toggle( 'is-dark', dotDark ); }
+			if ( rs && rs.dark !== ringDark ) { ringDark = rs.dark; ring.classList.toggle( 'is-dark', ringDark ); }
+			if ( rs && rs.act !== ringAct ) { ringAct = rs.act; ring.classList.toggle( 'is-active', ringAct ); }
 			/* Giữ lại 1 mẫu cũ hơn mốc trễ lớn nhất để còn nội suy. */
 			while ( trail.length > 2 && trail[ 1 ].t < now - RING_DELAY - 50 ) { trail.shift(); }
 			raf = visible ? requestAnimationFrame( frame ) : 0;
@@ -152,23 +159,21 @@
 		document.addEventListener( 'pointermove', function ( e ) {
 			if ( e.pointerType && e.pointerType !== 'mouse' ) { return; }
 			var t = performance.now();
+			var el = e.target;
+			var act = !! ( el.closest && el.closest( 'a, button, summary, label, input, textarea, select, [role="button"]' ) );
+			var dark = !! ( el.closest && el.closest( '.az-why-us, .az-cta__box, .az-footer__bottom, .az-announcement-wrap' ) );
 			if ( ! visible ) {
 				/* Lần đầu hiện: đặt cả dot và vòng ngay tại con trỏ, tránh bay từ góc màn hình. */
-				trail = [ { t: t - 500, x: e.clientX, y: e.clientY } ];
+				trail = [ { t: t - 500, x: e.clientX, y: e.clientY, act: act, dark: dark } ];
 				dotPos = ringPos = null;
+				dotDark = ringDark = ringAct = null; /* null ≠ boolean: ép frame() áp lại class đúng ngay khung đầu */
 				lastFrame = 0;
 				show( true );
 			}
-			/* Sau một lúc đứng yên, giữ nguyên vị trí cũ tới ngay trước sự kiện mới để dot/vòng không trượt sớm. */
+			/* Sau một lúc đứng yên, giữ nguyên vị trí và trạng thái cũ tới ngay trước sự kiện mới để dot/vòng không trượt sớm. */
 			var last = trail[ trail.length - 1 ];
-			if ( last && t - last.t > 40 ) { trail.push( { t: t - 1, x: last.x, y: last.y } ); }
-			trail.push( { t: t, x: e.clientX, y: e.clientY } );
-			var el = e.target;
-			var onLink = !! ( el.closest && el.closest( 'a, button, summary, label, input, textarea, select, [role="button"]' ) );
-			var onDark = !! ( el.closest && el.closest( '.az-why-us, .az-cta__box, .az-footer__bottom, .az-announcement-wrap' ) );
-			ring.classList.toggle( 'is-active', onLink );
-			dot.classList.toggle( 'is-dark', onDark );
-			ring.classList.toggle( 'is-dark', onDark );
+			if ( last && t - last.t > 40 ) { trail.push( { t: t - 1, x: last.x, y: last.y, act: last.act, dark: last.dark } ); }
+			trail.push( { t: t, x: e.clientX, y: e.clientY, act: act, dark: dark } );
 		}, { passive: true } );
 
 		document.addEventListener( 'pointerdown', function () { ring.classList.add( 'is-down' ); } );
