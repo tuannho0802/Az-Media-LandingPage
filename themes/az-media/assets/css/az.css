@@ -686,6 +686,54 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 	.az-section .az-ctc-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* 7.x HOVER TRANG CHỦ: thẻ nhấc nhẹ, ảnh zoom chậm, icon nhích; dùng chung đường cong với hover header.
+   Chỉ bật khi có chuột (hover + pointer: fine) để trên cảm ứng không bị kẹt trạng thái hover. */
+:root { --az-ease: cubic-bezier(.22, 1, .36, 1); }
+.az-section :is(.az-card, .az-mission__item, .az-sol, .az-quote, .az-plan, .az-hero__card, .az-hero__rating, .az-logos__item) { transition: transform .45s var(--az-ease), box-shadow .45s var(--az-ease), border-color .3s ease, background-color .3s ease; }
+.az-card__num, .az-quote__avatar, .az-hero__avatar { transition: transform .4s var(--az-ease), background-color .3s ease, color .3s ease; }
+.az-sol__icon, .az-sol__icon .wp-social-link { transition: transform .4s var(--az-ease), color .3s ease; }
+.az-why-us__img img, .az-solutions__img img { transition: transform .9s var(--az-ease); }
+.az-solutions__img { overflow: hidden; border-radius: var(--az-radius-lg); }
+.az-faq__summary { transition: border-color .25s ease, background-color .25s ease, transform .35s var(--az-ease); }
+.az-footer__nav .wp-block-navigation-item__content { transition: color .25s ease, transform .35s var(--az-ease); }
+.az-contact::before { transition: transform .35s var(--az-ease), background-color .3s ease; }
+.az-section .wp-block-button__link:active { transform: translateY(0) scale(.98); box-shadow: none; }
+
+@media (hover: hover) and (pointer: fine) {
+	/* Thẻ chung (Why us, Specialization, Solutions, Testimonials): nhấc 4px, bóng đổ, viền xanh */
+	.az-section :is(.az-mission__item, .az-sol, .az-quote):hover { transform: translateY(-4px); border-color: var(--az-accent); box-shadow: var(--az-shadow-hover); }
+	/* Thẻ nền tối ở Why us: sáng nền, viền rõ hơn; ô số đổi sang xanh và phóng nhẹ */
+	.az-why-us .az-card:hover { transform: translateY(-4px); background: rgba(255, 255, 255, .11); border-color: rgba(255, 255, 255, .34); }
+	.az-why-us .az-card:hover .az-card__num { background: var(--az-accent); color: #fff; transform: scale(1.1); }
+	/* Gói giá: nhấc cao hơn; gói thường đổi viền, gói giữa (nền đậm) chỉ nhấc và đổ bóng */
+	.az-section .az-plan:hover, .az-section .az-plan:focus-within { transform: translateY(-6px); box-shadow: var(--az-shadow-hover); }
+	.az-pricing__list > li:not(:nth-child(2)) .az-plan:hover { border-color: var(--az-accent); }
+	/* Nhận xét: avatar phóng nhẹ */
+	.az-quote:hover .az-quote__avatar { transform: scale(1.08); }
+	/* Số liệu mạng xã hội: icon phóng và đổi sang xanh */
+	.az-sol:hover .az-sol__icon { transform: scale(1.12); }
+	.az-sol:hover .az-sol__icon .wp-social-link { color: var(--az-accent); }
+	/* Card nổi ở hero */
+	.az-section :is(.az-hero__card, .az-hero__rating):hover { transform: translateY(-4px); border-color: var(--az-accent); }
+	.az-hero__card:hover .az-hero__avatar { transform: scale(1.08); }
+	/* Logo đối tác: nhấc nhẹ, nền trắng rõ */
+	.az-section .az-logos__item:hover { transform: translateY(-2px); background: #fff; border-color: rgba(10, 42, 102, .22); box-shadow: var(--az-shadow-hover); }
+	/* Ảnh lớn: zoom chậm trong khung */
+	.az-why-us__media:hover .az-why-us__img img, .az-solutions__img:hover img { transform: scale(1.045); }
+	/* FAQ: ô câu hỏi nhích sang phải và đổi nền */
+	.az-faq__summary:hover { transform: translateX(4px); background: var(--az-tint); }
+	/* Footer: link nhích sang phải, icon liên hệ phóng nhẹ */
+	.az-footer__nav .wp-block-navigation-item__content:hover { transform: translateX(4px); text-decoration: none; }
+	.az-footer .az-contact:hover::before { transform: scale(1.1); background: var(--az-primary); }
+}
+
+/* Giảm chuyển động: giữ đổi màu, bỏ nhấc/zoom/nhích */
+@media (prefers-reduced-motion: reduce) {
+	.az-section :is(.az-card, .az-mission__item, .az-sol, .az-quote, .az-plan, .az-hero__card, .az-hero__rating, .az-logos__item, .az-faq__summary):hover,
+	.az-section .az-plan:focus-within, .az-footer__nav .wp-block-navigation-item__content:hover { transform: none !important; }
+	.az-why-us__img img, .az-solutions__img img { transform: none !important; }
+}
+
 /* Con trỏ tuỳ biến (tạo bằng az.js, chỉ khi có chuột): dot + vòng tròn, con trỏ gốc vẫn giữ nguyên */
 .az-cursor { position: fixed; top: 0; left: 0; z-index: 100000; pointer-events: none; border-radius: 50%; opacity: 0; will-change: translate, scale; transition: opacity .2s, scale .2s, border-color .2s, background-color .2s; }
 .az-cursor.is-visible { opacity: 1; }

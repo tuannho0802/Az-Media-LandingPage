@@ -109,3 +109,10 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 - Chỉnh độ nhanh: các `transition` và `--az-ease` trong khối "Hover header" của `az.css`. Mobile (hamburger) giữ nguyên hành vi của core.
 - Lưu ý khi sửa con trỏ: vị trí phải đặt bằng thuộc tính `translate` chứ không dùng `transform`, vì độ phóng dùng thuộc tính `scale` riêng; trộn `transform` với `scale` sẽ làm toạ độ bị nhân theo độ phóng và vòng lệch khỏi con trỏ.
 
+## Hiệu ứng hover trang chủ
+
+- Khối "7.x HOVER TRANG CHỦ" trong `az.css`, dùng biến `--az-ease` (cùng đường cong với header). Toàn bộ nằm trong `@media (hover: hover) and (pointer: fine)`, nên cảm ứng không bị kẹt hover.
+- Thẻ (Why us, Sứ mệnh, Solutions, Nhận xét): nhấc 4px + bóng + viền xanh. Gói giá: nhấc 6px (gói giữa nền đậm chỉ nhấc và đổ bóng). Thẻ nền tối: sáng nền, ô số đổi xanh và phóng 1.1×.
+- Ảnh lớn (Why us, Solutions): zoom 1.045× trong khung `overflow: hidden`. FAQ: ô nhích 4px phải. Footer: link nhích 4px phải, icon liên hệ phóng 1.1×.
+- Chỉnh độ mạnh: đổi `translateY(-4px)` / `-6px`, `scale(...)` và thời gian `.45s` trong khối đó. `prefers-reduced-motion` bỏ nhấc/zoom/nhích, giữ đổi màu.
+

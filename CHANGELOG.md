@@ -14,6 +14,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [home] Hiệu ứng hover cho các phần trang chủ, cùng đường cong chuyển động với header: thẻ Why us, Sứ mệnh, Solutions, Nhận xét nhấc 4px kèm bóng và viền xanh; thẻ nền tối sáng nền, ô số đổi xanh; Gói giá nhấc 6px; icon mạng xã hội phóng và đổi xanh; avatar phóng nhẹ; card nổi ở hero nhấc; ô logo nhấc; ảnh Why us và Solutions zoom chậm; ô FAQ nhích phải và đổi nền; link footer nhích phải. Chỉ bật khi có chuột; bỏ nhấc/zoom khi người dùng chọn giảm chuyển động.
 - [theme] Nút lên đầu trang ở mọi trang: ẩn ở đầu trang, cuộn quá 240px thì trượt vào từ góc phải dưới, vòng ngoài tô dần theo tiến độ cuộn. Bấm nút thì cuộn mượt về đầu và trượt ra khuất góc phải, chỉ hiện lại khi người dùng cuộn xuống tiếp.
 - [theme] Con trỏ chuột tuỳ biến: con trỏ gốc giữ nguyên, dot trễ 20ms, vòng tròn trễ 40ms (trễ theo thời gian thực). Vòng phóng to khi rê vào link/nút, đổi sang màu trắng trên nền tối. Chỉ bật với chuột (hover + pointer: fine) và tắt khi người dùng chọn giảm chuyển động.
 - [legal] Trang tổng `/legal/` (trước đây 404): H1 + 3 thẻ dẫn tới Chính sách bảo mật, Điều khoản, Chính sách hoàn tiền (kèm mô tả và ngày cập nhật), nút Liên hệ. Template mới `page-legal-hub.html` (custom template “Trang tổng pháp lý”), pattern `az-legal-hub-hero`, `az-legal-hub-list`. `/legal` (không có dấu `/`) tự chuyển về `/legal/`.
