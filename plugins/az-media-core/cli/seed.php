@@ -127,8 +127,36 @@ class AZ_Core_Seed_Command {
 			array( 'Video marketing', 'Sản xuất video ngắn và dài giúp tăng tương tác và truyền tải thông điệp.' ),
 		);
 		foreach ( $items as $i => $s ) {
-			$this->upsert( 'service', $s[0], '', $s[1], $i + 1 );
+			$id = $this->upsert( 'service', $s[0], $this->service_content( $s[0] ), $s[1], $i + 1 );
+			// Dịch vụ đã seed từ trước chưa có nội dung: chỉ điền khi đang trống, không ghi đè nội dung đã sửa.
+			if ( $id && '' === trim( (string) get_post_field( 'post_content', $id ) ) ) {
+				wp_update_post( array( 'ID' => $id, 'post_content' => $this->service_content( $s[0] ) ) );
+				$this->out( "Đã điền nội dung mẫu: [service] {$s[0]}" );
+			}
 		}
+	}
+
+	/**
+	 * Nội dung mẫu cho trang chi tiết dịch vụ (PLACEHOLDER): giới thiệu, lợi ích, quy trình.
+	 * Lợi ích và quy trình nằm trong nội dung bài để biên tập viên sửa từng dịch vụ ngay trong trình soạn thảo.
+	 */
+	private function service_content( $title ) {
+		$title    = esc_html( $title );
+		$list     = static function ( $items, $ordered = false ) {
+			$tag   = $ordered ? 'ol' : 'ul';
+			$attrs = $ordered ? ' {"ordered":true}' : '';
+			$out   = "<!-- wp:list$attrs -->\n<$tag class=\"wp-block-list\">";
+			foreach ( $items as $item ) {
+				$out .= "<!-- wp:list-item -->\n<li>$item</li>\n<!-- /wp:list-item -->";
+			}
+			return $out . "</$tag>\n<!-- /wp:list -->\n\n";
+		};
+		$content  = "<!-- wp:paragraph -->\n<p>Dịch vụ $title của AZ Media giúp thương hiệu của bạn có kế hoạch rõ ràng, triển khai nhất quán và đo được kết quả. Nội dung mẫu (PLACEHOLDER), cần thay bằng mô tả thật.</p>\n<!-- /wp:paragraph -->\n\n";
+		$content .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Lợi ích</h2>\n<!-- /wp:heading -->\n\n";
+		$content .= $list( array( 'Kế hoạch bám sát mục tiêu kinh doanh', 'Một đầu mối làm việc xuyên suốt', 'Báo cáo minh bạch, số liệu rõ ràng' ) );
+		$content .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Quy trình thực hiện</h2>\n<!-- /wp:heading -->\n\n";
+		$content .= $list( array( 'Tiếp nhận nhu cầu và mục tiêu', 'Đề xuất kế hoạch và báo giá', 'Triển khai và theo dõi', 'Báo cáo và tối ưu' ), true );
+		return $content;
 	}
 
 	private function seed_testimonials() {

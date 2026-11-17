@@ -51,6 +51,8 @@ add_action( 'init', function () {
 	register_post_type( 'service', array_merge( $common, array(
 		'labels'    => array( 'name' => 'Dịch vụ', 'singular_name' => 'Dịch vụ', 'add_new_item' => 'Thêm dịch vụ', 'edit_item' => 'Sửa dịch vụ' ),
 		'menu_icon' => 'dashicons-megaphone',
+		// Dịch vụ có trang chi tiết /services/{slug}/ (template single-service). Không có trang lưu trữ /services/.
+		'rewrite'   => array( 'slug' => 'services', 'with_front' => false ),
 	) ) );
 
 	register_post_type( 'testimonial', array_merge( $common, array(
@@ -89,3 +91,15 @@ add_action( 'init', function () {
 		}
 	}
 } );
+
+/**
+ * Làm mới rewrite rules đúng một lần khi đổi cấu hình URL của CPT (ví dụ /services/{slug}/),
+ * để git pull xong là chạy ngay, không cần vào Settings → Permalinks bấm Save.
+ * Tăng số phiên bản khi lại đổi rewrite.
+ */
+add_action( 'init', function () {
+	if ( '1' !== get_option( 'az_core_rewrite_ver' ) ) {
+		flush_rewrite_rules( false );
+		update_option( 'az_core_rewrite_ver', '1', true );
+	}
+}, 99 );

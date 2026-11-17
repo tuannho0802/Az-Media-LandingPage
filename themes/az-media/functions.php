@@ -85,8 +85,38 @@ add_filter( 'query_loop_block_query_vars', function ( $query, $block ) {
 	if ( $wanted && ! post_type_exists( $wanted ) ) {
 		$query['post__in'] = array( 0 );
 	}
+	// Pattern az-media/service-related (queryId 15): loại dịch vụ đang xem khỏi danh sách "Dịch vụ khác".
+	if ( 15 === (int) ( $block->context['queryId'] ?? 0 ) && is_singular( 'service' ) ) {
+		$query['post__not_in'] = array( get_queried_object_id() );
+	}
 	return $query;
 }, 10, 2 );
+
+/**
+ * Schema Service (JSON-LD) cho trang chi tiết dịch vụ.
+ */
+add_action( 'wp_head', function () {
+	if ( ! is_singular( 'service' ) ) {
+		return;
+	}
+	$post = get_queried_object();
+	if ( ! $post instanceof WP_Post ) {
+		return;
+	}
+	$data = array(
+		'@context'    => 'https://schema.org',
+		'@type'       => 'Service',
+		'name'        => get_the_title( $post ),
+		'description' => wp_strip_all_tags( get_the_excerpt( $post ) ),
+		'url'         => get_permalink( $post ),
+		'provider'    => array(
+			'@type' => 'Organization',
+			'name'  => 'AZ Media',
+			'url'   => home_url( '/' ),
+		),
+	);
+	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG ) . "</script>\n";
+}, 5 );
 
 /**
  * Nhắc quản trị viên bật plugin dữ liệu và chạy seed.

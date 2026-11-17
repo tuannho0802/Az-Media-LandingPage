@@ -14,6 +14,9 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [service-detail] Trang chi tiết dịch vụ `/services/{slug}/` dựng theo cấu trúc đề xuất trong `docs/pages/04-service-detail.md` (chưa có ảnh ref): hero (badge, H1, tóm tắt, nút Nhận báo giá), thân bài (ảnh đại diện + nội dung gồm giới thiệu, lợi ích, quy trình), 3 dịch vụ khác, CTA, FAQ. Template `single-service.html`; pattern mới `az-service-hero`, `az-service-body`, `az-service-related`; dùng lại `az-cta`, `az-faq`.
+- [service-detail] Schema Service (JSON-LD) trong `functions.php`.
+- [core] Seed nội dung mẫu cho 6 dịch vụ (giới thiệu, lợi ích, quy trình); dịch vụ đã seed từ trước được điền khi nội dung đang trống, không ghi đè nội dung đã sửa.
 - [services] Trang `/all-services/` dựng theo `docs/reference-images/OG-Services.png`: hero, khối Why choose us (thẻ trích dẫn + 3 thẻ lợi ích), 2 hàng ảnh xen kẽ, lưới 6 dịch vụ có icon, CTA, FAQ. Template `page-all-services.html`; pattern mới `az-services-hero`, `az-services-why`, `az-services-features`, `az-services-grid`.
 - [core] CPT `service` (menu Dịch vụ) và seed 6 dịch vụ mẫu; lưới dịch vụ tự lấy từ CPT.
 - [pricing] Trang `/pricing/` dựng theo ảnh ref `docs/reference-images/OG-Pricing.png`: hero (badge, H1, mô tả), Trusted by, 3 thẻ gói (gói giữa nền đậm), Why choose us, FAQ. Template `page-pricing.html`; pattern mới `az-pricing-hero`, `az-pricing-list`, dùng lại `az-logos`, `az-why-us`, `az-faq`.
@@ -26,6 +29,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [core] CPT `service` có rewrite `/services/{slug}/` (không có trang lưu trữ). Rewrite rules tự làm mới một lần khi cập nhật (option `az_core_rewrite_ver`), không cần Save lại Permalinks.
+- [services] Tên dịch vụ trong lưới `az-services-grid` giờ là link tới trang chi tiết (xử lý known issue "thẻ chưa có link").
 - [docs] `[services] Đạt design review`: chủ dự án xác nhận hoàn thành trang Dịch vụ (17/11/2026). Các mục review tích theo xác nhận, chưa có số đo; xem `docs/pages/03-services.md`.
 - [docs] `[home] Đạt design review`: chủ dự án xác nhận hoàn thành trang chủ (17/11/2026). 5 mục review và Lighthouse tích theo xác nhận, chưa có số đo; xem `docs/pages/01-home.md`.
 - [core] Giá, chu kỳ, mô tả gói (Gói giá) và vai trò, chữ avatar (Nhận xét) chuyển từ meta box ở đáy màn hình lên panel "Thông tin hiển thị" ở thanh bên phải trình soạn thảo. Meta box cũ chỉ còn dùng cho Classic Editor.
@@ -51,6 +56,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [service-detail] Chưa có ảnh ref và chưa đọc được demo, nên bố cục theo plan đề xuất, chưa so thiết kế; chưa xem bằng trình duyệt/WordPress thật (khoảng cách, typography, responsive 1200/1024/768/480). Chưa có form báo giá (chờ Contact Form 7 và trang Liên hệ). Nội dung dịch vụ là PLACEHOLDER.
 - [services] Icon gán theo vị trí thẻ (6 icon xoay vòng), không theo từng dịch vụ; ảnh hai hàng xen kẽ là ảnh tạm; thẻ chưa có link tới trang chi tiết. Nội dung là PLACEHOLDER.
 - [pricing] Mục 7 trong `02-pricing.md` còn vài hạng mục chờ so bằng mắt trên Local WP (khoảng cách, typography, responsive 1200/1024/768/480). Giá, mô tả, logo là PLACEHOLDER.
 - [home] Toàn bộ số liệu, lời nhận xét, giá, logo, email, điện thoại là PLACEHOLDER, cần thay bằng dữ liệu thật trước khi public.

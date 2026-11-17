@@ -24,7 +24,7 @@
 <!-- wp:query {"queryId":14,"query":{"perPage":6,"pages":0,"offset":0,"postType":"service","order":"asc","orderBy":"menu_order","author":"","search":"","exclude":[],"sticky":"","inherit":false},"className":"az-svc-grid__query"} -->
 <div class="wp-block-query az-svc-grid__query"><!-- wp:post-template {"className":"az-svc-grid__list"} -->
 <!-- wp:group {"className":"az-service"} -->
-<div class="wp-block-group az-service"><!-- wp:post-title {"level":3,"isLink":false,"className":"az-service__title"} /-->
+<div class="wp-block-group az-service"><!-- wp:post-title {"level":3,"isLink":true,"className":"az-service__title"} /-->
 
 <!-- wp:post-excerpt {"excerptLength":30,"className":"az-service__text"} /--></div>
 <!-- /wp:group -->

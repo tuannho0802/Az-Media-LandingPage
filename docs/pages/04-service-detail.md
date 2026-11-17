@@ -6,9 +6,9 @@
 | Template WordPress | `templates/single-service.html` |
 | Trang demo tham chiếu | https://reachout.nexmotivedemo.com/all-services/ (mở một dịch vụ bất kỳ để lấy URL chi tiết) |
 | Độ tin cậy nguồn | ⚠️ Chưa đọc; chưa biết URL chi tiết của demo |
-| Pattern dùng | `az-page-hero`, `az-benefits`, `az-process`, `az-faq`, `az-cta` |
-| Dữ liệu (CPT/plugin) | CPT `service`, Contact Form 7 (form báo giá) |
-| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☐ Chờ review · ☐ Đạt |
+| Pattern dùng | `az-service-hero`, `az-service-body`, `az-service-related` (mới); dùng lại `az-cta`, `az-faq` |
+| Dữ liệu (CPT/plugin) | CPT `service` (nay có URL `/services/{slug}/`); form báo giá chờ trang Liên hệ |
+| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt |
 | Ngày truy cập demo | 17/11/2026 |
 
 > **Cần xác minh trước khi dựng.** Chưa đọc được nội dung trang này của demo, nên mục 2 là cấu trúc đề xuất theo chuẩn trang agency. Việc đầu tiên: mở link demo ở trên, chụp full-page lưu vào `docs/references/service-detail-demo.png`, sửa bảng mục 2 cho khớp demo, rồi đổi cột "Xác minh" từ ⚠️ sang ✅.
@@ -21,13 +21,13 @@ Giải thích sâu một dịch vụ và thu lead qua form báo giá.
 
 | # | Section | Nội dung / hành vi | Pattern | Dữ liệu | Xác minh |
 |---|---|---|---|---|---|
-| 1 | Page hero | Tên dịch vụ + breadcrumb | az-page-hero | `service` title | ⚠️ |
-| 2 | Tổng quan | Ảnh + mô tả dịch vụ | Content block | `service` content | ⚠️ |
-| 3 | Lợi ích | Lưới icon box (3–6 mục) | az-benefits | Meta `service` | ⚠️ |
-| 4 | Quy trình | Các bước thực hiện | az-process | Meta/pattern | ⚠️ |
-| 5 | Form báo giá | Form CF7: tên, email, điện thoại, nhu cầu | CF7 shortcode | CF7 | ⚠️ |
-| 6 | Dịch vụ liên quan | 2–3 card dịch vụ khác | Query loop | `service` | ⚠️ |
-| 7 | FAQ + CTA | FAQ của dịch vụ, CTA cuối | az-faq, az-cta | `faq` | ⚠️ |
+| 1 | Hero | Badge "Dịch vụ", tên dịch vụ (H1), tóm tắt, nút "Nhận báo giá" → `/contact/` | az-service-hero | `service` title + excerpt | ⚠️ |
+| 2 | Thân bài | Ảnh đại diện (nếu có) + nội dung: giới thiệu, **Lợi ích**, **Quy trình thực hiện** | az-service-body | `service` content + ảnh đại diện | ⚠️ |
+| 3 | Dịch vụ khác | 3 thẻ dịch vụ khác, bấm vào sang trang chi tiết | az-service-related | `service` (loại trừ bài đang xem) | ⚠️ |
+| 4 | CTA | Khối CTA đậm | az-cta | tĩnh | ⚠️ |
+| 5 | FAQ | Accordion 5 câu | az-faq | `faq` | ⚠️ |
+
+> Quyết định dựng (chưa có ảnh ref, không xem được demo): Lợi ích và Quy trình nằm **trong nội dung bài** (editor sửa từng dịch vụ), không tạo meta field hay pattern riêng. Không có breadcrumb (bản dựng đầu của trang Bảng giá từng bị gỡ vì demo không có). **Form báo giá chưa dựng**: cần Contact Form 7 và trang Liên hệ (`10-contact`); tạm dùng nút "Nhận báo giá" và CTA dẫn tới `/contact/`. Điền sẵn dịch vụ vào form làm cùng trang Liên hệ.
 
 ## 3. Nội dung AZ Media cần chuẩn bị
 
@@ -83,4 +83,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/all-services/ (mở m�
 
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
-| | | |
+| 17/11/2026 | Dựng lần đầu theo cấu trúc đề xuất (chưa có ảnh ref): template `single-service.html`, 3 pattern mới, CPT `service` có URL `/services/{slug}/`, nội dung mẫu seed, link từ lưới trang Dịch vụ, schema Service. Chưa xem bằng trình duyệt. | |
