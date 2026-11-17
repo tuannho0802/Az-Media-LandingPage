@@ -90,7 +90,7 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 
 ## Con trỏ chuột tuỳ biến
 
-- Tạo bằng `az.js` (`initCursor`) và CSS `.az-cursor*`. Thứ tự di chuyển: con trỏ gốc (0ms) → dot (20ms) → vòng tròn 40px (40ms). Đổi độ trễ ở `DOT_DELAY` và `RING_DELAY` trong `az.js`.
+- Tạo bằng `az.js` (`initCursor`) và CSS `.az-cursor*`. Thứ tự di chuyển: con trỏ gốc (0ms) → dot → vòng tròn 40px. `DOT_DELAY` / `RING_DELAY` là tổng độ trễ so với con trỏ gốc; `DOT_EASE` / `RING_EASE` là độ "trôi" (càng lớn càng chậm và mượt, ví dụ 45 và 80). Chỉnh độ mượt thì đổi EASE, không cần đổi DELAY.
 - Chỉ chạy khi `(hover: hover) and (pointer: fine)` và không bật `prefers-reduced-motion`. Trên cảm ứng không có gì được thêm vào trang.
 - Trạng thái: rê vào link/nút/input thì vòng phóng 1.5×; nhấn chuột thì vòng thu nhỏ; trên `.az-why-us`, `.az-cta__box`, footer dưới, announcement thì đổi sang màu trắng.
 

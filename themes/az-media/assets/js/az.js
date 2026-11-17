@@ -83,7 +83,8 @@
 	 * Độ trễ là trễ theo thời gian thực (nội suy trên lịch sử vị trí chuột), không phải easing,
 	 * nên dot và vòng luôn đi đúng đường của con trỏ gốc. Chỉ bật với chuột (hover + pointer: fine). */
 	function initCursor() {
-		var DOT_DELAY = 120, RING_DELAY = 200;
+		var DOT_DELAY = 120, RING_DELAY = 200; /* tổng độ trễ mong muốn (ms) so với con trỏ gốc */
+		var DOT_EASE = 45, RING_EASE = 80;     /* hằng số làm mượt (ms): càng lớn càng "trôi" chậm, càng mượt */
 		var fine = window.matchMedia && window.matchMedia( '(hover: hover) and (pointer: fine)' ).matches;
 		if ( ! fine || reduceMotion ) { return; }
 
@@ -110,14 +111,32 @@
 			return { x: a.x + ( b.x - a.x ) * k, y: a.y + ( b.y - a.y ) * k };
 		}
 
-		function place( node, pos ) {
-			if ( pos ) { node.style.transform = 'translate3d(' + pos.x.toFixed( 1 ) + 'px,' + pos.y.toFixed( 1 ) + 'px,0)'; }
+		function place( node, x, y ) {
+			node.style.transform = 'translate3d(' + x.toFixed( 1 ) + 'px,' + y.toFixed( 1 ) + 'px,0)';
+		}
+
+		/* Vị trí đang hiển thị. Mỗi khung hình đi một phần quãng đường tới mục tiêu (độ trễ thời gian),
+		 * theo hàm mũ độc lập với fps nên chuyển động trôi mượt, tăng/giảm tốc dần thay vì bám sát tức thì. */
+		var dotPos = null, ringPos = null, lastFrame = 0;
+
+		function glide( pos, target, ease, dt ) {
+			if ( ! target ) { return pos; }
+			if ( ! pos ) { return { x: target.x, y: target.y }; }
+			var k = 1 - Math.exp( -dt / ease );
+			pos.x += ( target.x - pos.x ) * k;
+			pos.y += ( target.y - pos.y ) * k;
+			return pos;
 		}
 
 		function frame() {
 			var now = performance.now();
-			place( dot, at( now - DOT_DELAY ) );
-			place( ring, at( now - RING_DELAY ) );
+			var dt = Math.min( now - ( lastFrame || now ), 50 );
+			lastFrame = now;
+			/* Làm mượt kiểu mũ tự nó trễ ~ bằng hằng số ease, nên trừ đi để tổng độ trễ vẫn đúng DOT_DELAY/RING_DELAY. */
+			dotPos = glide( dotPos, at( now - Math.max( 0, DOT_DELAY - DOT_EASE ) ), DOT_EASE, dt );
+			ringPos = glide( ringPos, at( now - Math.max( 0, RING_DELAY - RING_EASE ) ), RING_EASE, dt );
+			if ( dotPos ) { place( dot, dotPos.x, dotPos.y ); }
+			if ( ringPos ) { place( ring, ringPos.x, ringPos.y ); }
 			/* Giữ lại 1 mẫu cũ hơn mốc trễ lớn nhất để còn nội suy. */
 			while ( trail.length > 2 && trail[ 1 ].t < now - RING_DELAY - 50 ) { trail.shift(); }
 			raf = visible ? requestAnimationFrame( frame ) : 0;
@@ -135,7 +154,9 @@
 			var t = performance.now();
 			if ( ! visible ) {
 				/* Lần đầu hiện: đặt cả dot và vòng ngay tại con trỏ, tránh bay từ góc màn hình. */
-				trail = [ { t: t - 200, x: e.clientX, y: e.clientY } ];
+				trail = [ { t: t - 500, x: e.clientX, y: e.clientY } ];
+				dotPos = ringPos = null;
+				lastFrame = 0;
 				show( true );
 			}
 			/* Sau một lúc đứng yên, giữ nguyên vị trí cũ tới ngay trước sự kiện mới để dot/vòng không trượt sớm. */
