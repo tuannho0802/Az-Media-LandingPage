@@ -525,6 +525,31 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 .az-ctc-map__address strong { color: var(--az-text); }
 .az-ctc-map__frame { display: block; width: 100%; height: clamp(300px, 40vw, 460px); border: 0; }
 
+/* 7.16 Trang pháp lý (page-legal) */
+.az-section .az-legal__inner { max-width: 760px; margin-inline: auto; }
+.az-section .az-legal__updated { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .35rem; font-size: .9375rem; color: var(--az-muted); }
+.az-legal__updated :is(p, .wp-block-post-date) { margin: 0; }
+.az-legal__content { counter-reset: az-legal; }
+.az-section .az-legal__content h2::before { counter-increment: az-legal; content: counter(az-legal) ". "; color: var(--az-accent-text); }
+
+/* 7.17 Trang 404 và Tìm kiếm */
+.az-section .az-404__inner { max-width: 640px; margin-inline: auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.25rem; }
+.az-404__code { margin: 0; font-size: clamp(5rem, 3rem + 10vw, 9rem); font-weight: 800; line-height: 1; letter-spacing: -.04em; color: var(--az-primary); }
+.az-404__title { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem); }
+.az-search { width: 100%; max-width: 520px; margin-inline: auto; }
+.az-search .wp-block-search__inside-wrapper { display: flex; gap: 8px; }
+.az-search .wp-block-search__input { flex: 1 1 auto; min-width: 0; min-height: 48px; padding: .75rem 1rem; font: inherit; color: var(--az-text); background: #fff; border: 1px solid var(--az-border); border-radius: 10px; transition: border-color .2s, box-shadow .2s; }
+.az-search .wp-block-search__input:focus { outline: none; border-color: var(--az-accent); box-shadow: 0 0 0 3px rgba(47, 107, 255, .2); }
+.az-search .wp-block-search__button { margin: 0; min-height: 48px; border: 0; cursor: pointer; }
+.az-section .az-search-results .wp-block-query-pagination { margin-top: 40px; gap: 8px; }
+.az-search-results .wp-block-query-pagination-numbers { display: flex; gap: 8px; }
+.az-search-results .wp-block-query-pagination :is(.page-numbers, .wp-block-query-pagination-previous, .wp-block-query-pagination-next) { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 .9rem; color: var(--az-primary-dark); text-decoration: none; background: #fff; border: 1px solid var(--az-border); border-radius: 8px; transition: border-color .2s, color .2s; }
+.az-search-results .wp-block-query-pagination :is(a.page-numbers, .wp-block-query-pagination-previous, .wp-block-query-pagination-next):hover { color: var(--az-accent-text); border-color: var(--az-accent); }
+.az-search-results .wp-block-query-pagination .page-numbers.current { color: #fff; background: var(--az-primary); border-color: var(--az-primary); }
+.az-search-results .wp-block-query-pagination .page-numbers.dots { background: none; border: 0; }
+.az-section .az-search-empty { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-block: 24px; text-align: center; }
+.az-search-empty .az-head__lead { margin-inline: auto; }
+
 /* 8. RESPONSIVE */
 @media (max-width: 1100px) {
 	.az-footer .az-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }

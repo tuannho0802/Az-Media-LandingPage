@@ -341,6 +341,33 @@ class AZ_Core_Seed_Command {
 			. "<!-- wp:paragraph -->\n<p>Quan tâm vị trí này? Bấm Ứng tuyển ngay và gửi CV cùng thư giới thiệu ngắn cho chúng tôi.</p>\n<!-- /wp:paragraph -->";
 	}
 
+	/**
+	 * Điền nội dung mẫu cho 3 trang pháp lý và gán template "Trang pháp lý" (page-legal).
+	 * Chỉ ghi đè khi nội dung đang là bản trống, dòng "Trang đang được xây dựng" hoặc văn bản mẫu mặc định của WordPress,
+	 * để không mất nội dung đã sửa.
+	 */
+	private function seed_legal() {
+		foreach ( az_core_legal_pages() as $slug => $content ) {
+			$page = get_page_by_path( $slug );
+			if ( ! $page ) {
+				continue;
+			}
+			$current = (string) $page->post_content;
+			$is_stub = '' === trim( wp_strip_all_tags( $current ) )
+				|| false !== strpos( $current, 'Trang đang được xây dựng' )
+				|| false !== strpos( $current, 'privacy-policy-tutorial' );
+			if ( $is_stub ) {
+				wp_update_post( array( 'ID' => $page->ID, 'post_content' => $content ) );
+				$this->out( "Đã điền nội dung mẫu: {$page->post_title} (/$slug/)" );
+			}
+			$template = get_post_meta( $page->ID, '_wp_page_template', true );
+			if ( ! $template || 'default' === $template ) {
+				update_post_meta( $page->ID, '_wp_page_template', 'page-legal' );
+				$this->out( "Đã gán template Trang pháp lý: /$slug/" );
+			}
+		}
+	}
+
 	private function seed_pages() {
 		$pages = array(
 			'home'             => 'Trang chủ',
@@ -378,6 +405,7 @@ class AZ_Core_Seed_Command {
 			) );
 			$this->out( "Đã tạo trang: $title (/$slug/)" );
 		}
+		$this->seed_legal();
 		update_option( 'show_on_front', 'page' );
 		update_option( 'page_on_front', $ids['home'] );
 		update_option( 'page_for_posts', $ids['blog'] );

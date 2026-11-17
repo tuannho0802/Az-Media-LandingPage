@@ -68,6 +68,9 @@
       }
     }
   },
+  "customTemplates": [
+    { "name": "page-legal", "title": "Trang pháp lý", "postTypes": [ "page" ] }
+  ],
   "templateParts": [
     { "name": "announcement-bar", "title": "Announcement bar", "area": "uncategorized" },
     { "name": "header", "title": "Header", "area": "header" },

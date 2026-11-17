@@ -14,6 +14,10 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [legal] 3 trang pháp lý `/privacy-policy/`, `/terms/`, `/refund-policy/`: hero (badge, H1, "Cập nhật lần cuối" theo ngày sửa trang), cột đọc 760px, heading H2 tự đánh số bằng CSS. Template `page-legal.html` đăng ký là custom template "Trang pháp lý" trong `theme.json`; pattern mới `az-legal-hero`, `az-legal-body`.
+- [core] Nội dung mẫu 3 văn bản pháp lý (`includes/legal-content.php`) và seed điền khi trang đang trống, đang là "Trang đang được xây dựng" hoặc là văn bản mẫu mặc định của WordPress; seed gán template Trang pháp lý. **Bản nháp mẫu chưa qua rà soát pháp lý.**
+- [404-search] Trang 404 dựng lại (số 404 lớn, H1, ô tìm kiếm, nút về trang chủ/Dịch vụ/Blog/Liên hệ) và trang kết quả tìm kiếm mới `search.html` (hero giữ từ khóa, lưới thẻ 2 cột, phân trang, trạng thái không có kết quả). Pattern mới `az-404`, `az-search-hero`, `az-search-results`; dùng lại `az-post-card`.
+- [theme] Tìm kiếm giới hạn ở bài viết và dịch vụ (`pre_get_posts`); `noindex` cho trang 404 (`wp_robots`).
 - [contact] Trang `/contact/` dựng theo `docs/reference-images/OG-Contact.png`: hero, khối form (ảnh trái, form phải), 3 thẻ thông tin (điện thoại, email, giờ làm việc), bản đồ Google nhúng kèm địa chỉ 27 Đinh Bộ Lĩnh, Phường 24, Quận Bình Thạnh, TP. Hồ Chí Minh (link Google). Template `page-contact.html`; pattern mới `az-contact-hero`, `az-contact-form`, `az-contact-info`; icon `phone`, `mail`, `clock`, `pin`. Schema LocalBusiness (tên, URL, địa chỉ).
 - [core] Block `az-media/contact-form` + xử lý gửi (`includes/contact-form.php`): kiểm tra server, nonce, honeypot, tối thiểu 3 giây, tối đa 5 lần/giờ/IP; lưu tin nhắn vào CPT `contact_message` (menu Tin nhắn liên hệ) rồi gửi email thông báo; email nhận đặt ở Cài đặt → Chung. Dùng form tự viết thay Contact Form 7 vì cấu hình CF7 nằm trong database, không đi theo git.
 - [maintenance] Trang bảo trì `/maintenance-mode/` làm **khác demo có chủ đích**: toàn màn hình, nền đậm có lưới, căn giữa, không ảnh, không announcement/header/footer; gồm nhãn trạng thái nhấp nháy, H1, thời gian dự kiến, tiến độ 3 bước, nút liên hệ gấp. Template `page-maintenance-mode.html`, pattern mới `az-maintenance`.
@@ -45,6 +49,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [docs] Slug trang Điều khoản chốt là `/terms/` (khớp footer và seed), plan `12-legal.md` đã sửa từ `/terms-and-conditions/`.
 - [global] Gỡ mục "Bảo trì" khỏi dropdown Trang ở header (trang bảo trì không đưa vào menu công khai).
 - [docs] Viết lại plan `docs/pages/11-maintenance.md` theo hướng trang bảo trì dùng thật, khác demo.
 - [career] CPT `career` có URL công khai `/career/{slug}/` (rewrite tự làm mới một lần, `az_core_rewrite_ver` lên 2). Thẻ việc làm ở `/career/` bấm được toàn khung và có "Xem chi tiết".
@@ -80,6 +85,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [legal] Nội dung 3 văn bản là bản nháp mẫu, cần rà soát pháp lý trước khi công bố (số ngày, tỷ lệ hoàn tiền, thông tin pháp nhân, email liên hệ). Chưa có ảnh ref nên bố cục theo cấu trúc đề xuất; chưa xem bằng trình duyệt/WordPress thật.
+- [404-search] Chưa có ảnh ref; chưa xem bằng trình duyệt/WordPress thật (đặc biệt ô tìm kiếm, phân trang và `query-title` giữ từ khóa). Trang Blog (`06-blog`) chưa dựng nên link Blog dẫn tới trang danh sách bài viết mặc định.
 - [contact] Chưa xem bằng trình duyệt/WordPress thật và chưa gửi thử form (đã kiểm thử hàm kiểm tra dữ liệu bằng PHP CLI, chưa chạy luồng gửi trong WordPress). Email, điện thoại, giờ làm việc, ảnh là PLACEHOLDER. Local WP mặc định không gửi được email: tin nhắn vẫn lưu ở menu Tin nhắn liên hệ. Chưa có reCAPTCHA/Turnstile.
 - [maintenance] Chưa xem bằng trình duyệt/WordPress thật; chưa thử bật chế độ bảo trì với khách ẩn danh. Thời gian dự kiến, 3 bước tiến độ, email, điện thoại là nội dung mẫu cần sửa tay cho từng đợt bảo trì. Chưa có ô đăng ký nhận tin.
 - [global] Header mới (nền mờ, bar dính) chưa xem bằng trình duyệt/WordPress thật: cần kiểm blur khi cuộn qua ảnh/khối đậm, menu mobile mở hết màn hình, bar 2 dòng trên mobile, và khi đăng nhập có admin bar.

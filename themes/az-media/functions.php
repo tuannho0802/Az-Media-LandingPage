@@ -210,3 +210,26 @@ add_action( 'wp_head', function () {
 	);
 	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG ) . "</script>\n";
 }, 5 );
+
+/**
+ * Tìm kiếm: bài viết và dịch vụ (mặc định WordPress tìm cả Page, kéo theo các trang pháp lý, trang trống).
+ * Dịch vụ khai báo exclude_from_search nên phải chỉ định post_type rõ ràng ở đây.
+ */
+add_action( 'pre_get_posts', function ( $query ) {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_search() ) {
+		return;
+	}
+	$types = array( 'post' );
+	if ( post_type_exists( 'service' ) ) {
+		$types[] = 'service';
+	}
+	$query->set( 'post_type', $types );
+} );
+
+/**
+ * noindex cho trang 404. (Trang kết quả tìm kiếm đã được WordPress tự gắn noindex.)
+ */
+add_filter( 'wp_robots', function ( $robots ) {
+	return is_404() ? wp_robots_no_robots( $robots ) : $robots;
+} );
+
