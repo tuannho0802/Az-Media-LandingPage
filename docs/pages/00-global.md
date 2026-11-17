@@ -87,3 +87,10 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 | 17/11/2026 | Header: logo và menu không xuống dòng, ẩn nút Bảng giá/Liên hệ dành cho mobile ở desktop. Footer làm lại theo ref (dải tagline + 5 cột + thanh đậm) | |
 | 17/11/2026 | Sửa header theo ref: nền trong suốt (trắng 78%) có blur 10px, announcement bar và header cùng dính khi cuộn (header nằm dưới bar), menu căn trái cạnh logo thay vì căn giữa, chiều cao 70px không co khi cuộn, mũi tên dropdown sát chữ. Chưa xem bằng trình duyệt | |
 | 17/11/2026 | Gỡ mục "Bảo trì" khỏi dropdown Trang: trang bảo trì chỉ hiện khi bật chế độ bảo trì hoặc xem trước bằng URL, xem `11-maintenance.md` | |
+
+## Con trỏ chuột tuỳ biến
+
+- Tạo bằng `az.js` (`initCursor`) và CSS `.az-cursor*`. Thứ tự di chuyển: con trỏ gốc (0ms) → dot (20ms) → vòng tròn 40px (40ms). Đổi độ trễ ở `DOT_DELAY` và `RING_DELAY` trong `az.js`.
+- Chỉ chạy khi `(hover: hover) and (pointer: fine)` và không bật `prefers-reduced-motion`. Trên cảm ứng không có gì được thêm vào trang.
+- Trạng thái: rê vào link/nút/input thì vòng phóng 1.5×; nhấn chuột thì vòng thu nhỏ; trên `.az-why-us`, `.az-cta__box`, footer dưới, announcement thì đổi sang màu trắng.
+

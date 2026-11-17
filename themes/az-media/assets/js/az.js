@@ -79,10 +79,88 @@
 		} );
 	}
 
+	/* Con trỏ tuỳ biến: con trỏ gốc (0ms) → dot (trễ 20ms) → vòng tròn (trễ 40ms).
+	 * Độ trễ là trễ theo thời gian thực (nội suy trên lịch sử vị trí chuột), không phải easing,
+	 * nên dot và vòng luôn đi đúng đường của con trỏ gốc. Chỉ bật với chuột (hover + pointer: fine). */
+	function initCursor() {
+		var DOT_DELAY = 120, RING_DELAY = 200;
+		var fine = window.matchMedia && window.matchMedia( '(hover: hover) and (pointer: fine)' ).matches;
+		if ( ! fine || reduceMotion ) { return; }
+
+		var dot = document.createElement( 'div' );
+		var ring = document.createElement( 'div' );
+		dot.className = 'az-cursor az-cursor--dot';
+		ring.className = 'az-cursor az-cursor--ring';
+		dot.setAttribute( 'aria-hidden', 'true' );
+		ring.setAttribute( 'aria-hidden', 'true' );
+		document.body.appendChild( ring );
+		document.body.appendChild( dot );
+
+		var trail = []; /* { t, x, y } theo thời gian tăng dần */
+		var visible = false;
+		var raf = 0;
+
+		function at( time ) {
+			var n = trail.length, i;
+			if ( ! n ) { return null; }
+			if ( time <= trail[ 0 ].t ) { return trail[ 0 ]; }
+			if ( time >= trail[ n - 1 ].t ) { return trail[ n - 1 ]; }
+			for ( i = n - 1; i > 0; i-- ) { if ( trail[ i - 1 ].t <= time ) { break; } }
+			var a = trail[ i - 1 ], b = trail[ i ], k = ( time - a.t ) / ( b.t - a.t || 1 );
+			return { x: a.x + ( b.x - a.x ) * k, y: a.y + ( b.y - a.y ) * k };
+		}
+
+		function place( node, pos ) {
+			if ( pos ) { node.style.transform = 'translate3d(' + pos.x.toFixed( 1 ) + 'px,' + pos.y.toFixed( 1 ) + 'px,0)'; }
+		}
+
+		function frame() {
+			var now = performance.now();
+			place( dot, at( now - DOT_DELAY ) );
+			place( ring, at( now - RING_DELAY ) );
+			/* Giữ lại 1 mẫu cũ hơn mốc trễ lớn nhất để còn nội suy. */
+			while ( trail.length > 2 && trail[ 1 ].t < now - RING_DELAY - 50 ) { trail.shift(); }
+			raf = visible ? requestAnimationFrame( frame ) : 0;
+		}
+
+		function show( on ) {
+			visible = on;
+			dot.classList.toggle( 'is-visible', on );
+			ring.classList.toggle( 'is-visible', on );
+			if ( on && ! raf ) { raf = requestAnimationFrame( frame ); }
+		}
+
+		document.addEventListener( 'pointermove', function ( e ) {
+			if ( e.pointerType && e.pointerType !== 'mouse' ) { return; }
+			var t = performance.now();
+			if ( ! visible ) {
+				/* Lần đầu hiện: đặt cả dot và vòng ngay tại con trỏ, tránh bay từ góc màn hình. */
+				trail = [ { t: t - 200, x: e.clientX, y: e.clientY } ];
+				show( true );
+			}
+			/* Sau một lúc đứng yên, giữ nguyên vị trí cũ tới ngay trước sự kiện mới để dot/vòng không trượt sớm. */
+			var last = trail[ trail.length - 1 ];
+			if ( last && t - last.t > 40 ) { trail.push( { t: t - 1, x: last.x, y: last.y } ); }
+			trail.push( { t: t, x: e.clientX, y: e.clientY } );
+			var el = e.target;
+			var onLink = !! ( el.closest && el.closest( 'a, button, summary, label, input, textarea, select, [role="button"]' ) );
+			var onDark = !! ( el.closest && el.closest( '.az-why-us, .az-cta__box, .az-footer__bottom, .az-announcement-wrap' ) );
+			ring.classList.toggle( 'is-active', onLink );
+			dot.classList.toggle( 'is-dark', onDark );
+			ring.classList.toggle( 'is-dark', onDark );
+		}, { passive: true } );
+
+		document.addEventListener( 'pointerdown', function () { ring.classList.add( 'is-down' ); } );
+		document.addEventListener( 'pointerup', function () { ring.classList.remove( 'is-down' ); } );
+		document.documentElement.addEventListener( 'mouseleave', function () { show( false ); } );
+		document.addEventListener( 'visibilitychange', function () { if ( document.hidden ) { show( false ); } } );
+	}
+
 	ready( function () {
 		initAnnouncement();
 		initHeader();
 		initCounters();
 		initFaq();
+		initCursor();
 	} );
 }() );

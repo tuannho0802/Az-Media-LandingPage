@@ -641,6 +641,18 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 	.az-section .az-ctc-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Con trỏ tuỳ biến (tạo bằng az.js, chỉ khi có chuột): dot + vòng tròn, con trỏ gốc vẫn giữ nguyên */
+.az-cursor { position: fixed; top: 0; left: 0; z-index: 100000; pointer-events: none; border-radius: 50%; opacity: 0; will-change: transform; transition: opacity .2s, scale .2s, border-color .2s, background-color .2s; }
+.az-cursor.is-visible { opacity: 1; }
+.az-cursor--dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--az-primary-dark); }
+.az-cursor--ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; border: 1.5px solid var(--az-primary-dark); }
+.az-cursor--ring.is-active { scale: 1.5; background: rgba(10, 42, 102, .08); }
+.az-cursor--ring.is-down { scale: .85; }
+.az-cursor--ring.is-active.is-down { scale: 1.2; }
+.az-cursor--dot.is-dark { background: #fff; }
+.az-cursor--ring.is-dark { border-color: #fff; }
+.az-cursor--ring.is-dark.is-active { background: rgba(255, 255, 255, .12); }
+
 /* 9. MOTION */
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
