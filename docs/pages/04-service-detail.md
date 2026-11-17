@@ -8,7 +8,7 @@
 | Độ tin cậy nguồn | ⚠️ Chưa đọc; chưa biết URL chi tiết của demo |
 | Pattern dùng | `az-service-hero`, `az-service-body`, `az-service-related` (mới); dùng lại `az-cta`, `az-faq` |
 | Dữ liệu (CPT/plugin) | CPT `service` (nay có URL `/services/{slug}/`); form báo giá chờ trang Liên hệ |
-| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt |
+| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☐ Chờ review · ☑ Đạt (chủ dự án xác nhận 17/11/2026, sau commit `bbcbe7b`) |
 | Ngày truy cập demo | 17/11/2026 |
 
 > **Cần xác minh trước khi dựng.** Chưa đọc được nội dung trang này của demo, nên mục 2 là cấu trúc đề xuất theo chuẩn trang agency. Việc đầu tiên: mở link demo ở trên, chụp full-page lưu vào `docs/references/service-detail-demo.png`, sửa bảng mục 2 cho khớp demo, rồi đổi cột "Xác minh" từ ⚠️ sang ✅.
@@ -59,28 +59,29 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/all-services/ (mở m�
 
 | ☐ | Hạng mục | Cách đối chiếu | Ghi chú |
 |---|---|---|---|
-| ☐ | Thứ tự section khớp demo | Mở demo, đếm và so từ trên xuống dưới | |
-| ☐ | Bố cục cột và tỉ lệ | Đặt hai cửa sổ cạnh nhau ở 1440px, so cột trái/phải | |
-| ☐ | Khoảng cách trong và giữa các khối | Đo padding/margin bằng DevTools | |
-| ☐ | Typography (cỡ, độ đậm, line-height) | DevTools, tab Computed | |
-| ☐ | Màu đã đổi từ tím sang xanh đậm theo token | Không còn mã màu tím nào trong CSS của trang | |
-| ☐ | Component (nút, card, badge) và trạng thái hover/focus | Di chuột và Tab qua từng phần tử | |
-| ☐ | Tương tác và animation | So hành vi với demo (counter, slider, accordion...) | |
-| ☐ | Responsive 1200 / 1024 / 768 / 480 | Thu nhỏ trình duyệt, không cuộn ngang, nút đủ lớn | |
-| ☐ | Không dùng lại ảnh, logo, tên, nội dung của demo | Rà ảnh, alt, tên người, số liệu | |
-| ☐ | Bố cục cột nội dung/form | So với demo | |
+| ☑ | Thứ tự section khớp demo | Mở demo, đếm và so từ trên xuống dưới | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Bố cục cột và tỉ lệ | Đặt hai cửa sổ cạnh nhau ở 1440px, so cột trái/phải | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Khoảng cách trong và giữa các khối | Đo padding/margin bằng DevTools | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Typography (cỡ, độ đậm, line-height) | DevTools, tab Computed | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Màu đã đổi từ tím sang xanh đậm theo token | Không còn mã màu tím nào trong CSS của trang | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Component (nút, card, badge) và trạng thái hover/focus | Di chuột và Tab qua từng phần tử | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Tương tác và animation | So hành vi với demo (counter, slider, accordion...) | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Responsive 1200 / 1024 / 768 / 480 | Thu nhỏ trình duyệt, không cuộn ngang, nút đủ lớn | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Không dùng lại ảnh, logo, tên, nội dung của demo | Rà ảnh, alt, tên người, số liệu | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Bố cục cột nội dung/form | So với demo | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
 
 Ảnh đối chiếu: lưu `docs/references/service-detail-demo.png` và `docs/references/service-detail-az.png`.
 
 ## 8. Tiêu chí nghiệm thu
 
-- [ ] Tạo dịch vụ mới là có sẵn trang chi tiết đúng template.
+- [x] Tạo dịch vụ mới là có sẵn trang chi tiết đúng template.
 - [ ] Form gửi được, email về đúng hộp thư.
-- [ ] Toàn bộ mục 7 đã tích hoặc có ghi chú lý do chênh lệch.
-- [ ] Đã ghi thay đổi vào `CHANGELOG.md` với tag `[service-detail]`.
+- [x] Toàn bộ mục 7 đã tích hoặc có ghi chú lý do chênh lệch. (Các mục tích theo xác nhận của chủ dự án, chưa có số đo.)
+- [x] Đã ghi thay đổi vào `CHANGELOG.md` với tag `[service-detail]`.
 
 ## 9. Nhật ký trang
 
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
 | 17/11/2026 | Dựng lần đầu theo cấu trúc đề xuất (chưa có ảnh ref): template `single-service.html`, 3 pattern mới, CPT `service` có URL `/services/{slug}/`, nội dung mẫu seed, link từ lưới trang Dịch vụ, schema Service. Chưa xem bằng trình duyệt. | |
+| 17/11/2026 | **Đạt.** Chủ dự án xác nhận hoàn thành trang Chi tiết dịch vụ. Form báo giá chuyển sang làm cùng trang Liên hệ (`10-contact`) | `bbcbe7b` |

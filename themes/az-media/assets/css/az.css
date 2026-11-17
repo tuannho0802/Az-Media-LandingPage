@@ -1,5 +1,5 @@
 /* AZ Media theme — az.css
-   Cấu trúc: 1 tokens · 2 base · 3 component chung · 4 announcement · 5 header · 6 footer · 7 các section (7.1-7.9 trang chủ, 7.10 page hero, 7.11 trang Bảng giá, 7.12 chi tiết dịch vụ) · 8 responsive · 9 motion */
+   Cấu trúc: 1 tokens · 2 base · 3 component chung · 4 announcement · 5 header · 6 footer · 7 các section (7.1-7.9 trang chủ, 7.10 page hero, 7.11 trang Bảng giá, 7.12 chi tiết dịch vụ, 7.13 trang Giới thiệu) · 8 responsive · 9 motion */
 
 /* 1. TOKENS (alias của palette trong theme.json) */
 :root {
@@ -348,6 +348,32 @@ html { scroll-behavior: smooth; }
 .az-service__title a:focus-visible { outline: none; }
 .az-service:has(.az-service__title a:focus-visible) { outline: 2px solid var(--az-accent); outline-offset: 3px; }
 
+/* 7.13 Trang Giới thiệu (page-about) */
+.az-section .az-about-intro__top { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 64px); align-items: start; margin-bottom: clamp(40px, 5vw, 64px); }
+.az-section .az-about-intro__main { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+.az-about-intro__img { margin: 0; }
+.az-about-intro__img img { display: block; width: 100%; height: auto; aspect-ratio: 18 / 5; object-fit: cover; border-radius: var(--az-radius); }
+.az-section .az-about-stats__box { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; padding: clamp(24px, 3vw, 32px) clamp(24px, 3vw, 40px); background: var(--az-soft); border-radius: var(--az-radius-lg); }
+.az-section .az-values .az-head { margin-bottom: 40px; }
+.az-section .az-values__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.az-section .az-values__list { display: flex; flex-direction: column; gap: 16px; }
+.az-section .az-value { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; padding: 28px; background: var(--az-soft); border-radius: var(--az-radius); }
+.az-value__title { margin: 0; font-size: 1.125rem; }
+.az-value__text { margin: 0; color: var(--az-muted); font-size: .9375rem; }
+.az-values__img { margin: 0; height: 100%; }
+.az-values__img img { display: block; width: 100%; height: 100%; min-height: 320px; object-fit: cover; border-radius: var(--az-radius); }
+.az-section .az-team__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+.az-team__list > li { margin: 0; display: flex; }
+.az-section .az-member { width: 100%; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); background: var(--az-soft); border-radius: var(--az-radius); overflow: hidden; }
+.az-section .az-member__photo { position: relative; min-height: 240px; background: var(--az-tint) url("../img/placeholder-person.svg") center / cover no-repeat; }
+.az-section .az-member__photo .az-member__img { position: absolute; inset: 0; margin: 0; }
+.az-member__img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.az-section .az-member__role { position: absolute; left: 8px; bottom: 8px; z-index: 1; background: #fff; }
+.az-member__role:empty { display: none; }
+.az-section .az-member__body { display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; padding: 24px; }
+.az-member__name { margin: 0; font-size: 1.0625rem; }
+.az-member__text { margin: 0; color: var(--az-muted); font-size: .9375rem; }
+
 /* 8. RESPONSIVE */
 @media (max-width: 1100px) {
 	.az-footer .az-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -386,6 +412,20 @@ html { scroll-behavior: smooth; }
 @media (max-width: 480px) {
 	.az-footer .az-footer__grid { grid-template-columns: minmax(0, 1fr); }
 	.az-footer .az-footer__bottombar { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 900px) {
+	.az-section .az-about-intro__top, .az-section .az-values__grid { grid-template-columns: minmax(0, 1fr); }
+	.az-about-intro__img img { aspect-ratio: 16 / 9; }
+	.az-values__img img { min-height: 0; aspect-ratio: 4 / 3; }
+	.az-section .az-team__list { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 768px) {
+	.az-section .az-about-stats__box { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+	.az-section .az-member { grid-template-columns: minmax(0, 1fr); }
+	.az-section .az-member__photo { min-height: 280px; }
 }
 
 /* 9. MOTION */

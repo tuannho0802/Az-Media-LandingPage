@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Ảnh tạm">
+  <rect width="400" height="400" fill="#E8EEFB"/>
+  <circle cx="200" cy="150" r="64" fill="#0A2A66" opacity=".85"/>
+  <path d="M70 400c0-92 58-150 130-150s130 58 130 150Z" fill="#0A2A66" opacity=".85"/>
+</svg>

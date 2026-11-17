@@ -23,6 +23,9 @@ function az_core_meta_fields() {
 			'az_role'     => array( 'label' => 'Vai trò / công ty', 'placeholder' => 'Giám đốc Marketing, Công ty A' ),
 			'az_initials' => array( 'label' => 'Chữ cái avatar', 'placeholder' => 'NA' ),
 		),
+		'team_member'  => array(
+			'az_role' => array( 'label' => 'Chức danh', 'placeholder' => 'Giám đốc sáng tạo' ),
+		),
 	);
 }
 
@@ -58,6 +61,11 @@ add_action( 'init', function () {
 	register_post_type( 'testimonial', array_merge( $common, array(
 		'labels'    => array( 'name' => 'Nhận xét', 'singular_name' => 'Nhận xét', 'add_new_item' => 'Thêm nhận xét', 'edit_item' => 'Sửa nhận xét' ),
 		'menu_icon' => 'dashicons-format-quote',
+	) ) );
+
+	register_post_type( 'team_member', array_merge( $common, array(
+		'labels'    => array( 'name' => 'Đội ngũ', 'singular_name' => 'Thành viên', 'add_new_item' => 'Thêm thành viên', 'edit_item' => 'Sửa thành viên' ),
+		'menu_icon' => 'dashicons-groups',
 	) ) );
 
 	register_post_type( 'faq', array_merge( $common, array(

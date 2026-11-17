@@ -45,6 +45,7 @@ class AZ_Core_Seed_Command {
 		$this->seed_plans();
 		$this->seed_services();
 		$this->seed_testimonials();
+		$this->seed_team();
 		$this->seed_faqs();
 		$this->seed_pages();
 		flush_rewrite_rules();
@@ -157,6 +158,18 @@ class AZ_Core_Seed_Command {
 		$content .= "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Quy trình thực hiện</h2>\n<!-- /wp:heading -->\n\n";
 		$content .= $list( array( 'Tiếp nhận nhu cầu và mục tiêu', 'Đề xuất kế hoạch và báo giá', 'Triển khai và theo dõi', 'Báo cáo và tối ưu' ), true );
 		return $content;
+	}
+
+	private function seed_team() {
+		$items = array(
+			array( 'Nguyễn Hoàng Long', 'Giám đốc sáng tạo', 'Long dẫn dắt định hướng hình ảnh và nội dung, biến ý tưởng thương hiệu thành những câu chuyện dễ nhớ. Hồ sơ mẫu (PLACEHOLDER).' ),
+			array( 'Trần Thu Trang', 'Chuyên viên chiến lược', 'Trang xây dựng lộ trình nội dung cho từng nền tảng, bám sát mục tiêu kinh doanh của khách hàng. Hồ sơ mẫu (PLACEHOLDER).' ),
+			array( 'Lê Minh Khoa', 'Chuyên viên quảng cáo', 'Khoa tối ưu ngân sách và đối tượng cho chiến dịch trả phí, ưu tiên kết quả đo được. Hồ sơ mẫu (PLACEHOLDER).' ),
+			array( 'Phạm Ngọc Anh', 'Chuyên viên cộng đồng', 'Ngọc Anh chăm sóc cộng đồng, phản hồi nhanh và giữ giọng điệu thương hiệu nhất quán. Hồ sơ mẫu (PLACEHOLDER).' ),
+		);
+		foreach ( $items as $i => $m ) {
+			$this->upsert( 'team_member', $m[0], '', $m[2], $i + 1, array( 'az_role' => $m[1] ) );
+		}
 	}
 
 	private function seed_testimonials() {

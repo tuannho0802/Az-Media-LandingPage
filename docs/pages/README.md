@@ -12,8 +12,8 @@ Nguồn tham chiếu và URL gốc xem `docs/plan.md`, mục 11.
 | [01](01-home.md) | Trang chủ | `/` | ✅ đã đọc | ✅ Đạt (17/11) |
 | [02](02-pricing.md) | Bảng giá | `/pricing/` | ✅ có ảnh ref `OG-Pricing.png` | ◐ dựng lại theo ref, chờ review (17/11) |
 | [03](03-services.md) | Dịch vụ (danh sách) | `/all-services/` | ✅ có ảnh ref `OG-Services.png` | ✅ Đạt (17/11) |
-| [04](04-service-detail.md) | Chi tiết dịch vụ | `/services/{slug}/` | ⚠️ cần xác minh (chưa có ảnh ref) | ◐ dựng theo plan, chờ review (17/11) |
-| [05](05-about.md) | Giới thiệu | `/about/` | ⚠️ cần xác minh | ☐ |
+| [04](04-service-detail.md) | Chi tiết dịch vụ | `/services/{slug}/` | ⚠️ dựng theo cấu trúc đề xuất (chưa có ảnh ref) | ✅ Đạt (17/11) |
+| [05](05-about.md) | Giới thiệu | `/about/` | ✅ có ảnh ref `OG-About.png` | ◐ đã dựng, chờ review (17/11) |
 | [06](06-blog.md) | Blog (danh sách bài viết) | `/blog/` | ⚠️ cần xác minh | ☐ |
 | [07](07-blog-single.md) | Bài viết (chi tiết) | `/{slug}/` | ⚠️ cần xác minh | ☐ |
 | [08](08-faqs.md) | FAQs | `/faqs/` | ⚠️ cần xác minh | ☐ |
