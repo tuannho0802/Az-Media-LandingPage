@@ -19,7 +19,7 @@ Các thành phần xuất hiện ở mọi trang. Làm và nghiệm thu trước
 
 | # | Section | Nội dung / hành vi | Pattern | Dữ liệu | Xác minh |
 |---|---|---|---|---|---|
-| 1 | Announcement bar | Thanh mỏng trên cùng, nền đậm, một dòng chữ sáng căn giữa, có nút đóng | az-announcement | Option bật/tắt + nội dung | ✅ |
+| 1 | Announcement bar | Thanh mỏng trên cùng, nền đậm, một dòng chữ sáng căn giữa, không có nút đóng | az-announcement | Option bật/tắt + nội dung | ✅ |
 | 2 | Header | Logo trái, menu **căn trái ngay cạnh logo**: Home, Pricing, Services, Pages (dropdown: Blog, FAQs, Career, Contact, Maintenance Mode), About; hai nút phải: Pricing (viền) và Contact (đặc). Sticky, nền trắng trong suốt có blur; announcement bar cũng dính trên cùng, header dính ngay dưới bar | parts/header | Menu Primary | ✅ |
 | 3 | Hero trang con | Mỗi trang con có hero riêng theo ref demo (Bảng giá: `az-pricing-hero`). Không có pattern/breadcrumb dùng chung | az-pricing-hero | — | ✅ |
 | 4 | CTA cuối trang | Eyebrow, H2, mô tả, nút, ảnh bên cạnh. Tái sử dụng nhiều trang | az-cta | Nội dung pattern | ✅ |
@@ -36,7 +36,7 @@ Các thành phần xuất hiện ở mọi trang. Làm và nghiệm thu trước
 
 - Header sticky, thu nhỏ nhẹ khi cuộn (nếu demo có).
 - Dropdown Pages mở bằng hover (desktop) và chạm (mobile), hỗ trợ bàn phím.
-- Announcement bar ghi nhớ trạng thái đóng bằng localStorage.
+- Announcement bar không có nút đóng (theo ref), luôn hiển thị và dính trên cùng cùng header.
 - Nút: primary nền đậm chữ trắng; secondary viền; có trạng thái hover/focus rõ.
 
 ## 5. Responsive

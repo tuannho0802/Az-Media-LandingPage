@@ -8,7 +8,7 @@
 		if ( document.readyState !== 'loading' ) { fn(); } else { document.addEventListener( 'DOMContentLoaded', fn ); }
 	}
 
-	/* Announcement bar: đóng và nhớ trạng thái. Đo chiều cao bar để header dính ngay dưới bar (--az-announce-h). */
+	/* Announcement bar: đo chiều cao bar để header dính ngay dưới bar (--az-announce-h). */
 	function initAnnouncement() {
 		var wrap = document.querySelector( '.az-announcement-wrap' );
 		var root = document.documentElement;
@@ -21,13 +21,6 @@
 			window.addEventListener( 'resize', measure );
 			if ( 'ResizeObserver' in window ) { new ResizeObserver( measure ).observe( wrap ); }
 		}
-		var btn = document.querySelector( '.az-announcement__close' );
-		if ( ! btn ) { return; }
-		btn.addEventListener( 'click', function () {
-			root.classList.add( 'az-announce-closed' );
-			measure();
-			try { localStorage.setItem( 'az_announce_closed', '1' ); } catch ( e ) { /* bỏ qua */ }
-		} );
 	}
 
 	/* Header: thêm class khi đã cuộn. */

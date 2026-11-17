@@ -70,17 +70,13 @@ html { scroll-behavior: smooth; }
 .az-icon--spark { --az-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m12 2 2.6 6.4L21 11l-6.4 2.6L12 20l-2.6-6.4L3 11l6.4-2.6L12 2Zm7 13 1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1 1-2.5Z'/%3E%3C/svg%3E"); }
 
 /* 4. ANNOUNCEMENT */
-.az-announcement { position: relative; background: var(--az-primary-dark); color: #fff; text-align: center; padding: .6rem 3rem; }
-.az-announcement .az-announcement__text { margin: 0; font-size: .875rem; color: #fff; }
-.az-announcement__close { position: absolute; right: .75rem; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer; }
-.az-announcement__close:hover { background: rgba(255, 255, 255, .15); }
-.az-announce-closed .az-announcement-wrap { display: none; }
+.az-announcement { position: relative; display: flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 40px; background: var(--az-primary-dark); text-align: center; padding: .5rem 1.25rem; }
+.az-announcement .az-announcement__text { margin: 0; font-size: .875rem; font-weight: 500; line-height: 1.4; color: #9DB9FF; }
 
 /* 5. HEADER
    Theo ref: announcement bar và header cùng dính trên cùng khi cuộn (header nằm ngay dưới bar), header nền trắng trong suốt có blur,
    logo + menu căn trái, hai nút căn phải. Chiều cao bar đo bằng JS (--az-announce-h), 43px là giá trị dự phòng khi chưa có JS. */
-:root { --az-announce-h: 43px; }
-.az-announce-closed { --az-announce-h: 0px; }
+:root { --az-announce-h: 40px; }
 .az-announcement-wrap { position: sticky; top: 0; z-index: 51; }
 .admin-bar .az-announcement-wrap { top: var(--wp-admin--admin-bar--height, 32px); }
 .az-site-header { position: sticky; top: var(--az-announce-h); z-index: 50; background: transparent; border-bottom: 1px solid var(--az-border); transition: box-shadow .25s; }
@@ -423,7 +419,7 @@ html { scroll-behavior: smooth; }
 	.az-section .az-why-us__img { position: static; }
 	.az-section .az-why-us__media { min-height: 0; display: flex; flex-direction: column; }
 	.az-footer .az-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
-	.az-announcement { padding-inline: 2.5rem; }
+	.az-announcement { padding-inline: 1.25rem; }
 	.az-faq__summary { padding: 14px 16px; }
 }
 @media (max-width: 480px) {

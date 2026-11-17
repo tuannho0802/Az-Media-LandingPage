@@ -64,7 +64,7 @@ add_action( 'wp_enqueue_scripts', function () {
 } );
 
 /**
- * Preload font chính (latin + vietnamese) và ẩn announcement bar trước khi vẽ nếu đã đóng.
+ * Preload font chính (latin + vietnamese).
  */
 add_action( 'wp_head', function () {
 	foreach ( array( 'latin', 'vietnamese' ) as $subset ) {
@@ -73,7 +73,6 @@ add_action( 'wp_head', function () {
 			esc_url( get_theme_file_uri( "assets/fonts/plus-jakarta-sans-{$subset}-wght-normal.woff2" ) )
 		);
 	}
-	echo '<script>try{if(localStorage.getItem("az_announce_closed")==="1"){document.documentElement.classList.add("az-announce-closed")}}catch(e){}</script>' . "\n";
 }, 1 );
 
 /**

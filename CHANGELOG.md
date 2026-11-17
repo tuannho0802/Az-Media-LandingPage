@@ -25,13 +25,14 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [pricing] Trang `/pricing/` dựng theo ảnh ref `docs/reference-images/OG-Pricing.png`: hero (badge, H1, mô tả), Trusted by, 3 thẻ gói (gói giữa nền đậm), Why choose us, FAQ. Template `page-pricing.html`; pattern mới `az-pricing-hero`, `az-pricing-list`, dùng lại `az-logos`, `az-why-us`, `az-faq`.
 - [core] Trang wp-admin Công cụ → AZ Media Seed: tạo dữ liệu mẫu bằng một nút bấm khi không có WP-CLI (Local WP trên Windows), kèm nhắc khi chưa có gói giá. Logic seed tách khỏi WP-CLI, `wp az seed` vẫn dùng được.
 - [theme] Khung block theme `az-media`: `theme.json` (palette xanh đậm, font Plus Jakarta Sans tự host kèm subset tiếng Việt), `functions.php`, `assets/css/az.css`, `assets/js/az.js`, template `front-page`, `index`, `page`, `single`, `404`.
-- [global] Part `announcement-bar` (nút đóng, nhớ trạng thái bằng localStorage), `header` (sticky, dropdown Trang, hamburger dưới 1024px), `footer` (dải tagline + liên hệ, lưới 5 cột link, thanh copyright và link pháp lý).
+- [global] Part `announcement-bar`, `header` (sticky, dropdown Trang, hamburger dưới 1024px), `footer` (dải tagline + liên hệ, lưới 5 cột link, thanh copyright và link pháp lý).
 - [home] 9 pattern trang chủ: `az-hero`, `az-logos`, `az-why-us`, `az-specialization`, `az-solutions`, `az-pricing`, `az-testimonials`, `az-cta`, `az-faq`, kèm counter và accordion `<details>`.
 - [core] Plugin `az-media-core`: CPT `pricing_plan`, `testimonial`, `faq` (+ taxonomy `faq_group`), meta box, block `az-media/faq-list` (kèm schema FAQPage), lệnh `wp az seed` tạo dữ liệu mẫu và các trang rỗng.
 - [docs] Plan riêng cho từng trang trong `docs/pages/` (00-global đến 13-404-search) kèm bảng kiểm tra bám sát thiết kế.
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [global] Announcement bar theo ref: câu ngắn một dòng "Tăng tốc và nâng tầm thương hiệu của bạn cùng AZ Media.", chữ xanh nhạt trên nền navy đậm, cao 40px. Bỏ nút đóng (`az-announcement__close`) cùng CSS, JS và script lưu trạng thái đóng, bar luôn hiển thị như ref; JS chỉ còn đo chiều cao bar cho header dính.
 - [global] Header làm lại theo ref: nền trắng trong suốt có blur (đặt ở `::before` để menu mobile `position: fixed` không bị ảnh hưởng), announcement bar và header cùng dính trên cùng khi cuộn (JS đo chiều cao bar vào `--az-announce-h`, xử lý cả khi đóng bar và có admin bar), menu căn trái cạnh logo thay vì căn giữa, chiều cao 70px cố định (bỏ co khi cuộn), mũi tên dropdown "Trang" sát chữ. Ảnh hưởng mọi trang.
 - [docs] `[service-detail] Đạt design review`: chủ dự án xác nhận hoàn thành trang Chi tiết dịch vụ (17/11/2026). Các mục review tích theo xác nhận, chưa có số đo; xem `docs/pages/04-service-detail.md`.
 - [docs] Thay `OG-About.png` bằng bản chụp không dính header sticky.

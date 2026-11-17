@@ -126,7 +126,7 @@ Kiểm tra tương phản chữ trắng trên `--az-primary` đạt WCAG AA tr�
 
 | Thành phần | Mô tả (từ demo) |
 |---|---|
-| Announcement bar | Thanh mỏng trên cùng, nền đậm, một dòng chữ sáng căn giữa, có nút đóng |
+| Announcement bar | Thanh mỏng trên cùng, nền đậm, một dòng chữ sáng căn giữa, không có nút đóng |
 | Header | Logo trái, menu giữa (có dropdown Pages), 2 nút phải: Pricing (viền) và Contact (đặc). Sticky |
 | Badge | Nhãn nhỏ chữ hoa trên H1 (nền nhạt, viền trái đậm) |
 | Nút | Primary (nền đậm, chữ trắng), Secondary (nền trắng, viền) |
@@ -146,7 +146,7 @@ Nội dung mẫu dưới đây là **bản nháp cho AZ Media** (tiếng Việt,
 ### 4.1 Announcement bar
 
 - Nội dung: một dòng khuyến mãi hoặc thông điệp (ví dụ: "Tăng tốc thương hiệu của bạn cùng AZ Media").
-- Có nút đóng, nhớ trạng thái bằng localStorage.
+- Không có nút đóng, luôn hiển thị.
 - Pattern: `az-announcement`.
 
 ### 4.2 Header
