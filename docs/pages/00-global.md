@@ -107,4 +107,5 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 - Link cấp 1: gạch chân `::after` chạy từ trái (`scaleX`), đổi màu .3s. Mũi tên dropdown xoay 180°.
 - Dropdown: ghi đè kiểu ẩn của core (height/width 0) về `auto` để animate được; đóng thì trong suốt, nhích xuống 10px; mở thì trượt lên + hiện dần. Trễ mở 80ms, trễ đóng 150ms (hover intent); có cầu nối vô hình 8px để rê chuột từ link xuống menu không bị đóng. Các mục hiện lần lượt cách nhau 40ms (tối đa 5 mục).
 - Chỉnh độ nhanh: các `transition` và `--az-ease` trong khối "Hover header" của `az.css`. Mobile (hamburger) giữ nguyên hành vi của core.
+- Lưu ý khi sửa con trỏ: vị trí phải đặt bằng thuộc tính `translate` chứ không dùng `transform`, vì độ phóng dùng thuộc tính `scale` riêng; trộn `transform` với `scale` sẽ làm toạ độ bị nhân theo độ phóng và vòng lệch khỏi con trỏ.
 

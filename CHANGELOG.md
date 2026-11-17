@@ -80,6 +80,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [theme] Ảnh tạm: thêm `placeholder-team.svg`, `placeholder-solutions.svg` cho các chỗ cần ảnh.
 
 ### Fixed
+- [theme] Con trỏ tuỳ biến: khi vòng phóng to (rê vào link/nút) hoặc thu nhỏ (nhấn chuột), vòng bị đẩy lệch khỏi con trỏ, lệch càng xa khi con trỏ càng cách góc trên trái màn hình (ở header lệch sang phải). Nguyên nhân: vị trí đặt bằng `transform: translate3d` còn độ phóng bằng thuộc tính `scale`; CSS áp `scale` trước `transform` nên nhân luôn toạ độ. Đổi sang thuộc tính `translate` (áp trước `scale`).
 - [theme] Con trỏ tuỳ biến: khi rê nhanh vào link/nút (ví dụ menu header), vòng tròn bị phóng to và tô nền ngay lúc con trỏ gốc chạm link trong khi vòng còn ở chỗ trống phía sau. Nay trạng thái hover (phóng to, đổi màu trên nền tối) đi theo độ trễ của từng phần tử: vòng chỉ đổi khi nó tới nơi, dot đổi theo độ trễ của dot.
 - [pricing] Local chỉ hiện khối CTA: WordPress cache danh sách pattern theo version theme, nên pattern mới thêm bằng `git pull` không được đăng ký. `functions.php` tự xóa cache khi danh sách hoặc thời gian sửa file trong `patterns/` đổi. Đã tái hiện và kiểm trên WordPress thật.
 - [core] Ô nhiều dòng (mô tả gói) bị `sanitize_text_field` gộp thành một dòng khi lưu. Dùng `sanitize_textarea_field` cho ô loại textarea, cả ở REST lẫn meta box Classic Editor.

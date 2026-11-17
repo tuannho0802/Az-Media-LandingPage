@@ -111,8 +111,10 @@
 			return { x: a.x + ( b.x - a.x ) * k, y: a.y + ( b.y - a.y ) * k, act: a.act, dark: a.dark };
 		}
 
+		/* Dùng thuộc tính `translate` (không dùng `transform`): CSS áp translate TRƯỚC scale, nên vòng phóng to/thu nhỏ
+		 * quanh tâm của nó. Nếu dùng `transform: translate3d`, scale sẽ nhân luôn cả toạ độ và đẩy vòng lệch khỏi con trỏ. */
 		function place( node, x, y ) {
-			node.style.transform = 'translate3d(' + x.toFixed( 1 ) + 'px,' + y.toFixed( 1 ) + 'px,0)';
+			node.style.translate = x.toFixed( 1 ) + 'px ' + y.toFixed( 1 ) + 'px';
 		}
 
 		/* Vị trí đang hiển thị. Mỗi khung hình đi một phần quãng đường tới mục tiêu (độ trễ thời gian),
