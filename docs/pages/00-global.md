@@ -8,7 +8,7 @@
 | Độ tin cậy nguồn | ✅ Cấu trúc đã đọc từ trang chủ demo · ⚠️ màu, font, kích thước là đề xuất |
 | Pattern dùng | `az-announcement`, `az-page-hero`, `az-cta`, `az-faq` |
 | Dữ liệu (CPT/plugin) | Menu WordPress (Primary, Footer 1-4), Customizer/Site Options cho email, điện thoại, social |
-| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☐ Chờ review · ☐ Đạt |
+| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt |
 | Ngày truy cập demo | 17/11/2026 |
 
 ## 1. Mục đích
@@ -83,4 +83,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
-| | | |
+| 17/11/2026 | Dựng announcement bar, header, footer. Chờ review thiết kế | |

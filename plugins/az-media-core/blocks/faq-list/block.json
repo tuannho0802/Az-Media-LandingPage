@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "az-media/faq-list",
+  "title": "Danh sách FAQ",
+  "category": "widgets",
+  "icon": "editor-help",
+  "description": "Accordion câu hỏi thường gặp lấy từ mục FAQs, kèm schema FAQPage.",
+  "textdomain": "az-media-core",
+  "attributes": {
+    "limit": { "type": "number", "default": 5 },
+    "group": { "type": "string", "default": "" }
+  },
+  "supports": { "html": false, "align": false },
+  "editorScript": "file:./edit.js",
+  "render": "file:./render.php"
+}

@@ -8,7 +8,7 @@
 | Độ tin cậy nguồn | ✅ Thứ tự section và nội dung đã đọc · ⚠️ màu, font, kích thước là đề xuất, cần đo lại bằng DevTools |
 | Pattern dùng | `az-hero`, `az-logos`, `az-why-us`, `az-specialization`, `az-solutions`, `az-pricing`, `az-testimonials`, `az-cta`, `az-faq` |
 | Dữ liệu (CPT/plugin) | CPT `pricing_plan`, `testimonial`, `faq`; plugin: Contact Form 7 (nếu hero có form) |
-| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☐ Chờ review · ☐ Đạt |
+| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt |
 | Ngày truy cập demo | 17/11/2026 |
 
 ## 1. Mục đích
@@ -100,4 +100,15 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
-| | | |
+| 17/11/2026 | Dựng khung theme, phần dùng chung (00-global) và 9 section trang chủ, plugin `az-media-core`, script seed. Chờ review thiết kế | |
+
+### Ghi chú triển khai (cần bạn xác nhận khi review)
+
+- Ngôn ngữ nội dung mẫu: tiếng Việt. Nếu chốt site tiếng Anh hoặc song ngữ thì đổi text trong `patterns/` và `parts/`.
+- Mọi số liệu, giá, lời nhận xét, logo, email, điện thoại là **placeholder**. Hero có "120+ thương hiệu" và "4,9/5" là số giả lập, thay số thật trước khi public.
+- Slider testimonial: tôi chọn 2 slide mỗi lần ở desktop, 1 slide ở ≤768px. Demo chưa xác minh, đối chiếu ở hạng mục cuối mục 7.
+- Pricing: gói giữa (`:nth-child(2)`) được làm nổi bật bằng CSS. Nếu muốn chọn gói nổi bật tùy ý cần thêm meta `az_featured` và class riêng.
+- Avatar testimonial hiện là chữ cái đầu (meta `az_initials`), chưa dùng ảnh thật.
+- Hamburger đổi ở 1024px bằng CSS ghi đè breakpoint 600px mặc định của block Navigation. Kiểm tra kỹ ở 600–1023px.
+- Link trong menu/footer là đường dẫn tương đối (`/pricing/`), đúng khi site chạy ở gốc domain (Local WP). Nếu đặt trong thư mục con cần đổi.
+- Logo hiện là tên site kèm ô vuông CSS. Thay bằng logo thật qua block Site Logo khi có file.

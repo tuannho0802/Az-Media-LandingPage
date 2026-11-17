@@ -1,0 +1,14 @@
+/*
+Theme Name: AZ Media
+Theme URI: https://github.com/tuannho0802/Az-Media-LandingPage
+Author: AZ Media
+Description: Block theme cho website AZ Media (social media marketing agency). Cấu trúc tham chiếu demo Reachout, thương hiệu và nội dung riêng của AZ Media.
+Version: 0.1.0
+Requires at least: 6.6
+Tested up to: 6.8
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: az-media
+*/
+/* Toàn bộ CSS nằm ở assets/css/az.css (enqueue trong functions.php). */

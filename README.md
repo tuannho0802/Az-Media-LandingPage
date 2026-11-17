@@ -238,7 +238,8 @@ git push origin v0.1.1-rollback
 
 | File | Nội dung |
 |---|---|
-| `docs/plan.md` | Kế hoạch dựng theme: kiến trúc, design system, đặc tả trang chủ, sitemap, lộ trình, checklist |
+| `docs/az-media-wordpress-plan.md` | Kế hoạch dựng theme: kiến trúc, design system, đặc tả trang chủ, sitemap, lộ trình, checklist |
+| `docs/pages/README.md` | Mục lục plan từng trang, thứ tự làm và quy trình review bám sát thiết kế |
 
 Các tài liệu tách thêm về sau (`design-system.md`, `sitemap.md`) cũng đặt trong `docs/`.
 
