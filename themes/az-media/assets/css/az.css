@@ -657,7 +657,7 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 	.az-faq__summary { padding: 14px 16px; }
 }
 @media (max-width: 480px) {
-	.az-footer .az-footer__grid { grid-template-columns: minmax(0, 1fr); }
+	.az-footer .az-footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
 	.az-footer .az-footer__bottombar { flex-direction: column; align-items: flex-start; }
 }
 
@@ -817,6 +817,30 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 @media (max-width: 599px) {
 	.az-section .az-blog-grid__list { grid-template-columns: minmax(0, 1fr); }
 	.az-post-head__img { margin-top: 28px; border-radius: var(--az-radius); }
+}
+
+/* 11. MOBILE: menu đóng được, vùng chạm >= 44px, footer gọn (fix/mobile-responsive) */
+/* Overlay menu nằm trong stacking context của header (z 50) nên bị announcement bar (z 51) che mất nút đóng.
+   WordPress thêm class has-modal-open lên <html> khi overlay mở. */
+html.has-modal-open .az-site-header { z-index: 100001; }
+
+@media (max-width: 1023.98px) {
+	/* Nút hamburger/đóng: vùng chạm 44x44, giữ nguyên vị trí hiển thị */
+	.az-site-header .az-nav .wp-block-navigation__responsive-container-open,
+	.az-site-header .az-nav .wp-block-navigation__responsive-container-close { box-sizing: content-box; padding: 10px; margin: -10px; }
+	/* Hai nút Bảng giá / Liên hệ trong menu mobile rộng hết khung */
+	.az-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container { width: 100%; }
+	.az-nav .wp-block-navigation__responsive-container.is-menu-open .az-nav__mobile-btn { width: 100%; }
+	.az-nav .az-nav__mobile-btn .wp-block-navigation-item__content { box-sizing: border-box; width: 100%; }
+}
+@media (max-width: 900px) {
+	/* Link footer, link pháp lý, "Xem chi tiết" cao tối thiểu 44px */
+	.az-footer .az-footer__nav .wp-block-navigation__container { gap: 0; }
+	.az-footer .az-footer__nav .wp-block-navigation-item__content { min-height: 44px; }
+	.az-job__more { display: inline-flex; align-items: center; min-height: 44px; }
+	.az-legal-nav__link { display: inline-flex; align-items: center; min-height: 44px; }
+	.az-footer .az-footer__legal .wp-block-navigation-item__content { display: inline-flex; align-items: center; min-height: 44px; }
+	.az-footer .az-footer__legal .wp-block-navigation__container { gap: 0 20px; justify-content: flex-start; }
 }
 
 /* 9. MOTION */
