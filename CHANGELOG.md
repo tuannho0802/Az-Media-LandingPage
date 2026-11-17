@@ -26,6 +26,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [docs] `[services] Đạt design review`: chủ dự án xác nhận hoàn thành trang Dịch vụ (17/11/2026). Các mục review tích theo xác nhận, chưa có số đo; xem `docs/pages/03-services.md`.
 - [docs] `[home] Đạt design review`: chủ dự án xác nhận hoàn thành trang chủ (17/11/2026). 5 mục review và Lighthouse tích theo xác nhận, chưa có số đo; xem `docs/pages/01-home.md`.
 - [core] Giá, chu kỳ, mô tả gói (Gói giá) và vai trò, chữ avatar (Nhận xét) chuyển từ meta box ở đáy màn hình lên panel "Thông tin hiển thị" ở thanh bên phải trình soạn thảo. Meta box cũ chỉ còn dùng cho Classic Editor.
 - [home] Làm lại layout theo ảnh ref `docs/reference-images/OG-Home.png`: hero (ảnh chạm đáy, card khách hàng và card rating chồng góc), Trusted by (nền tint, logo trong thẻ), Why choose us (nền đậm có lưới, ảnh kèm 3 counter, 4 card 2×2), Specialization (tầm nhìn trái, 4 thẻ sứ mệnh có icon phải), Solutions (ảnh trái, lưới 2×3 thẻ có icon mạng xã hội), Pricing (thẻ căn giữa, gói giữa nền đậm, không nâng lên), Testimonials (lưới 3×2, sao ở đáy thẻ, mobile vuốt ngang), CTA (khối đậm không ảnh), FAQ (ô câu hỏi nền nhạt, câu trả lời bên dưới).

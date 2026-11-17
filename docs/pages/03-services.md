@@ -9,7 +9,7 @@
 | Độ tin cậy nguồn | ✅ Dựng theo ảnh ref do chủ dự án cung cấp |
 | Pattern dùng | `az-services-hero`, `az-services-why`, `az-services-features`, `az-services-grid` (4 pattern mới), `az-cta`, `az-faq` (dùng lại) |
 | Dữ liệu (CPT/plugin) | CPT `service` (mới, menu **Dịch vụ**), `faq` |
-| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt (chờ chủ dự án so trên Local WP) |
+| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☐ Chờ review · ☑ Đạt (chủ dự án xác nhận 17/11/2026, sau commit `d992d5d`) |
 | Ngày cập nhật | 17/11/2026 |
 
 ## 1. Mục đích
@@ -57,27 +57,28 @@ Kiểm tra ở 1200 / 1024 / 768 / 480: không cuộn ngang, ảnh không méo, 
 | ☐ | Hạng mục | Cách đối chiếu | Ghi chú |
 |---|---|---|---|
 | ☑ | Thứ tự section khớp demo | So với `OG-Services.png` | Hero, Why, 2 hàng, lưới, CTA, FAQ |
-| ☐ | Bố cục cột và tỉ lệ | Hai cửa sổ cạnh nhau ở 1440px | |
-| ☐ | Khoảng cách trong và giữa các khối | DevTools | |
-| ☐ | Typography | DevTools, tab Computed | |
+| ☑ | Bố cục cột và tỉ lệ | Hai cửa sổ cạnh nhau ở 1440px | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Khoảng cách trong và giữa các khối | DevTools | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Typography | DevTools, tab Computed | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
 | ☑ | Màu đã đổi từ tím sang xanh đậm theo token | Không còn mã tím | Chỉ dùng token |
-| ☐ | Component (nút, card, badge) và hover/focus | Di chuột và Tab | |
-| ☐ | Responsive 1200 / 1024 / 768 / 480 | Thu nhỏ trình duyệt | Đã đo 1440/1024/768/390 trên WordPress thật: không cuộn ngang, không lỗi JS. Chưa đo 1200/480 |
+| ☑ | Component (nút, card, badge) và hover/focus | Di chuột và Tab | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Responsive 1200 / 1024 / 768 / 480 | Thu nhỏ trình duyệt | Đã đo 1440/1024/768/390 trên WordPress thật: không cuộn ngang, không lỗi JS. Chưa đo 1200/480 **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
 | ☑ | Không dùng lại ảnh, logo, tên, nội dung của demo | Rà ảnh, alt, số liệu | Chữ tự viết, ảnh tạm SVG |
-| ☐ | Cỡ icon và khoảng cách trong thẻ | DevTools | Icon tự vẽ (nét đơn giản), không phải icon của ref |
-| ☐ | Số cột và gutter lưới | So ở 1440px | |
+| ☑ | Cỡ icon và khoảng cách trong thẻ | DevTools | Icon tự vẽ (nét đơn giản), không phải icon của ref **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Số cột và gutter lưới | So ở 1440px | **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
 
 ## 8. Tiêu chí nghiệm thu
 
 - [x] Thêm một dịch vụ mới ở wp-admin tự xuất hiện trong lưới (tối đa 6 thẻ).
-- [ ] Toàn bộ mục 7 đã tích hoặc có ghi chú lý do chênh lệch.
+- [x] Toàn bộ mục 7 đã tích hoặc có ghi chú lý do chênh lệch. (Các mục tích theo xác nhận của chủ dự án, chưa có số đo.)
 - [x] Đã ghi thay đổi vào `CHANGELOG.md` với tag `[services]`.
 
 ## 9. Nhật ký trang
 
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
-| 17/11/2026 | Dựng trang theo `OG-Services.png`: CPT `service`, 4 pattern mới, template `page-all-services.html`, seed 6 dịch vụ | |
+| 17/11/2026 | Dựng trang theo `OG-Services.png`: CPT `service`, 4 pattern mới, template `page-all-services.html`, seed 6 dịch vụ | `d992d5d` |
+| 17/11/2026 | **Đạt.** Chủ dự án xem trang trên Local WP và xác nhận hoàn thành. Giữ nút ở CTA như trang chủ; ảnh tạm và icon tự vẽ còn lại là chủ ý | |
 
 ### Ghi chú triển khai
 
