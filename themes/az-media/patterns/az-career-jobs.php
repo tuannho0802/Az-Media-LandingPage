@@ -3,7 +3,7 @@
  * Title: AZ Career Jobs
  * Slug: az-media/career-jobs
  * Categories: az-media
- * Description: Vị trí đang tuyển: badge + H2 căn giữa, lưới 2 cột thẻ việc làm lấy từ CPT career (hình thức, mức lương, mô tả, ngày cập nhật). Chưa có vị trí thì hiện thông báo.
+ * Description: Vị trí đang tuyển: badge + H2 căn giữa, lưới 2 cột thẻ việc làm lấy từ CPT career (hình thức, mức lương, mô tả, thời gian cập nhật dạng "2 ngày trước"). Chưa có vị trí thì hiện thông báo.
  */
 ?>
 <!-- wp:group {"tagName":"section","align":"full","className":"az-section az-jobs","layout":{"type":"constrained"}} -->
@@ -35,13 +35,7 @@
 
 <!-- wp:post-excerpt {"excerptLength":40,"className":"az-job__text"} /-->
 
-<!-- wp:group {"className":"az-job__updated"} -->
-<div class="wp-block-group az-job__updated"><!-- wp:paragraph -->
-<p>Cập nhật:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:post-date {"displayType":"modified","format":"d/m/Y"} /--></div>
-<!-- /wp:group --></div>
+<!-- wp:az-media/post-updated /--></div>
 <!-- /wp:group -->
 <!-- /wp:post-template -->
 

@@ -23,7 +23,7 @@ Thu hút ứng viên, liệt kê vị trí đang mở và nhận hồ sơ.
 | # | Section | Nội dung / hành vi | Pattern | Dữ liệu | Xác minh |
 |---|---|---|---|---|---|
 | 1 | Page hero | Badge "Gia nhập AZ Media", H1 một dòng "Tuyển dụng", mô tả 2 dòng; căn giữa, nền tint có lưới | az-career-hero | — | ✅ |
-| 2 | Vị trí đang tuyển | Badge + H2 căn giữa; lưới 2 cột thẻ nền nhạt: tên vị trí, hình thức (icon đồng hồ), mức lương (icon tiền), mô tả ngắn, "Cập nhật: ngày" | az-career-jobs | `career` (tối đa 6) | ✅ |
+| 2 | Vị trí đang tuyển | Badge + H2 căn giữa; lưới 2 cột thẻ nền nhạt: tên vị trí, hình thức (icon đồng hồ), mức lương (icon tiền), mô tả ngắn, "Cập nhật N ngày trước" (block `az-media/post-updated`) | az-career-jobs | `career` (tối đa 6) | ✅ |
 | 3 | Cách ứng tuyển | Badge + H2 căn trái, nút viền bên phải; dưới là 3 thẻ đánh số 01-03 bên trái, ảnh cao bên phải | az-career-apply | Nội dung pattern | ✅ |
 
 ## 3. Nội dung AZ Media cần chuẩn bị
@@ -35,7 +35,8 @@ Thu hút ứng viên, liệt kê vị trí đang mở và nhận hồ sơ.
 ## 4. Tương tác và hành vi
 
 - Ref không có nút Ứng tuyển, form hay upload CV: thẻ việc làm chỉ hiển thị thông tin, nút "Liên hệ" ở khối Cách ứng tuyển dẫn tới `/contact/`.
-- Ngày "Cập nhật" là ngày sửa gần nhất của bài (định dạng dd/mm/yyyy), ref hiển thị dạng "2 ngày trước".
+- "Cập nhật 2 ngày trước" do block `az-media/post-updated` tính từ thời gian sửa gần nhất của từng vị trí (`post_modified`), tiếng Việt: vừa xong, N phút/giờ/ngày/tuần/tháng/năm trước. Bấm Cập nhật ở wp-admin là thời gian tự mới lại; rê chuột lên chữ để xem ngày giờ chính xác. Nếu site dùng plugin cache trang, thời gian tương đối chỉ làm mới khi cache được xóa.
+- Seed tạo 4 vị trí với ngày lùi 2, 4, 6, 1 ngày để thấy hiển thị tương đối. Vị trí đã seed từ trước giữ nguyên ngày tạo.
 - Khi không có vị trí nào: hiện thông báo thay vì danh sách trống.
 
 ## 5. Responsive
@@ -83,3 +84,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/career/) và trang AZ M
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
 | 17/11/2026 | Dựng trang theo ảnh ref: template `page-career`, 3 pattern, CPT `career` + seed 4 vị trí. Chưa kiểm trên WordPress thật | |
+| 17/11/2026 | Sửa lỗi dòng "Cập nhật:" trống ở thẻ việc làm: thay `core/post-date` bằng block `az-media/post-updated`, hiển thị thời gian tương đối tiếng Việt từ `post_modified`, seed ngày mẫu | |

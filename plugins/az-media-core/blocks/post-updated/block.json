@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "az-media/post-updated",
+  "title": "Thời gian cập nhật",
+  "category": "widgets",
+  "icon": "clock",
+  "description": "Hiện \"Cập nhật 2 ngày trước\" theo thời gian sửa gần nhất của bài. Dùng trong Query Loop.",
+  "textdomain": "az-media-core",
+  "usesContext": [ "postId" ],
+  "supports": { "html": false, "align": false },
+  "editorScript": "file:./edit.js",
+  "render": "file:./render.php"
+}

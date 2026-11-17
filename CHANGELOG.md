@@ -14,6 +14,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [core] Block `az-media/post-updated` (dùng trong Query Loop) hiện "Cập nhật 2 ngày trước" theo thời gian sửa gần nhất của bài, có `<time datetime>` và title là ngày giờ chính xác; hàm `az_core_time_ago_vi()` diễn đạt tiếng Việt (vừa xong, phút, giờ, ngày, tuần, tháng, năm).
 - [career] Trang `/career/` dựng theo `docs/reference-images/OG-Career.png`: hero (badge, H1 "Tuyển dụng", mô tả), lưới 2 cột thẻ việc làm (hình thức, mức lương, mô tả, ngày cập nhật; hiện thông báo khi chưa có vị trí), khối Cách ứng tuyển (3 thẻ đánh số + ảnh, nút Liên hệ). Template `page-career.html`, pattern `az-career-hero`, `az-career-jobs`, `az-career-apply`. Ref không có form ứng tuyển, phúc lợi, CTA nên bỏ khỏi plan.
 - [core] CPT `career` (menu Tuyển dụng, meta `az_job_type` hình thức và `az_salary` mức lương) và seed 4 vị trí mẫu (chạy lại Seed để tạo).
 - [faqs] Trang `/faqs/` dựng theo `docs/reference-images/OG-FAQ.png`: hero (badge, H1 hai dòng, mô tả), lưới accordion 2 cột đánh số liên tục 01-10 (câu đầu mỗi cột mở sẵn), mục Blog "Bài viết mới nhất" (2 bài gần nhất, ảnh + tiêu đề + trích đoạn + nút Đọc thêm). Template `page-faqs.html`, pattern `az-faqs-hero`, `az-faqs-list`, `az-blog-recent`. Ref không có khối CTA nên bỏ `az-cta` khỏi plan.
@@ -36,6 +37,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [career] Thẻ việc làm dùng block `az-media/post-updated` thay cho `core/post-date`, sửa lỗi dòng "Cập nhật:" không hiện ngày trên WordPress thật; ngày cập nhật giờ tự đổi khi sửa vị trí ở wp-admin. Seed vị trí tuyển lùi ngày tạo 2, 4, 6, 1 ngày để demo (chỉ áp dụng cho vị trí tạo mới).
 - [global] Announcement bar theo ref: câu ngắn một dòng "Tăng tốc và nâng tầm thương hiệu của bạn cùng AZ Media.", chữ xanh nhạt trên nền navy đậm, cao 40px. Bỏ nút đóng (`az-announcement__close`) cùng CSS, JS và script lưu trạng thái đóng, bar luôn hiển thị như ref; JS chỉ còn đo chiều cao bar cho header dính.
 - [global] Header làm lại theo ref: nền trắng trong suốt có blur (đặt ở `::before` để menu mobile `position: fixed` không bị ảnh hưởng), announcement bar và header cùng dính trên cùng khi cuộn (JS đo chiều cao bar vào `--az-announce-h`, xử lý cả khi đóng bar và có admin bar), menu căn trái cạnh logo thay vì căn giữa, chiều cao 70px cố định (bỏ co khi cuộn), mũi tên dropdown "Trang" sát chữ. Ảnh hưởng mọi trang.
 - [docs] `[service-detail] Đạt design review`: chủ dự án xác nhận hoàn thành trang Chi tiết dịch vụ (17/11/2026). Các mục review tích theo xác nhận, chưa có số đo; xem `docs/pages/04-service-detail.md`.

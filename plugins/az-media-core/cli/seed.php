@@ -66,7 +66,7 @@ class AZ_Core_Seed_Command {
 	/**
 	 * Tạo bài nếu chưa có (so theo post_type + tiêu đề).
 	 */
-	private function upsert( $type, $title, $content, $excerpt, $order, $meta = array(), $terms = array() ) {
+	private function upsert( $type, $title, $content, $excerpt, $order, $meta = array(), $terms = array(), $days_ago = 0 ) {
 		$existing = get_posts( array(
 			'post_type'   => $type,
 			'title'       => $title,
@@ -78,7 +78,7 @@ class AZ_Core_Seed_Command {
 			$this->out( "Bỏ qua (đã có): [$type] $title" );
 			return (int) $existing[0];
 		}
-		$id = wp_insert_post( array(
+		$args = array(
 			'post_type'    => $type,
 			'post_title'   => $title,
 			'post_content' => $content,
@@ -86,7 +86,13 @@ class AZ_Core_Seed_Command {
 			'post_status'  => 'publish',
 			'menu_order'   => $order,
 			'meta_input'   => $meta,
-		), true );
+		);
+		if ( $days_ago > 0 ) {
+			// Bài mới tạo có post_modified = post_date, nên lùi ngày tạo là lùi luôn mốc "cập nhật" để demo thời gian tương đối.
+			$args['post_date_gmt'] = gmdate( 'Y-m-d H:i:s', time() - (int) $days_ago * DAY_IN_SECONDS );
+			$args['post_date']     = get_date_from_gmt( $args['post_date_gmt'] );
+		}
+		$id = wp_insert_post( $args, true );
 		if ( is_wp_error( $id ) ) {
 			$this->out( $id->get_error_message(), 'warning' );
 			return 0;
@@ -207,13 +213,13 @@ class AZ_Core_Seed_Command {
 
 	private function seed_careers() {
 		$jobs = array(
-			array( 'Chuyên viên chiến lược mạng xã hội', 'Bạn có năng khiếu xây dựng chiến lược mạng xã hội dựa trên dữ liệu, giúp tăng tương tác và thúc đẩy tăng trưởng? Bạn sẽ chịu trách nhiệm lên kế hoạch, triển khai và tối ưu các chiến dịch.', '18 - 28 triệu / tháng' ),
-			array( 'Quản lý tài khoản khách hàng', 'Chúng tôi tìm người đảm nhận vai trò đầu mối làm việc với khách hàng: hiểu mục tiêu, xây dựng chiến lược phù hợp và đảm bảo khách hàng hài lòng với dịch vụ của AZ Media.', '16 - 25 triệu / tháng' ),
-			array( 'Chuyên viên quảng cáo số', 'Bạn đam mê quảng cáo trả phí trên mạng xã hội? Bạn sẽ quản lý và tối ưu các chiến dịch quảng cáo để đạt hiệu quả đầu tư cao nhất và độ phủ tối đa cho khách hàng.', '15 - 22 triệu / tháng' ),
-			array( 'Chuyên viên phân tích dữ liệu', 'Bạn giỏi đọc và phân tích số liệu? Hãy cùng chúng tôi đo lường, cải thiện hiệu quả chiến dịch bằng những nhận định và đề xuất giá trị từ dữ liệu.', '18 - 30 triệu / tháng' ),
+			array( 'Chuyên viên chiến lược mạng xã hội', 'Bạn có năng khiếu xây dựng chiến lược mạng xã hội dựa trên dữ liệu, giúp tăng tương tác và thúc đẩy tăng trưởng? Bạn sẽ chịu trách nhiệm lên kế hoạch, triển khai và tối ưu các chiến dịch.', '18 - 28 triệu / tháng', 2 ),
+			array( 'Quản lý tài khoản khách hàng', 'Chúng tôi tìm người đảm nhận vai trò đầu mối làm việc với khách hàng: hiểu mục tiêu, xây dựng chiến lược phù hợp và đảm bảo khách hàng hài lòng với dịch vụ của AZ Media.', '16 - 25 triệu / tháng', 4 ),
+			array( 'Chuyên viên quảng cáo số', 'Bạn đam mê quảng cáo trả phí trên mạng xã hội? Bạn sẽ quản lý và tối ưu các chiến dịch quảng cáo để đạt hiệu quả đầu tư cao nhất và độ phủ tối đa cho khách hàng.', '15 - 22 triệu / tháng', 6 ),
+			array( 'Chuyên viên phân tích dữ liệu', 'Bạn giỏi đọc và phân tích số liệu? Hãy cùng chúng tôi đo lường, cải thiện hiệu quả chiến dịch bằng những nhận định và đề xuất giá trị từ dữ liệu.', '18 - 30 triệu / tháng', 1 ),
 		);
 		foreach ( $jobs as $i => $j ) {
-			$this->upsert( 'career', $j[0], '<p>' . $j[1] . '</p>', $j[1], $i + 1, array( 'az_job_type' => 'Toàn thời gian', 'az_salary' => $j[2] ) );
+			$this->upsert( 'career', $j[0], '<p>' . $j[1] . '</p>', $j[1], $i + 1, array( 'az_job_type' => 'Toàn thời gian', 'az_salary' => $j[2] ), array(), $j[3] );
 		}
 	}
 
