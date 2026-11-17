@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "az-media/contact-form",
+  "title": "Form liên hệ",
+  "category": "widgets",
+  "icon": "email",
+  "description": "Form liên hệ AZ Media: họ tên, email, chủ đề, lời nhắn. Tin nhắn được lưu ở menu Tin nhắn liên hệ và gửi email thông báo.",
+  "textdomain": "az-media-core",
+  "supports": { "html": false, "align": false },
+  "editorScript": "file:./edit.js",
+  "render": "file:./render.php"
+}

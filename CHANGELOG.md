@@ -14,6 +14,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [contact] Trang `/contact/` dựng theo `docs/reference-images/OG-Contact.png`: hero, khối form (ảnh trái, form phải), 3 thẻ thông tin (điện thoại, email, giờ làm việc), bản đồ Google nhúng kèm địa chỉ 27 Đinh Bộ Lĩnh, Phường 24, Quận Bình Thạnh, TP. Hồ Chí Minh (link Google). Template `page-contact.html`; pattern mới `az-contact-hero`, `az-contact-form`, `az-contact-info`; icon `phone`, `mail`, `clock`, `pin`. Schema LocalBusiness (tên, URL, địa chỉ).
+- [core] Block `az-media/contact-form` + xử lý gửi (`includes/contact-form.php`): kiểm tra server, nonce, honeypot, tối thiểu 3 giây, tối đa 5 lần/giờ/IP; lưu tin nhắn vào CPT `contact_message` (menu Tin nhắn liên hệ) rồi gửi email thông báo; email nhận đặt ở Cài đặt → Chung. Dùng form tự viết thay Contact Form 7 vì cấu hình CF7 nằm trong database, không đi theo git.
 - [maintenance] Trang bảo trì `/maintenance-mode/` làm **khác demo có chủ đích**: toàn màn hình, nền đậm có lưới, căn giữa, không ảnh, không announcement/header/footer; gồm nhãn trạng thái nhấp nháy, H1, thời gian dự kiến, tiến độ 3 bước, nút liên hệ gấp. Template `page-maintenance-mode.html`, pattern mới `az-maintenance`.
 - [maintenance] Chế độ bảo trì thật trong plugin `az-media-core` (`includes/maintenance.php`): bật/tắt ở Công cụ → AZ Media Bảo trì hoặc `wp option update az_maintenance_on 1`; khách thấy trang bảo trì với HTTP 503, `Retry-After`, `noindex`; quản trị viên vào bình thường; có nhắc ở wp-admin và admin bar.
 - [career] Trang chi tiết vị trí `/career/{slug}/` (template `single-career.html`): hero (tên vị trí, chip hình thức/lương/địa điểm, nút Ứng tuyển), thân trang (nội dung bài + thẻ Thông tin vị trí dính khi cuộn), mục Vị trí khác. Pattern `az-career-detail-hero`, `az-career-detail-body`, `az-career-other`. Cấu trúc theo đề xuất (ref chỉ có trang danh sách).
@@ -78,6 +80,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [contact] Chưa xem bằng trình duyệt/WordPress thật và chưa gửi thử form (đã kiểm thử hàm kiểm tra dữ liệu bằng PHP CLI, chưa chạy luồng gửi trong WordPress). Email, điện thoại, giờ làm việc, ảnh là PLACEHOLDER. Local WP mặc định không gửi được email: tin nhắn vẫn lưu ở menu Tin nhắn liên hệ. Chưa có reCAPTCHA/Turnstile.
 - [maintenance] Chưa xem bằng trình duyệt/WordPress thật; chưa thử bật chế độ bảo trì với khách ẩn danh. Thời gian dự kiến, 3 bước tiến độ, email, điện thoại là nội dung mẫu cần sửa tay cho từng đợt bảo trì. Chưa có ô đăng ký nhận tin.
 - [global] Header mới (nền mờ, bar dính) chưa xem bằng trình duyệt/WordPress thật: cần kiểm blur khi cuộn qua ảnh/khối đậm, menu mobile mở hết màn hình, bar 2 dòng trên mobile, và khi đăng nhập có admin bar.
 - [about] Chưa xem bằng trình duyệt/WordPress thật (khoảng cách, typography, responsive 1200/1024/768/480). Ref dùng slider đội ngũ có chấm phân trang, bản dựng là lưới 2×2 tĩnh. Số liệu, tên thành viên, mô tả, ảnh là PLACEHOLDER.

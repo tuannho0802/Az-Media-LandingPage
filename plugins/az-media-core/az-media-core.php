@@ -21,6 +21,7 @@ require_once AZ_CORE_DIR . 'includes/editor-panel.php';
 require_once AZ_CORE_DIR . 'includes/faq-block.php';
 require_once AZ_CORE_DIR . 'includes/post-updated-block.php';
 require_once AZ_CORE_DIR . 'includes/maintenance.php';
+require_once AZ_CORE_DIR . 'includes/contact-form.php';
 
 require_once AZ_CORE_DIR . 'cli/seed.php';
 

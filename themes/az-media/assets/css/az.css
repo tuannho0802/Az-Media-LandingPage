@@ -68,6 +68,10 @@ html { scroll-behavior: smooth; }
 .az-icon--bars { --az-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 13h4v8H4v-8Zm6-9h4v17h-4V4Zm6 5h4v12h-4V9Z'/%3E%3C/svg%3E"); }
 .az-icon--users { --az-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM9 13c-3.3 0-7 1.6-7 4.5V20h14v-2.5c0-2.9-3.7-4.5-7-4.5Zm8 0c-.5 0-1 0-1.6.1 1.4 1 2.6 2.4 2.6 4.4V20h4v-2.5c0-2.4-2.6-4.5-5-4.5Z'/%3E%3C/svg%3E"); }
 .az-icon--spark { --az-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m12 2 2.6 6.4L21 11l-6.4 2.6L12 20l-2.6-6.4L3 11l6.4-2.6L12 2Zm7 13 1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1 1-2.5Z'/%3E%3C/svg%3E"); }
+.az-icon--phone { --az-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z'/%3E%3C/svg%3E"); }
+.az-icon--mail { --az-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='m3 7 9 6 9-6'/%3E%3C/svg%3E"); }
+.az-icon--clock { --az-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E"); }
+.az-icon--pin { --az-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E"); }
 
 /* 4. ANNOUNCEMENT */
 .az-announcement { position: relative; display: flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 40px; background: var(--az-primary-dark); text-align: center; padding: .5rem 1.25rem; }
@@ -490,6 +494,37 @@ html { scroll-behavior: smooth; }
 .az-maint .wp-block-button.is-style-outline > .wp-block-button__link:hover { background: #fff; color: var(--az-primary-dark); border-color: #fff; }
 .az-maint__copy { margin: 0; font-size: .8125rem; color: rgba(255, 255, 255, .6); }
 
+/* 7.15 Trang Liên hệ (page-contact) */
+.az-section .az-contact-box { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 40px); padding: clamp(16px, 3vw, 32px); background: var(--az-soft); border-radius: var(--az-radius-lg); align-items: stretch; }
+.az-contact-box__img { margin: 0; }
+.az-contact-box__img img { display: block; width: 100%; height: 100%; min-height: 420px; object-fit: cover; border-radius: var(--az-radius); }
+.az-section .az-contact-box__main { justify-content: center; }
+.az-form { width: 100%; align-self: stretch; display: flex; flex-direction: column; gap: 1rem; }
+.az-form__form { display: flex; flex-direction: column; gap: 1rem; }
+.az-form__field { display: flex; flex-direction: column; gap: .4rem; }
+.az-form__label { font-size: .9375rem; font-weight: 500; color: var(--az-text); }
+.az-form__control { width: 100%; box-sizing: border-box; min-height: 48px; padding: .75rem 1rem; font: inherit; color: var(--az-text); background: #fff; border: 1px solid var(--az-border); border-radius: 10px; transition: border-color .2s, box-shadow .2s; }
+textarea.az-form__control { min-height: 140px; resize: vertical; }
+.az-form__control:focus { outline: none; border-color: var(--az-accent); box-shadow: 0 0 0 3px rgba(47, 107, 255, .2); }
+.az-form__control:user-invalid { border-color: #B42318; }
+.az-form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.az-form__submit { align-self: flex-start; cursor: pointer; border: 0; }
+.az-form__note { margin: 0; padding: .75rem 1rem; font-size: .9375rem; border-radius: 10px; }
+.az-form__note--ok { color: var(--az-primary-dark); background: var(--az-tint); border-left: 3px solid var(--az-accent); }
+.az-form__note--error { color: #B42318; background: #FEF3F2; border-left: 3px solid #B42318; }
+.az-section .az-ctc .az-head { margin-bottom: 40px; }
+.az-section .az-ctc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.az-section .az-ctc-card { display: flex; flex-direction: column; align-items: flex-start; gap: .6rem; padding: 28px 24px; background: #fff; border: 1px solid var(--az-border); border-radius: var(--az-radius); }
+.az-ctc-card__title { margin: 0; font-size: 1.0625rem; }
+.az-ctc-card__text { margin: 0; color: var(--az-muted); }
+.az-ctc-card__text a, .az-ctc-map__address a { color: inherit; text-decoration: none; }
+.az-ctc-card__text a:hover, .az-ctc-map__address a:hover { color: var(--az-accent-text); text-decoration: underline; }
+.az-section .az-ctc-map { margin-top: 24px; overflow: hidden; background: #fff; border: 1px solid var(--az-border); border-radius: var(--az-radius); }
+.az-section .az-ctc-map__bar { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-bottom: 1px solid var(--az-border); }
+.az-ctc-map__address { margin: 0; font-size: .9375rem; color: var(--az-muted); }
+.az-ctc-map__address strong { color: var(--az-text); }
+.az-ctc-map__frame { display: block; width: 100%; height: clamp(300px, 40vw, 460px); border: 0; }
+
 /* 8. RESPONSIVE */
 @media (max-width: 1100px) {
 	.az-footer .az-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -547,6 +582,15 @@ html { scroll-behavior: smooth; }
 @media (max-width: 480px) {
 	.az-section .az-member { grid-template-columns: minmax(0, 1fr); }
 	.az-section .az-member__photo { min-height: 280px; }
+}
+
+@media (max-width: 900px) {
+	.az-section .az-contact-box { grid-template-columns: minmax(0, 1fr); }
+	.az-contact-box__img { order: 2; }
+	.az-contact-box__img img { min-height: 0; aspect-ratio: 4 / 3; }
+}
+@media (max-width: 768px) {
+	.az-section .az-ctc-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* 9. MOTION */

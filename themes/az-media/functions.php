@@ -186,3 +186,27 @@ add_action( 'wp_head', function () {
 	}
 	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG ) . "</script>\n";
 }, 5 );
+
+/**
+ * Schema LocalBusiness (JSON-LD) cho trang Liên hệ. Chỉ khai báo dữ liệu thật (tên, địa chỉ, URL);
+ * điện thoại, email và giờ làm việc đang là placeholder nên chưa đưa vào.
+ */
+add_action( 'wp_head', function () {
+	if ( ! is_page( 'contact' ) ) {
+		return;
+	}
+	$data = array(
+		'@context' => 'https://schema.org',
+		'@type'    => 'LocalBusiness',
+		'name'     => 'AZ Media',
+		'url'      => home_url( '/' ),
+		'address'  => array(
+			'@type'           => 'PostalAddress',
+			'streetAddress'   => '27 Đinh Bộ Lĩnh, Phường 24',
+			'addressLocality' => 'Quận Bình Thạnh',
+			'addressRegion'   => 'TP. Hồ Chí Minh',
+			'addressCountry'  => 'VN',
+		),
+	);
+	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG ) . "</script>\n";
+}, 5 );
