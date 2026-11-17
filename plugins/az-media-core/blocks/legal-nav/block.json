@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "az-media/legal-nav",
+  "title": "Điều hướng pháp lý",
+  "category": "widgets",
+  "icon": "media-document",
+  "description": "Liên kết giữa các văn bản pháp lý (Chính sách bảo mật, Điều khoản, Chính sách hoàn tiền): dạng thanh nút hoặc dạng thẻ.",
+  "textdomain": "az-media-core",
+  "attributes": {
+    "mode": { "type": "string", "default": "tabs", "enum": [ "tabs", "cards" ] }
+  },
+  "supports": { "html": false, "align": false },
+  "editorScript": "file:./edit.js",
+  "render": "file:./render.php"
+}

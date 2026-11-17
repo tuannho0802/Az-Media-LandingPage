@@ -46,6 +46,7 @@ $self    = $page_id ? get_permalink( $page_id ) : home_url( '/contact/' );
 		<div class="az-form__hp" aria-hidden="true">
 			<label>Để trống ô này <input type="text" name="az_website" tabindex="-1" autocomplete="off"></label>
 		</div>
+		<p class="az-form__consent">Khi gửi tin nhắn, bạn đồng ý để AZ Media xử lý thông tin theo <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Chính sách bảo mật</a>.</p>
 		<button type="submit" class="wp-block-button__link wp-element-button az-form__submit">Gửi tin nhắn</button>
 	</form>
 </div>

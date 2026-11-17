@@ -550,6 +550,28 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 .az-section .az-search-empty { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-block: 24px; text-align: center; }
 .az-search-empty .az-head__lead { margin-inline: auto; }
 
+/* 7.18 Điều hướng pháp lý: thanh nút trên mỗi văn bản (az-legal-nav) + trang tổng /legal/ dạng thẻ (az-legal-cards) */
+.az-section.az-legal-navbar { padding-block: 24px 0; }
+.az-legal-nav__list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.az-legal-nav__list li { margin: 0; }
+.az-legal-nav__link { display: inline-block; padding: .55rem 1.1rem; font-size: .9375rem; font-weight: 600; line-height: 1.2; color: var(--az-primary-dark); text-decoration: none; background: #fff; border: 1px solid var(--az-border); border-radius: 999px; transition: background-color .2s, color .2s, border-color .2s; }
+.az-legal-nav__link:hover { border-color: var(--az-primary); }
+.az-legal-nav__link.is-current { color: #fff; background: var(--az-primary); border-color: var(--az-primary); }
+.az-section.az-legal-hub { padding-block: clamp(40px, 6vw, 72px); }
+.az-section .az-legal-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; max-width: 1080px; margin: 0 auto; padding: 0; list-style: none; }
+.az-legal-card { position: relative; display: flex; flex-direction: column; gap: .75rem; margin: 0; padding: 28px; background: #fff; border: 1px solid var(--az-border); border-radius: var(--az-radius); box-shadow: var(--az-shadow); transition: box-shadow .2s, transform .2s; }
+.az-legal-card:hover, .az-legal-card:focus-within { box-shadow: var(--az-shadow-hover); transform: translateY(-2px); }
+.az-legal-card__title { margin: 0; font-size: 1.25rem; }
+.az-legal-card__link { color: var(--az-primary-dark); text-decoration: none; }
+.az-legal-card__link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.az-legal-card__link:focus-visible { outline: none; }
+.az-legal-card:focus-within { outline: 2px solid var(--az-accent); outline-offset: 3px; }
+.az-legal-card__desc { flex: 1; margin: 0; color: var(--az-muted); }
+.az-legal-card__meta { margin: 0; padding-top: .75rem; font-size: .875rem; color: var(--az-muted); border-top: 1px solid var(--az-border); }
+.az-section .az-legal-hub__help { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: clamp(32px, 5vw, 56px); text-align: center; }
+.az-legal-hub__help p { margin: 0; color: var(--az-muted); }
+.az-form__consent { margin: 0; font-size: .875rem; color: var(--az-muted); }
+
 /* 8. RESPONSIVE */
 @media (max-width: 1100px) {
 	.az-footer .az-footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -567,6 +589,7 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 	.az-section .az-hero__rating { left: 12px; bottom: auto; top: 12px; }
 	.az-section .az-hero__content { padding-bottom: 0; }
 	.az-solutions__img img { aspect-ratio: 16 / 10; }
+	.az-section .az-legal-cards { grid-template-columns: minmax(0, 1fr); max-width: 520px; }
 }
 @media (max-width: 768px) {
 	.az-faq__list--cols { grid-template-columns: minmax(0, 1fr); gap: 12px; }

@@ -14,6 +14,11 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [legal] Trang tổng `/legal/` (trước đây 404): H1 + 3 thẻ dẫn tới Chính sách bảo mật, Điều khoản, Chính sách hoàn tiền (kèm mô tả và ngày cập nhật), nút Liên hệ. Template mới `page-legal-hub.html` (custom template “Trang tổng pháp lý”), pattern `az-legal-hub-hero`, `az-legal-hub-list`. `/legal` (không có dấu `/`) tự chuyển về `/legal/`.
+- [legal] Thanh nút chuyển giữa các văn bản (Tất cả | Chính sách bảo mật | Điều khoản | Chính sách hoàn tiền) dưới hero của mỗi trang pháp lý, đánh dấu trang đang xem (`aria-current`). Pattern mới `az-legal-nav`.
+- [core] Block `az-media/legal-nav` (dạng `tabs` và `cards`): chỉ liệt kê trang đã xuất bản nên không có link chết.
+- [global] Chân trang: thêm link “Pháp lý” (`/legal/`) ở cột Hỗ trợ.
+- [contact] Dòng “Khi gửi tin nhắn, bạn đồng ý để AZ Media xử lý thông tin theo Chính sách bảo mật” (có link) dưới form liên hệ.
 - [legal] 3 trang pháp lý `/privacy-policy/`, `/terms/`, `/refund-policy/`: hero (badge, H1, "Cập nhật lần cuối" theo ngày sửa trang), cột đọc 760px, heading H2 tự đánh số bằng CSS. Template `page-legal.html` đăng ký là custom template "Trang pháp lý" trong `theme.json`; pattern mới `az-legal-hero`, `az-legal-body`.
 - [core] Nội dung mẫu 3 văn bản pháp lý (`includes/legal-content.php`) và seed điền khi trang đang trống, đang là "Trang đang được xây dựng" hoặc là văn bản mẫu mặc định của WordPress; seed gán template Trang pháp lý. **Bản nháp mẫu chưa qua rà soát pháp lý.**
 - [404-search] Trang 404 dựng lại (số 404 lớn, H1, ô tìm kiếm, nút về trang chủ/Dịch vụ/Blog/Liên hệ) và trang kết quả tìm kiếm mới `search.html` (hero giữ từ khóa, lưới thẻ 2 cột, phân trang, trạng thái không có kết quả). Pattern mới `az-404`, `az-search-hero`, `az-search-results`; dùng lại `az-post-card`.
@@ -49,6 +54,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [core] Nội dung 3 văn bản pháp lý viết lại đầy đủ hơn (Chính sách bảo mật 11 mục, Điều khoản 14 mục, Chính sách hoàn tiền 7 mục có quy trình và ví dụ tính tiền). Phần dữ liệu thu thập, cookie, lưu trữ bám theo hành vi thật của website (form liên hệ lưu họ tên, email, chủ đề, lời nhắn; IP chỉ dùng giới hạn gửi form dưới dạng mã băm khoảng 1 giờ; không công cụ theo dõi; phông chữ tự host). Căn cứ pháp luật là Luật Bảo vệ dữ liệu cá nhân (hiệu lực 01/01/2026); không trích Nghị định 13/2023/NĐ-CP vì đã được thay thế từ 01/01/2026. **Vẫn là bản nháp chưa qua rà soát pháp lý.**
+- [core] Seed: nâng cấp văn bản nháp cũ lên bản mới nếu trang còn dòng “Bản nháp mẫu (PLACEHOLDER)”; trang đã duyệt và xóa dòng đó thì không bị ghi đè. Bấm seed nhiều lần không đổi ngày “Cập nhật lần cuối”. Seed tạo trang `/legal/`, gán template, và đổi tiêu đề “Privacy Policy” mặc định của WordPress thành “Chính sách bảo mật”.
 - [docs] Slug trang Điều khoản chốt là `/terms/` (khớp footer và seed), plan `12-legal.md` đã sửa từ `/terms-and-conditions/`.
 - [global] Gỡ mục "Bảo trì" khỏi dropdown Trang ở header (trang bảo trì không đưa vào menu công khai).
 - [docs] Viết lại plan `docs/pages/11-maintenance.md` theo hướng trang bảo trì dùng thật, khác demo.
@@ -85,6 +92,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [legal] Sau khi `git pull`: vào Công cụ → AZ Media Seed, bấm **Tạo dữ liệu mẫu** một lần để tạo trang `/legal/` và nâng cấp nội dung 3 văn bản; chưa bấm thì `/legal/` vẫn 404. Nếu trang pháp lý đã được sửa tay và đã xóa dòng nháp, nội dung mới sẽ KHÔNG tự thay; chép tay từ `includes/legal-content.php` nếu muốn.
+- [legal] Các chỗ trong ngoặc vuông `[ ]` ở 3 văn bản (tên pháp nhân, mã số doanh nghiệp, địa chỉ, số tháng lưu trữ, số ngày hoàn tiền, tòa án) là PLACEHOLDER cần điền. Nếu thêm Google Analytics, Meta Pixel hoặc form thu thập dữ liệu mới thì phải cập nhật mục Cookie và Thông tin thu thập của Chính sách bảo mật.
 - [legal] Nội dung 3 văn bản là bản nháp mẫu, cần rà soát pháp lý trước khi công bố (số ngày, tỷ lệ hoàn tiền, thông tin pháp nhân, email liên hệ). Chưa có ảnh ref nên bố cục theo cấu trúc đề xuất; chưa xem bằng trình duyệt/WordPress thật.
 - [404-search] Chưa có ảnh ref; chưa xem bằng trình duyệt/WordPress thật (đặc biệt ô tìm kiếm, phân trang và `query-title` giữ từ khóa). Trang Blog (`06-blog`) chưa dựng nên link Blog dẫn tới trang danh sách bài viết mặc định.
 - [contact] Chưa xem bằng trình duyệt/WordPress thật và chưa gửi thử form (đã kiểm thử hàm kiểm tra dữ liệu bằng PHP CLI, chưa chạy luồng gửi trong WordPress). Email, điện thoại, giờ làm việc, ảnh là PLACEHOLDER. Local WP mặc định không gửi được email: tin nhắn vẫn lưu ở menu Tin nhắn liên hệ. Chưa có reCAPTCHA/Turnstile.

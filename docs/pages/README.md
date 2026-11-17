@@ -20,7 +20,7 @@ Nguồn tham chiếu và URL gốc xem `docs/plan.md`, mục 11.
 | [09](09-career.md) | Tuyển dụng | `/career/` | ✅ có ảnh ref `OG-Career.png` | ◐ đã dựng, chờ review (17/11) |
 | [10](10-contact.md) | Liên hệ | `/contact/` | ✅ có ảnh ref `OG-Contact.png` | ◐ đã dựng, chờ review (17/11) |
 | [11](11-maintenance.md) | Bảo trì (Maintenance Mode) | `/maintenance-mode/` | ✅ đã xem ảnh demo, cố ý làm khác | ◐ đã dựng, chờ review (17/11) |
-| [12](12-legal.md) | Trang pháp lý (Privacy, Terms, Refund) | `/privacy-policy/, /terms/, /refund-policy/` | ⚠️ dựng theo cấu trúc đề xuất (chưa có ảnh ref) | ◐ đã dựng, chờ review (17/11) |
+| [12](12-legal.md) | Trang pháp lý (Privacy, Terms, Refund) + trang tổng | `/legal/, /privacy-policy/, /terms/, /refund-policy/` | ⚠️ dựng theo cấu trúc đề xuất (chưa có ảnh ref) | ◐ đã dựng, chờ review (17/11) |
 | [13](13-404-search.md) | 404 và Tìm kiếm | `(tự động)` | ⚠️ dựng theo cấu trúc đề xuất (chưa có ảnh ref) | ◐ đã dựng, chờ review (17/11) |
 
 Chú thích: ✅ đã đọc nội dung từ demo · ⚠️ URL lấy từ menu demo nhưng chưa đọc được nội dung, mục 2 của file là cấu trúc đề xuất.

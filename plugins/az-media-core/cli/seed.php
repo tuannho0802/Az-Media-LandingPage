@@ -342,9 +342,10 @@ class AZ_Core_Seed_Command {
 	}
 
 	/**
-	 * Điền nội dung mẫu cho 3 trang pháp lý và gán template "Trang pháp lý" (page-legal).
-	 * Chỉ ghi đè khi nội dung đang là bản trống, dòng "Trang đang được xây dựng" hoặc văn bản mẫu mặc định của WordPress,
-	 * để không mất nội dung đã sửa.
+	 * Điền nội dung mẫu cho 3 trang pháp lý, gán template "Trang pháp lý" (page-legal) và gán template trang tổng /legal/.
+	 * Chỉ ghi đè khi nội dung đang là bản trống, dòng "Trang đang được xây dựng", văn bản mẫu mặc định của WordPress,
+	 * hoặc bản nháp mẫu của AZ Media còn nguyên dòng "Bản nháp mẫu (PLACEHOLDER)" (để nâng cấp lên bản nháp mới).
+	 * Khi đã duyệt và xóa dòng nháp đó, seed không đụng tới nội dung nữa.
 	 */
 	private function seed_legal() {
 		foreach ( az_core_legal_pages() as $slug => $content ) {
@@ -352,19 +353,34 @@ class AZ_Core_Seed_Command {
 			if ( ! $page ) {
 				continue;
 			}
-			$current = (string) $page->post_content;
-			$is_stub = '' === trim( wp_strip_all_tags( $current ) )
+			$current  = (string) $page->post_content;
+			$is_stub  = '' === trim( wp_strip_all_tags( $current ) )
 				|| false !== strpos( $current, 'Trang đang được xây dựng' )
-				|| false !== strpos( $current, 'privacy-policy-tutorial' );
-			if ( $is_stub ) {
+				|| false !== strpos( $current, 'privacy-policy-tutorial' )
+				|| false !== strpos( $current, az_core_legal_draft_mark() );
+			// Bỏ qua khi đã giống hệt, để bấm seed nhiều lần không đổi ngày "Cập nhật lần cuối".
+			if ( $is_stub && trim( $current ) !== trim( $content ) ) {
 				wp_update_post( array( 'ID' => $page->ID, 'post_content' => $content ) );
 				$this->out( "Đã điền nội dung mẫu: {$page->post_title} (/$slug/)" );
+			}
+			// Trang privacy-policy do WordPress tạo sẵn có tiêu đề tiếng Anh "Privacy Policy": đổi sang tiếng Việt (chỉ khi còn tiêu đề mặc định).
+			if ( 'Privacy Policy' === $page->post_title ) {
+				$labels = az_core_legal_docs();
+				wp_update_post( array( 'ID' => $page->ID, 'post_title' => $labels[ $slug ]['label'] ?? $page->post_title ) );
+				$this->out( "Đã đổi tiêu đề sang tiếng Việt: /$slug/" );
 			}
 			$template = get_post_meta( $page->ID, '_wp_page_template', true );
 			if ( ! $template || 'default' === $template ) {
 				update_post_meta( $page->ID, '_wp_page_template', 'page-legal' );
 				$this->out( "Đã gán template Trang pháp lý: /$slug/" );
 			}
+		}
+
+		// Trang tổng /legal/: liệt kê 3 văn bản. Gán template riêng để không bị nhận nhầm template page-legal theo slug.
+		$hub = get_page_by_path( 'legal' );
+		if ( $hub && 'page-legal-hub' !== get_post_meta( $hub->ID, '_wp_page_template', true ) ) {
+			update_post_meta( $hub->ID, '_wp_page_template', 'page-legal-hub' );
+			$this->out( 'Đã gán template Trang tổng pháp lý: /legal/' );
 		}
 	}
 
@@ -382,6 +398,7 @@ class AZ_Core_Seed_Command {
 			'privacy-policy'   => 'Chính sách bảo mật',
 			'terms'            => 'Điều khoản',
 			'refund-policy'    => 'Chính sách hoàn tiền',
+			'legal'            => 'Pháp lý',
 		);
 		$ids = array();
 		foreach ( $pages as $slug => $title ) {
@@ -395,7 +412,7 @@ class AZ_Core_Seed_Command {
 				}
 				continue;
 			}
-			$content = 'home' === $slug ? '' : '<!-- wp:paragraph --><p>Trang đang được xây dựng.</p><!-- /wp:paragraph -->';
+			$content = in_array( $slug, array( 'home', 'legal' ), true ) ? '' : '<!-- wp:paragraph --><p>Trang đang được xây dựng.</p><!-- /wp:paragraph -->';
 			$ids[ $slug ] = wp_insert_post( array(
 				'post_type'    => 'page',
 				'post_title'   => $title,
