@@ -84,6 +84,10 @@ add_filter( 'query_loop_block_query_vars', function ( $query, $block ) {
 	if ( $wanted && ! post_type_exists( $wanted ) ) {
 		$query['post__in'] = array( 0 );
 	}
+	// Pattern az-media/career-other (queryId 32): loại vị trí đang xem khỏi danh sách "Vị trí khác".
+	if ( 32 === (int) ( $block->context['queryId'] ?? 0 ) && is_singular( 'career' ) ) {
+		$query['post__not_in'] = array( get_queried_object_id() );
+	}
 	// Pattern az-media/service-related (queryId 15): loại dịch vụ đang xem khỏi danh sách "Dịch vụ khác".
 	if ( 15 === (int) ( $block->context['queryId'] ?? 0 ) && is_singular( 'service' ) ) {
 		$query['post__not_in'] = array( get_queried_object_id() );
@@ -126,3 +130,59 @@ add_action( 'admin_notices', function () {
 	}
 	echo '<div class="notice notice-warning"><p><strong>AZ Media:</strong> hãy kích hoạt plugin <em>AZ Media Core</em>, rồi vào Công cụ → AZ Media Seed (hoặc chạy <code>wp az seed</code>) để Bảng giá, Nhận xét và FAQ hiển thị dữ liệu.</p></div>';
 } );
+
+/**
+ * Schema JobPosting (JSON-LD) cho trang chi tiết vị trí tuyển dụng.
+ * Địa điểm và hạn nộp lấy từ meta az_location, az_deadline (dd/mm/yyyy); thiếu thì bỏ trường tương ứng.
+ */
+add_action( 'wp_head', function () {
+	if ( ! is_singular( 'career' ) ) {
+		return;
+	}
+	$post = get_queried_object();
+	if ( ! $post instanceof WP_Post ) {
+		return;
+	}
+	$data = array(
+		'@context'           => 'https://schema.org',
+		'@type'              => 'JobPosting',
+		'title'              => get_the_title( $post ),
+		'description'        => wp_kses_post( apply_filters( 'the_content', $post->post_content ) ),
+		'datePosted'         => get_the_date( 'c', $post ),
+		'hiringOrganization' => array(
+			'@type'  => 'Organization',
+			'name'   => 'AZ Media',
+			'sameAs' => home_url( '/' ),
+		),
+	);
+	$type = mb_strtolower( (string) get_post_meta( $post->ID, 'az_job_type', true ) );
+	$map  = array(
+		'toàn thời gian' => 'FULL_TIME',
+		'bán thời gian'  => 'PART_TIME',
+		'hợp đồng'       => 'CONTRACTOR',
+		'thời vụ'        => 'TEMPORARY',
+		'thực tập'       => 'INTERN',
+	);
+	foreach ( $map as $needle => $code ) {
+		if ( false !== mb_strpos( $type, $needle ) ) {
+			$data['employmentType'] = $code;
+			break;
+		}
+	}
+	$location = trim( (string) get_post_meta( $post->ID, 'az_location', true ) );
+	if ( '' !== $location ) {
+		$data['jobLocation'] = array(
+			'@type'   => 'Place',
+			'address' => array(
+				'@type'           => 'PostalAddress',
+				'addressLocality' => $location,
+				'addressCountry'  => 'VN',
+			),
+		);
+	}
+	$deadline = DateTime::createFromFormat( 'd/m/Y', trim( (string) get_post_meta( $post->ID, 'az_deadline', true ) ) );
+	if ( $deadline ) {
+		$data['validThrough'] = $deadline->format( 'Y-m-d' ) . 'T23:59:59+07:00';
+	}
+	echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG ) . "</script>\n";
+}, 5 );

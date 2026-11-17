@@ -2,13 +2,13 @@
 
 | Thuộc tính | Giá trị |
 |---|---|
-| Slug AZ Media | `/career/` |
-| Template WordPress | `templates/page-career.html` |
+| Slug AZ Media | `/career/` (danh sách) · `/career/{slug}/` (chi tiết từng vị trí) |
+| Template WordPress | `templates/page-career.html` · `templates/single-career.html` |
 | Trang demo tham chiếu | https://reachout.nexmotivedemo.com/career/ |
 | Ảnh ref | `docs/reference-images/OG-Career.png` |
 | Độ tin cậy nguồn | ✅ Cấu trúc đọc từ ảnh ref · ⚠️ màu, font, kích thước là đề xuất |
-| Pattern dùng | `az-career-hero`, `az-career-jobs`, `az-career-apply` (dùng lại style `.az-values`) |
-| Dữ liệu (CPT/plugin) | CPT `career` (meta `az_job_type`, `az_salary`) |
+| Pattern dùng | Danh sách: `az-career-hero`, `az-career-jobs`, `az-career-apply` (dùng lại style `.az-values`) · Chi tiết: `az-career-detail-hero`, `az-career-detail-body`, `az-career-other` |
+| Dữ liệu (CPT/plugin) | CPT `career` (meta `az_job_type`, `az_salary`, `az_location`, `az_deadline`), block `az-media/post-updated` |
 | Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt |
 | Ngày truy cập demo | 17/11/2026 |
 
@@ -26,9 +26,25 @@ Thu hút ứng viên, liệt kê vị trí đang mở và nhận hồ sơ.
 | 2 | Vị trí đang tuyển | Badge + H2 căn giữa; lưới 2 cột thẻ nền nhạt: tên vị trí, hình thức (icon đồng hồ), mức lương (icon tiền), mô tả ngắn, "Cập nhật N ngày trước" (block `az-media/post-updated`) | az-career-jobs | `career` (tối đa 6) | ✅ |
 | 3 | Cách ứng tuyển | Badge + H2 căn trái, nút viền bên phải; dưới là 3 thẻ đánh số 01-03 bên trái, ảnh cao bên phải | az-career-apply | Nội dung pattern | ✅ |
 
+### 2b. Trang chi tiết vị trí `/career/{slug}/` (single-career)
+
+Ref `OG-Career.png` chỉ có trang danh sách, nên cấu trúc dưới đây là đề xuất, dùng lại style trang chi tiết dịch vụ.
+
+| # | Section | Nội dung / hành vi | Pattern | Dữ liệu | Xác minh |
+|---|---|---|---|---|---|
+| 1 | Hero | Badge "Tuyển dụng", tên vị trí (H1 duy nhất), hàng chip hình thức / mức lương / địa điểm, tóm tắt (excerpt), nút "Ứng tuyển ngay" (→ `/contact/`) và "Xem tất cả vị trí" (→ `/career/`) | az-career-detail-hero | `career` + meta | ⚠️ đề xuất |
+| 2 | Thân trang | Cột trái: nội dung bài (Mô tả công việc, Yêu cầu ứng viên, Quyền lợi). Cột phải (dính khi cuộn ở desktop): thẻ Thông tin vị trí (hình thức, lương, địa điểm, hạn nộp, "Cập nhật N ngày trước") và nút Ứng tuyển. Hàng nào trống thì tự ẩn | az-career-detail-body | `career` + meta | ⚠️ đề xuất |
+| 3 | Vị trí khác | Tối đa 2 vị trí khác (loại trừ vị trí đang xem), thẻ bấm được, nền tint | az-career-other | `career` | ⚠️ đề xuất |
+
+- Thẻ việc làm ở trang `/career/` bấm được toàn khung (tiêu đề là link, kèm "Xem chi tiết →") và dẫn tới trang chi tiết.
+- Schema `JobPosting` (JSON-LD) in tự động ở `functions.php`: tên, mô tả, ngày đăng, đơn vị tuyển (AZ Media), loại hình (nhận từ ô Hình thức: toàn thời gian, bán thời gian, hợp đồng, thời vụ, thực tập), địa điểm và hạn nộp nếu có. Ô Hạn nộp theo dạng `dd/mm/yyyy`; để trống nếu nhận hồ sơ liên tục.
+- Nút Ứng tuyển hiện trỏ về `/contact/`. Khi làm trang `10-contact`, nối form để điền sẵn tên vị trí.
+- Thêm vị trí mới: wp-admin → Tuyển dụng → Thêm mới, điền tiêu đề, nội dung (dùng Heading + List như mẫu), Trích đoạn (hiện ở thẻ danh sách) và 4 ô thông tin ở thanh bên.
+- Sau khi cập nhật code: chạy lại Công cụ → AZ Media Seed. Seed bổ sung nội dung chi tiết, địa điểm, hạn nộp cho 4 vị trí đã có (chỉ điền khi đang trống, giữ nguyên nội dung bạn đã sửa và không đổi ngày cập nhật). URL `/career/{slug}/` tự làm mới một lần, không cần bấm Save Permalinks.
+
 ## 3. Nội dung AZ Media cần chuẩn bị
 
-- Vị trí tuyển thật (seed có 4 vị trí mẫu): tên, hình thức, mức lương, mô tả ngắn (dùng ô Trích đoạn).
+- Vị trí tuyển thật (seed có 4 vị trí mẫu kèm nội dung chi tiết): tên, hình thức, mức lương, địa điểm, hạn nộp, mô tả ngắn (ô Trích đoạn) và nội dung Mô tả / Yêu cầu / Quyền lợi.
 - Ảnh thật cho khối Cách ứng tuyển (đang dùng `placeholder-team.svg`).
 - Quy trình ứng tuyển thật cho 3 bước.
 
@@ -85,3 +101,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/career/) và trang AZ M
 |---|---|---|
 | 17/11/2026 | Dựng trang theo ảnh ref: template `page-career`, 3 pattern, CPT `career` + seed 4 vị trí. Chưa kiểm trên WordPress thật | |
 | 17/11/2026 | Sửa lỗi dòng "Cập nhật:" trống ở thẻ việc làm: thay `core/post-date` bằng block `az-media/post-updated`, hiển thị thời gian tương đối tiếng Việt từ `post_modified`, seed ngày mẫu | |
+| 17/11/2026 | Thêm trang chi tiết `/career/{slug}/` (template `single-career`, 3 pattern, schema JobPosting), thẻ danh sách có link, meta `az_location` và `az_deadline`, seed bổ sung nội dung chi tiết cho vị trí đã có. Chưa kiểm trên WordPress thật | |

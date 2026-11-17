@@ -29,6 +29,8 @@ function az_core_meta_fields() {
 		'career'       => array(
 			'az_job_type' => array( 'label' => 'Hình thức làm việc', 'placeholder' => 'Toàn thời gian' ),
 			'az_salary'   => array( 'label' => 'Mức lương (hiển thị)', 'placeholder' => '15 - 25 triệu / tháng' ),
+			'az_location' => array( 'label' => 'Địa điểm làm việc', 'placeholder' => 'TP. Hồ Chí Minh' ),
+			'az_deadline' => array( 'label' => 'Hạn nộp hồ sơ (dd/mm/yyyy)', 'placeholder' => '31/12/2026', 'help' => 'Để trống nếu nhận hồ sơ liên tục.' ),
 		),
 	);
 }
@@ -75,6 +77,8 @@ add_action( 'init', function () {
 	register_post_type( 'career', array_merge( $common, array(
 		'labels'    => array( 'name' => 'Tuyển dụng', 'singular_name' => 'Vị trí tuyển dụng', 'add_new_item' => 'Thêm vị trí tuyển dụng', 'edit_item' => 'Sửa vị trí tuyển dụng' ),
 		'menu_icon' => 'dashicons-businessman',
+		// Mỗi vị trí có trang chi tiết /career/{slug}/ (template single-career). Không có trang lưu trữ riêng, danh sách nằm ở trang /career/.
+		'rewrite'   => array( 'slug' => 'career', 'with_front' => false ),
 	) ) );
 
 	register_post_type( 'faq', array_merge( $common, array(
@@ -115,8 +119,8 @@ add_action( 'init', function () {
  * Tăng số phiên bản khi lại đổi rewrite.
  */
 add_action( 'init', function () {
-	if ( '1' !== get_option( 'az_core_rewrite_ver' ) ) {
+	if ( '2' !== get_option( 'az_core_rewrite_ver' ) ) {
 		flush_rewrite_rules( false );
-		update_option( 'az_core_rewrite_ver', '1', true );
+		update_option( 'az_core_rewrite_ver', '2', true );
 	}
 }, 99 );

@@ -212,15 +212,133 @@ class AZ_Core_Seed_Command {
 	}
 
 	private function seed_careers() {
-		$jobs = array(
-			array( 'Chuyên viên chiến lược mạng xã hội', 'Bạn có năng khiếu xây dựng chiến lược mạng xã hội dựa trên dữ liệu, giúp tăng tương tác và thúc đẩy tăng trưởng? Bạn sẽ chịu trách nhiệm lên kế hoạch, triển khai và tối ưu các chiến dịch.', '18 - 28 triệu / tháng', 2 ),
-			array( 'Quản lý tài khoản khách hàng', 'Chúng tôi tìm người đảm nhận vai trò đầu mối làm việc với khách hàng: hiểu mục tiêu, xây dựng chiến lược phù hợp và đảm bảo khách hàng hài lòng với dịch vụ của AZ Media.', '16 - 25 triệu / tháng', 4 ),
-			array( 'Chuyên viên quảng cáo số', 'Bạn đam mê quảng cáo trả phí trên mạng xã hội? Bạn sẽ quản lý và tối ưu các chiến dịch quảng cáo để đạt hiệu quả đầu tư cao nhất và độ phủ tối đa cho khách hàng.', '15 - 22 triệu / tháng', 6 ),
-			array( 'Chuyên viên phân tích dữ liệu', 'Bạn giỏi đọc và phân tích số liệu? Hãy cùng chúng tôi đo lường, cải thiện hiệu quả chiến dịch bằng những nhận định và đề xuất giá trị từ dữ liệu.', '18 - 30 triệu / tháng', 1 ),
+		$perks = array(
+			'Lương cạnh tranh, xét tăng lương hai lần mỗi năm theo hiệu quả công việc.',
+			'Thưởng dự án, thưởng tháng 13 và các dịp lễ, Tết.',
+			'Bảo hiểm sức khỏe và khám sức khỏe định kỳ hằng năm.',
+			'Làm việc linh hoạt, hỗ trợ ngân sách học tập và tham gia hội thảo ngành.',
 		);
+		$jobs  = array(
+			array(
+				'title'    => 'Chuyên viên chiến lược mạng xã hội',
+				'excerpt'  => 'Bạn có năng khiếu xây dựng chiến lược mạng xã hội dựa trên dữ liệu, giúp tăng tương tác và thúc đẩy tăng trưởng? Bạn sẽ chịu trách nhiệm lên kế hoạch, triển khai và tối ưu các chiến dịch.',
+				'salary'   => '18 - 28 triệu / tháng',
+				'days_ago' => 2,
+				'duties'   => array(
+					'Xây dựng chiến lược và lịch nội dung theo từng nền tảng cho khách hàng.',
+					'Phối hợp đội sáng tạo và đội quảng cáo để triển khai chiến dịch đúng tiến độ.',
+					'Theo dõi số liệu, báo cáo hiệu quả định kỳ và đề xuất hướng tối ưu.',
+					'Nghiên cứu xu hướng mạng xã hội và đối thủ để cập nhật cách làm mới.',
+				),
+				'reqs'     => array(
+					'Ít nhất 2 năm kinh nghiệm làm mạng xã hội hoặc marketing nội dung.',
+					'Hiểu rõ cơ chế hoạt động của Facebook, Instagram, TikTok.',
+					'Tư duy dữ liệu, biết đọc báo cáo và rút ra nhận định.',
+					'Kỹ năng trình bày và làm việc nhóm tốt.',
+				),
+			),
+			array(
+				'title'    => 'Quản lý tài khoản khách hàng',
+				'excerpt'  => 'Chúng tôi tìm người đảm nhận vai trò đầu mối làm việc với khách hàng: hiểu mục tiêu, xây dựng chiến lược phù hợp và đảm bảo khách hàng hài lòng với dịch vụ của AZ Media.',
+				'salary'   => '16 - 25 triệu / tháng',
+				'days_ago' => 4,
+				'duties'   => array(
+					'Là đầu mối làm việc hằng ngày với khách hàng, nắm rõ mục tiêu và ngân sách.',
+					'Chuyển yêu cầu của khách thành kế hoạch công việc cụ thể cho các đội nội bộ.',
+					'Theo dõi tiến độ, chất lượng và xử lý phát sinh trong quá trình triển khai.',
+					'Báo cáo kết quả và tư vấn hướng mở rộng hợp tác.',
+				),
+				'reqs'     => array(
+					'Ít nhất 2 năm kinh nghiệm quản lý khách hàng tại agency hoặc đơn vị dịch vụ.',
+					'Giao tiếp tốt, chủ động và có khả năng thuyết phục.',
+					'Quản lý thời gian, đa nhiệm và làm việc dưới áp lực.',
+					'Hiểu biết cơ bản về marketing số là lợi thế.',
+				),
+			),
+			array(
+				'title'    => 'Chuyên viên quảng cáo số',
+				'excerpt'  => 'Bạn đam mê quảng cáo trả phí trên mạng xã hội? Bạn sẽ quản lý và tối ưu các chiến dịch quảng cáo để đạt hiệu quả đầu tư cao nhất và độ phủ tối đa cho khách hàng.',
+				'salary'   => '15 - 22 triệu / tháng',
+				'days_ago' => 6,
+				'duties'   => array(
+					'Lên kế hoạch, thiết lập và vận hành quảng cáo trên Meta, TikTok, Google.',
+					'Tối ưu ngân sách, đối tượng và mẫu quảng cáo để cải thiện chi phí chuyển đổi.',
+					'Thử nghiệm A/B thông điệp và hình ảnh, ghi lại bài học cho cả đội.',
+					'Báo cáo hiệu quả quảng cáo theo tuần và theo tháng.',
+				),
+				'reqs'     => array(
+					'Ít nhất 1 năm kinh nghiệm chạy quảng cáo trả phí.',
+					'Thành thạo Meta Ads Manager và công cụ đo lường cơ bản.',
+					'Tư duy số liệu, cẩn thận với ngân sách khách hàng.',
+					'Chủ động học hỏi các định dạng và tính năng quảng cáo mới.',
+				),
+			),
+			array(
+				'title'    => 'Chuyên viên phân tích dữ liệu',
+				'excerpt'  => 'Bạn giỏi đọc và phân tích số liệu? Hãy cùng chúng tôi đo lường, cải thiện hiệu quả chiến dịch bằng những nhận định và đề xuất giá trị từ dữ liệu.',
+				'salary'   => '18 - 30 triệu / tháng',
+				'days_ago' => 1,
+				'duties'   => array(
+					'Thu thập, làm sạch và tổng hợp dữ liệu từ các nền tảng quảng cáo và mạng xã hội.',
+					'Xây dựng bảng điều khiển theo dõi hiệu quả cho từng khách hàng.',
+					'Phân tích hành vi khán giả và đề xuất hướng tối ưu cho chiến dịch.',
+					'Trình bày kết quả dễ hiểu cho đội nội bộ và khách hàng.',
+				),
+				'reqs'     => array(
+					'Ít nhất 2 năm kinh nghiệm phân tích dữ liệu, ưu tiên lĩnh vực marketing.',
+					'Thành thạo Excel hoặc Google Sheets, biết SQL hoặc công cụ BI.',
+					'Tư duy logic, kể được câu chuyện bằng số liệu.',
+					'Cẩn thận, có trách nhiệm với độ chính xác của số liệu.',
+				),
+			),
+		);
+		$deadline = wp_date( 'd/m/Y', time() + 45 * DAY_IN_SECONDS );
 		foreach ( $jobs as $i => $j ) {
-			$this->upsert( 'career', $j[0], '<p>' . $j[1] . '</p>', $j[1], $i + 1, array( 'az_job_type' => 'Toàn thời gian', 'az_salary' => $j[2] ), array(), $j[3] );
+			$meta    = array(
+				'az_job_type' => 'Toàn thời gian',
+				'az_salary'   => $j['salary'],
+				'az_location' => 'TP. Hồ Chí Minh',
+				'az_deadline' => $deadline,
+			);
+			$content = $this->career_content( $j['duties'], $j['reqs'], $perks );
+			$id      = $this->upsert( 'career', $j['title'], $content, $j['excerpt'], $i + 1, $meta, array(), $j['days_ago'] );
+			if ( ! $id ) {
+				continue;
+			}
+			// Vị trí đã seed từ trước: bổ sung phần còn thiếu, không đổi ngày tạo/sửa và không ghi đè nội dung đã chỉnh.
+			foreach ( $meta as $key => $value ) {
+				if ( '' === trim( (string) get_post_meta( $id, $key, true ) ) ) {
+					update_post_meta( $id, $key, $value );
+					$this->out( "Đã bổ sung thông tin ($key): [career] {$j['title']}" );
+				}
+			}
+			$current = trim( (string) get_post_field( 'post_content', $id ) );
+			if ( '' === $current || trim( wp_strip_all_tags( $current ) ) === $j['excerpt'] ) {
+				global $wpdb;
+				// Ghi thẳng vào DB để giữ nguyên post_modified (wp_update_post sẽ đặt lại thành "vừa xong").
+				$wpdb->update( $wpdb->posts, array( 'post_content' => $content ), array( 'ID' => $id ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				clean_post_cache( $id );
+				$this->out( "Đã điền nội dung chi tiết: [career] {$j['title']}" );
+			}
 		}
+	}
+
+	/**
+	 * Nội dung chi tiết vị trí tuyển dụng: Mô tả công việc, Yêu cầu, Quyền lợi (block markup).
+	 */
+	private function career_content( $duties, $reqs, $perks ) {
+		$list = function ( $items ) {
+			$out = "<!-- wp:list -->\n<ul class=\"wp-block-list\">";
+			foreach ( $items as $item ) {
+				$out .= "<!-- wp:list-item -->\n<li>$item</li>\n<!-- /wp:list-item -->";
+			}
+			return $out . "</ul>\n<!-- /wp:list -->\n\n";
+		};
+		$heading = function ( $text ) {
+			return "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">$text</h2>\n<!-- /wp:heading -->\n\n";
+		};
+		return $heading( 'Mô tả công việc' ) . $list( $duties ) . $heading( 'Yêu cầu ứng viên' ) . $list( $reqs ) . $heading( 'Quyền lợi' ) . $list( $perks )
+			. "<!-- wp:paragraph -->\n<p>Quan tâm vị trí này? Bấm Ứng tuyển ngay và gửi CV cùng thư giới thiệu ngắn cho chúng tôi.</p>\n<!-- /wp:paragraph -->";
 	}
 
 	private function seed_pages() {

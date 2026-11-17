@@ -409,7 +409,7 @@ html { scroll-behavior: smooth; }
 .az-post-card__more:hover { color: var(--az-accent-text); border-color: var(--az-accent); }
 
 /* 7.15 Trang Tuyển dụng (page-career): hero dùng lại .az-page-hero, thẻ việc làm 2 cột, khối Cách ứng tuyển dùng lại .az-values */
-:root { --az-icon-clock: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%202a10%2010%200%201%200%200%2020%2010%2010%200%200%200%200-20Zm0%2018a8%208%200%201%201%200-16%208%208%200%200%201%200%2016Zm.5-13H11v6l5.2%203.1.8-1.3-4.5-2.7V7Z'/%3E%3C/svg%3E"); --az-icon-cash: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M3%206h18a1%201%200%200%201%201%201v10a1%201%200%200%201-1%201H3a1%201%200%200%201-1-1V7a1%201%200%200%201%201-1Zm1%202v8h16V8H4Zm8%201.5a2.5%202.5%200%201%201%200%205%202.5%202.5%200%200%201%200-5Z'/%3E%3C/svg%3E"); }
+:root { --az-icon-pin: url("data:image/svg+xml,%3Csvg%20xmlns='http%3A//www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%202a7%207%200%200%200-7%207c0%205.2%207%2013%207%2013s7-7.8%207-13a7%207%200%200%200-7-7Zm0%209.5A2.5%202.5%200%201%201%2012%206.5a2.5%202.5%200%200%201%200%205Z'/%3E%3C/svg%3E"); --az-icon-clock: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M12%202a10%2010%200%201%200%200%2020%2010%2010%200%200%200%200-20Zm0%2018a8%208%200%201%201%200-16%208%208%200%200%201%200%2016Zm.5-13H11v6l5.2%203.1.8-1.3-4.5-2.7V7Z'/%3E%3C/svg%3E"); --az-icon-cash: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20d='M3%206h18a1%201%200%200%201%201%201v10a1%201%200%200%201-1%201H3a1%201%200%200%201-1-1V7a1%201%200%200%201%201-1Zm1%202v8h16V8H4Zm8%201.5a2.5%202.5%200%201%201%200%205%202.5%202.5%200%200%201%200-5Z'/%3E%3C/svg%3E"); }
 .az-section .az-jobs .az-head { margin-bottom: 40px; }
 .az-section .az-jobs__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
 .az-jobs__list > li { margin: 0; display: flex; }
@@ -420,6 +420,7 @@ html { scroll-behavior: smooth; }
 .az-job__tag, .az-job__updated { display: inline-flex; align-items: center; gap: .5rem; }
 .az-job__tag::before, .az-job__updated::before { content: ""; flex: 0 0 auto; width: 1rem; height: 1rem; background: var(--az-primary-dark); -webkit-mask: var(--az-icon-clock) center / contain no-repeat; mask: var(--az-icon-clock) center / contain no-repeat; }
 .az-job__tag--salary::before { -webkit-mask-image: var(--az-icon-cash); mask-image: var(--az-icon-cash); }
+.az-job__tag--location::before { -webkit-mask-image: var(--az-icon-pin); mask-image: var(--az-icon-pin); }
 .az-job__tag:empty { display: none; }
 .az-job__text { margin: 0; color: var(--az-muted); }
 .az-job__text p { margin: 0; }
@@ -428,6 +429,36 @@ html { scroll-behavior: smooth; }
 .az-section .az-apply__top .az-head { margin-bottom: 0; }
 .az-apply .az-h2 { max-width: 420px; }
 .az-apply__top .wp-block-buttons { margin: 0; }
+
+/* Thẻ việc làm bấm được toàn khung, dẫn tới trang chi tiết */
+.az-section .az-job { position: relative; }
+.az-job__title a { color: inherit; text-decoration: none; }
+.az-job__title a::after { content: ""; position: absolute; inset: 0; border-radius: var(--az-radius); }
+.az-job__title a:focus-visible { outline: none; }
+.az-job:has(.az-job__title a:focus-visible) { outline: 2px solid var(--az-accent); outline-offset: 3px; }
+.az-section .az-job__foot { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-top: auto; }
+.az-job__more { font-size: .9375rem; font-weight: 600; color: var(--az-accent-text); text-decoration: none; }
+.az-job__more::after { content: " \2192"; }
+.az-job:hover .az-job__more { text-decoration: underline; }
+.az-section--tint .az-job { background: #fff; }
+.az-section.az-career-other .az-head { margin-bottom: 40px; }
+
+/* 7.16 Trang chi tiết vị trí tuyển dụng (single-career): hero dùng lại .az-page-hero, nội dung dùng lại .az-svc-content */
+.az-section .az-career-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; }
+.az-section .az-career-detail__grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: clamp(32px, 5vw, 64px); align-items: start; }
+.az-section .az-career-detail__main { min-width: 0; }
+.az-section .az-career-detail .az-svc-content h2:first-child { margin-top: 0; }
+.az-section .az-career-aside { position: sticky; top: calc(var(--az-announce-h) + var(--az-header-h) + 24px); display: flex; flex-direction: column; align-items: stretch; gap: .25rem; padding: 28px; background: var(--az-soft); border: 1px solid var(--az-border); border-radius: var(--az-radius); }
+.az-career-aside__title { margin: 0 0 .5rem; font-size: 1.125rem; }
+.az-section .az-career-aside__row { display: flex; justify-content: space-between; gap: 16px; padding-block: .75rem; border-bottom: 1px solid var(--az-border); }
+.az-career-aside__label, .az-career-aside__value { margin: 0; font-size: .9375rem; }
+.az-career-aside__label { color: var(--az-muted); }
+.az-career-aside__value { font-weight: 600; text-align: right; color: var(--az-primary-dark); }
+.az-section .az-career-aside__row:has(.az-career-aside__value:empty) { display: none; }
+.az-career-aside .az-job__updated { margin-top: .75rem; }
+.az-career-aside .wp-block-buttons { margin-top: 1rem; }
+.az-career-aside .wp-block-button { width: 100%; }
+.az-career-aside .wp-block-button__link { width: 100%; box-sizing: border-box; }
 
 /* 8. RESPONSIVE */
 @media (max-width: 1100px) {
@@ -473,6 +504,8 @@ html { scroll-behavior: smooth; }
 }
 
 @media (max-width: 900px) {
+	.az-section .az-career-detail__grid { grid-template-columns: minmax(0, 1fr); }
+	.az-section .az-career-aside { position: static; }
 	.az-section .az-about-intro__top, .az-section .az-values__grid { grid-template-columns: minmax(0, 1fr); }
 	.az-about-intro__img img { aspect-ratio: 16 / 9; }
 	.az-values__img img { min-height: 0; aspect-ratio: 4 / 3; }

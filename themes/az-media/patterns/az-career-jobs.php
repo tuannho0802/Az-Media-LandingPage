@@ -3,7 +3,7 @@
  * Title: AZ Career Jobs
  * Slug: az-media/career-jobs
  * Categories: az-media
- * Description: Vị trí đang tuyển: badge + H2 căn giữa, lưới 2 cột thẻ việc làm lấy từ CPT career (hình thức, mức lương, mô tả, thời gian cập nhật dạng "2 ngày trước"). Chưa có vị trí thì hiện thông báo.
+ * Description: Vị trí đang tuyển: badge + H2 căn giữa, lưới 2 cột thẻ việc làm lấy từ CPT career (hình thức, mức lương, mô tả, thời gian cập nhật dạng "2 ngày trước", link tới trang chi tiết). Chưa có vị trí thì hiện thông báo.
  */
 ?>
 <!-- wp:group {"tagName":"section","align":"full","className":"az-section az-jobs","layout":{"type":"constrained"}} -->
@@ -20,7 +20,7 @@
 <!-- wp:query {"queryId":31,"query":{"perPage":6,"pages":0,"offset":0,"postType":"career","order":"asc","orderBy":"menu_order","author":"","search":"","exclude":[],"sticky":"","inherit":false},"className":"az-jobs__query"} -->
 <div class="wp-block-query az-jobs__query"><!-- wp:post-template {"className":"az-jobs__list"} -->
 <!-- wp:group {"className":"az-job"} -->
-<div class="wp-block-group az-job"><!-- wp:post-title {"level":3,"isLink":false,"className":"az-job__title"} /-->
+<div class="wp-block-group az-job"><!-- wp:post-title {"level":3,"isLink":true,"className":"az-job__title"} /-->
 
 <!-- wp:group {"className":"az-job__meta"} -->
 <div class="wp-block-group az-job__meta">
@@ -35,7 +35,11 @@
 
 <!-- wp:post-excerpt {"excerptLength":40,"className":"az-job__text"} /-->
 
-<!-- wp:az-media/post-updated /--></div>
+<!-- wp:group {"className":"az-job__foot"} -->
+<div class="wp-block-group az-job__foot"><!-- wp:az-media/post-updated /-->
+
+<!-- wp:read-more {"content":"Xem chi tiết","className":"az-job__more"} /--></div>
+<!-- /wp:group --></div>
 <!-- /wp:group -->
 <!-- /wp:post-template -->
 

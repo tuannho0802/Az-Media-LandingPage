@@ -14,6 +14,10 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [career] Trang chi tiết vị trí `/career/{slug}/` (template `single-career.html`): hero (tên vị trí, chip hình thức/lương/địa điểm, nút Ứng tuyển), thân trang (nội dung bài + thẻ Thông tin vị trí dính khi cuộn), mục Vị trí khác. Pattern `az-career-detail-hero`, `az-career-detail-body`, `az-career-other`. Cấu trúc theo đề xuất (ref chỉ có trang danh sách).
+- [career] Schema JobPosting (JSON-LD) trong `functions.php`, lấy địa điểm và hạn nộp từ meta.
+- [core] Meta `az_location` (địa điểm) và `az_deadline` (hạn nộp dd/mm/yyyy) cho CPT `career`.
+- [core] Seed vị trí tuyển có nội dung chi tiết (Mô tả công việc, Yêu cầu, Quyền lợi), địa điểm và hạn nộp; với vị trí đã seed từ trước, chạy lại Seed sẽ bổ sung phần còn thiếu, giữ nguyên nội dung đã sửa và ngày cập nhật.
 - [core] Block `az-media/post-updated` (dùng trong Query Loop) hiện "Cập nhật 2 ngày trước" theo thời gian sửa gần nhất của bài, có `<time datetime>` và title là ngày giờ chính xác; hàm `az_core_time_ago_vi()` diễn đạt tiếng Việt (vừa xong, phút, giờ, ngày, tuần, tháng, năm).
 - [career] Trang `/career/` dựng theo `docs/reference-images/OG-Career.png`: hero (badge, H1 "Tuyển dụng", mô tả), lưới 2 cột thẻ việc làm (hình thức, mức lương, mô tả, ngày cập nhật; hiện thông báo khi chưa có vị trí), khối Cách ứng tuyển (3 thẻ đánh số + ảnh, nút Liên hệ). Template `page-career.html`, pattern `az-career-hero`, `az-career-jobs`, `az-career-apply`. Ref không có form ứng tuyển, phúc lợi, CTA nên bỏ khỏi plan.
 - [core] CPT `career` (menu Tuyển dụng, meta `az_job_type` hình thức và `az_salary` mức lương) và seed 4 vị trí mẫu (chạy lại Seed để tạo).
@@ -37,6 +41,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [career] CPT `career` có URL công khai `/career/{slug}/` (rewrite tự làm mới một lần, `az_core_rewrite_ver` lên 2). Thẻ việc làm ở `/career/` bấm được toàn khung và có "Xem chi tiết".
 - [career] Thẻ việc làm dùng block `az-media/post-updated` thay cho `core/post-date`, sửa lỗi dòng "Cập nhật:" không hiện ngày trên WordPress thật; ngày cập nhật giờ tự đổi khi sửa vị trí ở wp-admin. Seed vị trí tuyển lùi ngày tạo 2, 4, 6, 1 ngày để demo (chỉ áp dụng cho vị trí tạo mới).
 - [global] Announcement bar theo ref: câu ngắn một dòng "Tăng tốc và nâng tầm thương hiệu của bạn cùng AZ Media.", chữ xanh nhạt trên nền navy đậm, cao 40px. Bỏ nút đóng (`az-announcement__close`) cùng CSS, JS và script lưu trạng thái đóng, bar luôn hiển thị như ref; JS chỉ còn đo chiều cao bar cho header dính.
 - [global] Header làm lại theo ref: nền trắng trong suốt có blur (đặt ở `::before` để menu mobile `position: fixed` không bị ảnh hưởng), announcement bar và header cùng dính trên cùng khi cuộn (JS đo chiều cao bar vào `--az-announce-h`, xử lý cả khi đóng bar và có admin bar), menu căn trái cạnh logo thay vì căn giữa, chiều cao 70px cố định (bỏ co khi cuộn), mũi tên dropdown "Trang" sát chữ. Ảnh hưởng mọi trang.
