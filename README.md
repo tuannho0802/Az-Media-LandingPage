@@ -14,6 +14,7 @@ Repo này đặt tại thư mục `wp-content/` và chỉ theo dõi phần code 
 - [Deploy lên FTP](#deploy-lên-ftp)
 - [Dữ liệu và cấu hình môi trường](#dữ-liệu-và-cấu-hình-môi-trường)
 - [Tài liệu](#tài-liệu)
+- [Tham chiếu thiết kế](#tham-chiếu-thiết-kế)
 - [Checklist trước khi release](#checklist-trước-khi-release)
 - [Xử lý sự cố](#xử-lý-sự-cố)
 
@@ -240,6 +241,22 @@ git push origin v0.1.1-rollback
 | `docs/plan.md` | Kế hoạch dựng theme: kiến trúc, design system, đặc tả trang chủ, sitemap, lộ trình, checklist |
 
 Các tài liệu tách thêm về sau (`design-system.md`, `sitemap.md`) cũng đặt trong `docs/`.
+
+## Tham chiếu thiết kế
+
+Bố cục và cấu trúc trang tham chiếu từ theme **Reachout** (tác giả NexMotive). Chỉ tham chiếu cấu trúc; code, ảnh, logo và nội dung của AZ Media là tự thực hiện.
+
+| Nguồn | URL | Ngày truy cập |
+|---|---|---|
+| Demo trang chủ (nguồn chính) | https://reachout.nexmotivedemo.com/ | 17/11/2026 |
+| Preview ThemeForest | https://preview.themeforest.net/item/reachout-social-media-marketing-agency-wordpress-theme/full_screen_preview/55526756 | 17/11/2026 |
+| Trang bán ThemeForest | https://themeforest.net/item/reachout-social-media-marketing-agency-wordpress-theme/55526756 | 17/11/2026 |
+
+Các trang con của demo: `/pricing/`, `/all-services/`, `/about/`, `/blog/`, `/faqs/`, `/career/`, `/contact/`, `/maintenance-mode/` (ghép sau domain `https://reachout.nexmotivedemo.com`). Danh sách đầy đủ kèm ghi chú nằm ở `docs/plan.md`, mục 11.
+
+Lưu ý:
+- Demo có thể đổi hoặc bị gỡ. Nên lưu bản chụp full-page từng trang vào `docs/references/` để đối chiếu về sau.
+- Giá trị màu, font trong repo là đề xuất cho AZ Media, không phải trích từ demo.
 
 ## Checklist trước khi release
 

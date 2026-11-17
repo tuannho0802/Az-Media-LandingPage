@@ -1,6 +1,6 @@
 # AZ Media – Kế hoạch dựng WordPress Theme (tham chiếu Reachout)
 
-Bộ tài liệu cho Ngan · Phiên bản 0.1 · Nguồn tham chiếu: reachout.nexmotivedemo.com (trang chủ đã đọc; trang con chưa đọc được, xem mục 1.3)
+Bộ tài liệu cho Ngan · Phiên bản 0.1 · Nguồn tham chiếu: https://reachout.nexmotivedemo.com/ (trang chủ đã đọc; trang con chưa đọc được, xem mục 1.3) · Danh sách URL nguồn đầy đủ: mục 11
 
 ## 1. Tổng quan
 
@@ -223,7 +223,7 @@ Nội dung mẫu dưới đây là **bản nháp cho AZ Media** (tiếng Việt,
 
 ## 5. Sitemap và các trang con (đề xuất, cần xác minh)
 
-Danh sách trang lấy từ menu demo. Nội dung từng trang dưới đây là cấu trúc đề xuất theo chuẩn trang agency, chưa đối chiếu với demo.
+Danh sách trang lấy từ menu demo (URL gốc từng trang ở mục 11.2). Nội dung từng trang dưới đây là cấu trúc đề xuất theo chuẩn trang agency, chưa đối chiếu với demo.
 
 | Trang | Slug | Section đề xuất | Dữ liệu |
 |---|---|---|---|
@@ -318,3 +318,39 @@ Viết một script seed (WP-CLI hoặc PHP) tạo sẵn trang, menu và CPT m�
 3. Ảnh chụp full-page hoặc HTML các trang con của demo để hoàn thiện mục 5.
 4. Chọn nền tảng: block theme (khuyến nghị) hay classic theme.
 5. Danh sách dịch vụ, bảng giá, số liệu thật của AZ Media.
+
+## 11. Nguồn tham chiếu (để truy lại bản gốc)
+
+### 11.1 Nguồn chính
+
+| Nguồn | URL | Dùng để lấy | Ngày truy cập |
+|---|---|---|---|
+| Demo trang chủ Reachout | https://reachout.nexmotivedemo.com/ | Thứ tự section, nội dung mẫu, menu, footer, phiên bản Elementor (4.4.0 ghi trong meta của trang) | 17/11/2026 |
+| Preview ThemeForest (khung bọc iframe) | https://preview.themeforest.net/item/reachout-social-media-marketing-agency-wordpress-theme/full_screen_preview/55526756 | Trỏ tới trang demo ở trên. Chặn truy cập tự động nên không đọc được nội dung | 17/11/2026 |
+| Trang bán ThemeForest | https://themeforest.net/item/reachout-social-media-marketing-agency-wordpress-theme/55526756 | Tác giả (NexMotive), mô tả theme, danh sách widget Elementor (mục 1.3). Đọc qua kết quả tìm kiếm | 17/11/2026 |
+| Ảnh chụp hero do Ngan cung cấp | (file ảnh, không có URL) | Bố cục hero, kích thước tương đối, màu, hiệu ứng lưới nền | 17/11/2026 |
+
+### 11.2 URL các trang con của demo
+
+Lấy từ menu và footer của trang chủ demo. **Chưa đọc được nội dung** (công cụ bị chặn), nên mục 5 là cấu trúc đề xuất. Khi cần đối chiếu, mở trực tiếp các link này.
+
+| Trang | URL |
+|---|---|
+| Pricing | https://reachout.nexmotivedemo.com/pricing/ |
+| Services | https://reachout.nexmotivedemo.com/all-services/ |
+| About | https://reachout.nexmotivedemo.com/about/ |
+| Blog | https://reachout.nexmotivedemo.com/blog/ |
+| FAQs | https://reachout.nexmotivedemo.com/faqs/ |
+| Career | https://reachout.nexmotivedemo.com/career/ |
+| Contact | https://reachout.nexmotivedemo.com/contact/ |
+| Maintenance Mode | https://reachout.nexmotivedemo.com/maintenance-mode/ |
+| Refund Policy | https://reachout.nexmotivedemo.com/refund-policy |
+| Privacy Policy | https://reachout.nexmotivedemo.com/privacy-policy |
+| Terms & Conditions | https://reachout.nexmotivedemo.com/terms-and-onditions (đúng như link trong demo, có lỗi chính tả "onditions") |
+
+### 11.3 Lưu ý khi dùng nguồn
+
+- Demo có thể thay đổi hoặc bị gỡ bất cứ lúc nào. Nên lưu bản chụp full-page từng trang vào `docs/references/` (hoặc dùng "Save Page Now" của Wayback Machine, https://web.archive.org/) để còn bản đối chiếu.
+- Nội dung mẫu, ảnh, logo, tên khách hàng trong demo thuộc về tác giả. Chỉ dùng để tham chiếu cấu trúc (xem mục 1.2).
+- Giá trị màu, font, spacing ở mục 3 là **đề xuất cho AZ Media**, không trích từ demo. Muốn bám sát demo thì đo lại bằng DevTools và ghi lại vào `docs/design-system.md`.
+- Một kết quả tìm kiếm ban đầu ghi tác giả là Keystone_Themes; các nguồn sau và trang bán ThemeForest cho thấy tác giả là NexMotive. Lấy NexMotive làm chuẩn.
