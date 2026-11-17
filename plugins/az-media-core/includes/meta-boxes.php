@@ -1,6 +1,6 @@
 <?php
 /**
- * Meta box đơn giản để sửa meta field trong wp-admin.
+ * Meta box dự phòng cho Classic Editor (trình soạn thảo khối đã có panel bên phải).
  *
  * @package az-media-core
  */
@@ -9,7 +9,8 @@ defined( 'ABSPATH' ) || exit;
 
 add_action( 'add_meta_boxes', function () {
 	foreach ( array_keys( az_core_meta_fields() ) as $post_type ) {
-		add_meta_box( 'az_core_fields', 'Thông tin hiển thị', 'az_core_render_meta_box', $post_type, 'normal', 'high' );
+		// Trình soạn thảo khối dùng panel ở thanh bên phải (includes/editor-panel.php); meta box chỉ hiện ở Classic Editor.
+		add_meta_box( 'az_core_fields', 'Thông tin hiển thị', 'az_core_render_meta_box', $post_type, 'normal', 'high', array( '__back_compat_meta_box' => true ) );
 	}
 } );
 

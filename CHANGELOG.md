@@ -23,6 +23,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [core] Giá, chu kỳ, mô tả gói (Gói giá) và vai trò, chữ avatar (Nhận xét) chuyển từ meta box ở đáy màn hình lên panel "Thông tin hiển thị" ở thanh bên phải trình soạn thảo. Meta box cũ chỉ còn dùng cho Classic Editor.
 - [home] Làm lại layout theo ảnh ref `docs/reference-images/OG-Home.png`: hero (ảnh chạm đáy, card khách hàng và card rating chồng góc), Trusted by (nền tint, logo trong thẻ), Why choose us (nền đậm có lưới, ảnh kèm 3 counter, 4 card 2×2), Specialization (tầm nhìn trái, 4 thẻ sứ mệnh có icon phải), Solutions (ảnh trái, lưới 2×3 thẻ có icon mạng xã hội), Pricing (thẻ căn giữa, gói giữa nền đậm, không nâng lên), Testimonials (lưới 3×2, sao ở đáy thẻ, mobile vuốt ngang), CTA (khối đậm không ảnh), FAQ (ô câu hỏi nền nhạt, câu trả lời bên dưới).
 - [global] Footer làm lại theo ref: dải tagline + email/điện thoại, lưới 5 cột link có mũi tên (thêm cột Mạng xã hội), thanh copyright nền đậm.
 - [theme] Badge/eyebrow đổi sang kiểu nền nhạt viền trái đậm; nút viền đổi sang nền trắng viền xám.

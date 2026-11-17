@@ -120,3 +120,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 - Link trong menu/footer là đường dẫn tương đối (`/pricing/`), đúng khi site chạy ở gốc domain (Local WP). Nếu đặt trong thư mục con cần đổi.
 - Logo hiện là tên site kèm ô vuông CSS. Thay bằng logo thật qua block Site Logo khi có file.
 - Phạm vi review 17/11: chạy trong Chromium headless trên HTML dựng từ `parts/` và `patterns/` (không có WordPress). Vì vậy menu header (Navigation), icon mạng xã hội (Social Links) và 3 khối lấy từ CPT (Pricing, Testimonials, FAQ) **chưa được xem**. Cần chụp lại trên Local WP rồi tích nốt các mục còn ☐.
+- Sửa giá, chu kỳ, mô tả gói (Gói giá) và vai trò, chữ avatar (Nhận xét): mở bài, thanh bên phải, tab "Gói giá"/"Nhận xét", panel **Thông tin hiển thị**. Tên là ô tiêu đề, mô tả ngắn (Gói giá) và nội dung nhận xét nằm ở **Excerpt** cùng thanh bên phải. FAQ: câu trả lời viết trong phần soạn thảo.

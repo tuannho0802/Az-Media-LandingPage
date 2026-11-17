@@ -17,6 +17,7 @@ define( 'AZ_CORE_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once AZ_CORE_DIR . 'includes/post-types.php';
 require_once AZ_CORE_DIR . 'includes/meta-boxes.php';
+require_once AZ_CORE_DIR . 'includes/editor-panel.php';
 require_once AZ_CORE_DIR . 'includes/faq-block.php';
 
 require_once AZ_CORE_DIR . 'cli/seed.php';
