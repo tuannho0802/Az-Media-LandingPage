@@ -9,7 +9,7 @@ Nguồn tham chiếu và URL gốc xem `docs/plan.md`, mục 11.
 | File | Trang | Slug | Nguồn demo | Review |
 |---|---|---|---|---|
 | [00](00-global.md) | Thành phần dùng chung (Header, Footer, Announcement, Component) | `(mọi trang)` | ✅ đã đọc | ☐ |
-| [01](01-home.md) | Trang chủ | `/` | ✅ đã đọc | ☐ |
+| [01](01-home.md) | Trang chủ | `/` | ✅ đã đọc | ◐ review 9/15 (17/11) |
 | [02](02-pricing.md) | Bảng giá | `/pricing/` | ⚠️ cần xác minh | ☐ |
 | [03](03-services.md) | Dịch vụ (danh sách) | `/all-services/ (đề xuất đổi thành /services/)` | ⚠️ cần xác minh | ☐ |
 | [04](04-service-detail.md) | Chi tiết dịch vụ | `/services/{slug}/` | ⚠️ cần xác minh | ☐ |

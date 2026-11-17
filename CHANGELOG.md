@@ -28,6 +28,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [theme] Ảnh tạm: thêm `placeholder-team.svg`, `placeholder-solutions.svg` cho các chỗ cần ảnh.
 
 ### Fixed
+- [home] 4 card đánh số ở Why us bị trắng, chữ trắng trên nền trắng nên không đọc được: selector `.az-section .az-why-us .az-card` không khớp (cùng một phần tử). Đổi thành `.az-why-us .az-card`.
 - [global] Header bị xuống dòng (logo "az-/media", menu hai hàng, nút gãy chữ) và nút Bảng giá/Liên hệ dành cho mobile hiện nhầm ở desktop.
 - [theme] Khi plugin `az-media-core` chưa bật, Query Loop của core tự đổi post type về `post` nên Pricing/Testimonials hiện nhầm bài "Hello world". Thêm filter `query_loop_block_query_vars` để hiển thị rỗng, và admin notice nhắc bật plugin + chạy `wp az seed`.
 - [core] CPT đặt `publicly_queryable` để Query Loop nhận đúng post type, không bật rewrite nên không sinh URL công khai.

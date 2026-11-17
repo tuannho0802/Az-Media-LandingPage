@@ -192,7 +192,7 @@ html { scroll-behavior: smooth; }
 .az-why-us__stats .az-stat__num { color: #fff; font-size: 1.75rem; }
 .az-why-us__stats .az-stat__label { color: rgba(255, 255, 255, .82); font-size: .8125rem; }
 .az-section .az-why-us__cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.az-section .az-why-us .az-card { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .12); box-shadow: none; }
+.az-why-us .az-card { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .12); box-shadow: none; }
 .az-why-us .az-card__num { display: grid; place-items: center; width: 32px; height: 32px; font-size: .75rem; font-weight: 700; line-height: 1; color: var(--az-primary-dark); background: var(--az-tint); border-radius: 4px; }
 .az-why-us .az-card__title { color: #fff; font-size: 1.125rem; }
 .az-why-us .az-card__text { color: rgba(255, 255, 255, .78); font-size: .9375rem; }
