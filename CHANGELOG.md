@@ -14,6 +14,10 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [blog] Trang Blog mới: `templates/home.html` + `archive.html`, pattern `az-blog-hero`, `az-blog-list` (chip danh mục, bài nổi bật trang 1, lưới 3 cột, phân trang), CSS thẻ bài.
+- [blog-single] Bài chi tiết: `single.html`, pattern `az-post-header`, `az-blog-related`, cột đọc 760px.
+- [core] Block `az-media/read-time` ("N phút đọc").
+- [theme] 6 ảnh placeholder SVG, tự gán theo ID bài khi chưa có ảnh đại diện.
 - [blog] Dữ liệu mẫu 5 bài blog (PLACEHOLDER) về marketing và truyền thông, có chuyên mục Marketing và Truyền thông, ngày đăng rải 3–28 ngày trước: mô hình AIDA, lịch sử mạng xã hội, 6 chỉ số đo hiệu quả, video ngắn, 5 sự thật về thương hiệu. Tạo bằng `wp az seed` hoặc nút ở Công cụ → AZ Media Seed; chạy lại không nhân đôi.
 - [theme] Ảnh đại diện dự phòng cho bài viết chưa gán ảnh (3 ảnh tạm `blog-placeholder-1..3.svg`, chọn theo ID bài) để thẻ bài ở Blog, FAQs và kết quả tìm kiếm không bị trống. Bài có ảnh thật thì dùng ảnh thật.
 - [home] Hiệu ứng hover cho các phần trang chủ, cùng đường cong chuyển động với header: thẻ Why us, Sứ mệnh, Solutions, Nhận xét nhấc 4px kèm bóng và viền xanh; thẻ nền tối sáng nền, ô số đổi xanh; Gói giá nhấc 6px; icon mạng xã hội phóng và đổi xanh; avatar phóng nhẹ; card nổi ở hero nhấc; ô logo nhấc; ảnh Why us và Solutions zoom chậm; ô FAQ nhích phải và đổi nền; link footer nhích phải. Chỉ bật khi có chuột; bỏ nhấc/zoom khi người dùng chọn giảm chuyển động.

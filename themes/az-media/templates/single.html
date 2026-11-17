@@ -2,10 +2,16 @@
 
 <!-- wp:template-part {"slug":"header","tagName":"header","className":"az-site-header"} /-->
 
-<!-- wp:group {"tagName":"main","className":"az-main az-main--default"} -->
-<main class="wp-block-group az-main az-main--default"><!-- wp:post-title {"level":1} /-->
+<!-- wp:group {"tagName":"main","className":"az-main"} -->
+<main class="wp-block-group az-main"><!-- wp:pattern {"slug":"az-media/post-header"} /-->
 
-<!-- wp:post-content /--></main>
+<!-- wp:group {"tagName":"article","className":"az-post-body","layout":{"type":"constrained"}} -->
+<article class="wp-block-group az-post-body"><!-- wp:post-content {"className":"az-svc-content","layout":{"type":"constrained"}} /--></article>
+<!-- /wp:group -->
+
+<!-- wp:pattern {"slug":"az-media/blog-related"} /-->
+
+<!-- wp:pattern {"slug":"az-media/cta"} /--></main>
 <!-- /wp:group -->
 
 <!-- wp:template-part {"slug":"footer","tagName":"footer","className":"az-site-footer"} /-->

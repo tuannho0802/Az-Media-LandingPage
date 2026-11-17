@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "az-media/read-time",
+  "title": "Thời gian đọc",
+  "category": "widgets",
+  "icon": "clock",
+  "description": "Hiện \"3 phút đọc\" tính theo số từ của bài. Dùng trong Query Loop hoặc template bài viết.",
+  "textdomain": "az-media-core",
+  "usesContext": [ "postId" ],
+  "supports": { "html": false, "align": false },
+  "editorScript": "file:./edit.js",
+  "render": "file:./render.php"
+}

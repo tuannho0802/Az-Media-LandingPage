@@ -88,6 +88,10 @@ add_filter( 'query_loop_block_query_vars', function ( $query, $block ) {
 	if ( 32 === (int) ( $block->context['queryId'] ?? 0 ) && is_singular( 'career' ) ) {
 		$query['post__not_in'] = array( get_queried_object_id() );
 	}
+	// Pattern az-media/blog-related (queryId 33): loại bài đang xem khỏi danh sách "Bài viết liên quan".
+	if ( 33 === (int) ( $block->context['queryId'] ?? 0 ) && is_singular( 'post' ) ) {
+		$query['post__not_in'] = array( get_queried_object_id() );
+	}
 	// Pattern az-media/service-related (queryId 15): loại dịch vụ đang xem khỏi danh sách "Dịch vụ khác".
 	if ( 15 === (int) ( $block->context['queryId'] ?? 0 ) && is_singular( 'service' ) ) {
 		$query['post__not_in'] = array( get_queried_object_id() );
@@ -241,7 +245,7 @@ add_filter( 'post_thumbnail_html', function ( $html, $post_id ) {
 	if ( $html || is_admin() || 'post' !== get_post_type( $post_id ) ) {
 		return $html;
 	}
-	$n = ( (int) $post_id % 3 ) + 1;
+	$n = ( (int) $post_id % 6 ) + 1;
 	return sprintf(
 		'<img src="%s" alt="" class="attachment-post-thumbnail wp-post-image az-thumb-fallback" style="aspect-ratio:3/2;object-fit:cover;width:100%%;height:100%%" loading="lazy" decoding="async" />',
 		esc_url( get_theme_file_uri( "assets/img/blog-placeholder-$n.svg" ) )

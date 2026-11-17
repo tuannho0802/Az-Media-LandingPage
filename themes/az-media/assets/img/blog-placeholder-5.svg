@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Ảnh tạm cho bài viết">
+  <rect width="600" height="400" fill="#EEF3FD"/>
+  <rect x="90" y="90" width="260" height="190" rx="18" fill="#2F6BFF"/>
+  <rect x="250" y="150" width="260" height="190" rx="18" fill="#0A2A66"/>
+  <path d="M345 215l56 32-56 32z" fill="#fff"/>
+  <circle cx="470" cy="90" r="30" fill="#9DB9FF"/>
+</svg>
