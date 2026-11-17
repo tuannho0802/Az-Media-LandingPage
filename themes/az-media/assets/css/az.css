@@ -149,10 +149,17 @@ html { scroll-behavior: smooth; }
 .az-header__actions .wp-block-button.is-style-outline .wp-block-button__link:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(10, 42, 102, .12); }
 .az-header__actions .wp-block-button__link:active { transform: translateY(0); box-shadow: none; }
 .az-header__actions { flex: 0 0 auto; margin: 0; flex-wrap: nowrap; }
+@media (max-width: 1023.98px) {
+	/* Mobile/tablet/xoay ngang: announcement cuộn đi, chỉ header dính để không chiếm 16-28% chiều cao màn hình.
+	   --az-announce-h về 0 để header (và các phần tử dính khác) bám sát mép trên. JS cũng đo lại theo position thực tế. */
+	:root { --az-announce-h: 0px; }
+	.az-announcement-wrap, .admin-bar .az-announcement-wrap { position: static; top: auto; }
+	.az-site-header { top: 0; }
+	.admin-bar .az-site-header { top: var(--wp-admin--admin-bar--height, 46px); }
+}
 @media (max-width: 600px) {
 	/* Admin bar chuyển sang position: absolute và cuộn đi: bỏ offset của nó */
-	.admin-bar .az-announcement-wrap { top: 0; }
-	.admin-bar .az-site-header { top: var(--az-announce-h); }
+	.admin-bar .az-site-header { top: 0; }
 }
 
 /* Nút Bảng giá/Liên hệ trong menu chỉ dành cho mobile: ẩn ở desktop (ghi đè display của core) */
@@ -846,4 +853,32 @@ html.has-modal-open .az-site-header { z-index: 100001; }
 /* 9. MOTION */
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* 12. MOBILE UI (fix/mobile-ui-2) */
+/* Safari iOS tự phóng to trang khi focus vào ô có chữ dưới 16px: đặt 16px cho mọi ô nhập trên mobile */
+@media (max-width: 900px) {
+	.az-form__control,
+	.az-search .wp-block-search__input,
+	:where(input:not([type="checkbox"], [type="radio"], [type="submit"], [type="button"], [type="range"], [type="file"], [type="color"]), textarea, select) { font-size: 16px; }
+}
+/* Ô tìm kiếm: nút không xuống 2 dòng làm ô nhập bị kéo cao; màn hẹp thì nút xuống hàng riêng */
+.az-search .wp-block-search__inside-wrapper { align-items: stretch; }
+.az-search .wp-block-search__button { flex: 0 0 auto; white-space: nowrap; }
+@media (max-width: 420px) {
+	.az-search .wp-block-search__inside-wrapper { flex-wrap: wrap; }
+	.az-search .wp-block-search__input { flex: 1 1 100%; }
+	.az-search .wp-block-search__button { flex: 1 1 100%; }
+}
+/* Hàng nút gợi ý (404, Search không kết quả): chia đều 2 cột trên mobile */
+@media (max-width: 600px) {
+	.az-404 .wp-block-buttons, .az-search-empty .wp-block-buttons { width: 100%; gap: 16px; }
+	.az-404 .wp-block-buttons .wp-block-button, .az-search-empty .wp-block-buttons .wp-block-button { flex: 1 1 calc(50% - 8px); }
+	.az-404 .wp-block-buttons .wp-block-button__link, .az-search-empty .wp-block-buttons .wp-block-button__link { width: 100%; }
+	/* Footer 2 cột: bỏ khoảng gap thừa giữa tiêu đề cột và link đầu (link đã cao 44px) */
+	.az-footer .az-footer__col { gap: 0; }
+}
+/* Ảnh thành viên ở About: ép 16/10 thay vì cao 280px+ mỗi thẻ */
+@media (max-width: 480px) {
+	.az-section .az-member__photo { min-height: 0; aspect-ratio: 16 / 10; }
 }

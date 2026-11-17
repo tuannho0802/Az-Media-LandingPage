@@ -13,7 +13,9 @@
 		var wrap = document.querySelector( '.az-announcement-wrap' );
 		var root = document.documentElement;
 		function measure() {
-			var h = wrap && wrap.offsetParent !== null ? wrap.offsetHeight : 0;
+			/* Chỉ tính chiều cao bar khi nó thực sự dính (desktop); khi cuộn đi (mobile) thì header bám mép trên. */
+			var sticky = wrap && window.getComputedStyle( wrap ).position === 'sticky';
+			var h = sticky && wrap.offsetParent !== null ? wrap.offsetHeight : 0;
 			root.style.setProperty( '--az-announce-h', h + 'px' );
 		}
 		if ( wrap ) {

@@ -87,6 +87,7 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 | 17/11/2026 | Header: logo và menu không xuống dòng, ẩn nút Bảng giá/Liên hệ dành cho mobile ở desktop. Footer làm lại theo ref (dải tagline + 5 cột + thanh đậm) | |
 | 17/11/2026 | Sửa header theo ref: nền trong suốt (trắng 78%) có blur 10px, announcement bar và header cùng dính khi cuộn (header nằm dưới bar), menu căn trái cạnh logo thay vì căn giữa, chiều cao 70px không co khi cuộn, mũi tên dropdown sát chữ. Chưa xem bằng trình duyệt | |
 | 17/11/2026 | Gỡ mục "Bảo trì" khỏi dropdown Trang: trang bảo trì chỉ hiện khi bật chế độ bảo trì hoặc xem trước bằng URL, xem `11-maintenance.md` | |
+| 17/11/2026 | Mobile: announcement bar không dính dưới 1024px, ô nhập 16px chống zoom iOS, gap footer 2 cột | |
 
 ## Con trỏ chuột tuỳ biến
 
@@ -115,4 +116,3 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 - Thẻ (Why us, Sứ mệnh, Solutions, Nhận xét): nhấc 4px + bóng + viền xanh. Gói giá: nhấc 6px (gói giữa nền đậm chỉ nhấc và đổ bóng). Thẻ nền tối: sáng nền, ô số đổi xanh và phóng 1.1×.
 - Ảnh lớn (Why us, Solutions): zoom 1.045× trong khung `overflow: hidden`. FAQ: ô nhích 4px phải. Footer: link nhích 4px phải, icon liên hệ phóng 1.1×.
 - Chỉnh độ mạnh: đổi `translateY(-4px)` / `-6px`, `scale(...)` và thời gian `.45s` trong khối đó. `prefers-reduced-motion` bỏ nhấc/zoom/nhích, giữ đổi màu.
-

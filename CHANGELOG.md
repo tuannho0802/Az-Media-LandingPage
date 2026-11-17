@@ -88,6 +88,12 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [theme] Ảnh tạm: thêm `placeholder-team.svg`, `placeholder-solutions.svg` cho các chỗ cần ảnh.
 
 ### Fixed
+- [global] Mobile: ô nhập (form Liên hệ, ô tìm kiếm ở Search và 404) đặt `font-size: 16px` dưới 900px để Safari iOS không tự phóng to khi focus.
+- [global] Mobile/xoay ngang (dưới 1024px): announcement bar không còn dính, chỉ header dính, tiết kiệm khoảng 40–55px chiều cao màn hình. `az.js` chỉ đo `--az-announce-h` khi bar thực sự `sticky`, nên header bám sát mép trên.
+- [404-search] Ô tìm kiếm ở 320px bị cao 62px vì nút "Tìm kiếm" xuống 2 dòng kéo giãn ô nhập: nút `nowrap`, dưới 420px nút xuống hàng riêng.
+- [404-search] Hàng nút gợi ý (Về trang chủ, Dịch vụ, Blog, Liên hệ) chia đều 2 cột trên mobile.
+- [global] Footer 2 cột trên mobile: bỏ `gap` thừa giữa tiêu đề cột và link đầu.
+- [about] Ảnh thành viên đội ngũ ép tỉ lệ 16/10 dưới 480px để trang không dài.
 - [theme] Con trỏ tuỳ biến: khi vòng phóng to (rê vào link/nút) hoặc thu nhỏ (nhấn chuột), vòng bị đẩy lệch khỏi con trỏ, lệch càng xa khi con trỏ càng cách góc trên trái màn hình (ở header lệch sang phải). Nguyên nhân: vị trí đặt bằng `transform: translate3d` còn độ phóng bằng thuộc tính `scale`; CSS áp `scale` trước `transform` nên nhân luôn toạ độ. Đổi sang thuộc tính `translate` (áp trước `scale`).
 - [theme] Con trỏ tuỳ biến: khi rê nhanh vào link/nút (ví dụ menu header), vòng tròn bị phóng to và tô nền ngay lúc con trỏ gốc chạm link trong khi vòng còn ở chỗ trống phía sau. Nay trạng thái hover (phóng to, đổi màu trên nền tối) đi theo độ trễ của từng phần tử: vòng chỉ đổi khi nó tới nơi, dot đổi theo độ trễ của dot.
 - [pricing] Local chỉ hiện khối CTA: WordPress cache danh sách pattern theo version theme, nên pattern mới thêm bằng `git pull` không được đăng ký. `functions.php` tự xóa cache khi danh sách hoặc thời gian sửa file trong `patterns/` đổi. Đã tái hiện và kiểm trên WordPress thật.
@@ -106,6 +112,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [404-search] Chuỗi "Search results for", "Skip to content" phụ thuộc locale của WordPress. Cần đặt Cài đặt → Chung → Ngôn ngữ site = Tiếng Việt (hoặc Việt hóa cứng trong theme nếu muốn không phụ thuộc locale).
+- [global] Các sửa mobile ở mục Fixed chưa kiểm bằng thiết bị thật: cần thử iPhone Safari (zoom khi focus), xoay ngang 844×390, 320px.
 - [legal] Sau khi `git pull`: vào Công cụ → AZ Media Seed, bấm **Tạo dữ liệu mẫu** một lần để tạo trang `/legal/` và nâng cấp nội dung 3 văn bản; chưa bấm thì `/legal/` vẫn 404. Nếu trang pháp lý đã được sửa tay và đã xóa dòng nháp, nội dung mới sẽ KHÔNG tự thay; chép tay từ `includes/legal-content.php` nếu muốn.
 - [legal] Các chỗ trong ngoặc vuông `[ ]` ở 3 văn bản (tên pháp nhân, mã số doanh nghiệp, địa chỉ, số tháng lưu trữ, số ngày hoàn tiền, tòa án) là PLACEHOLDER cần điền. Nếu thêm Google Analytics, Meta Pixel hoặc form thu thập dữ liệu mới thì phải cập nhật mục Cookie và Thông tin thu thập của Chính sách bảo mật.
 - [legal] Nội dung 3 văn bản là bản nháp mẫu, cần rà soát pháp lý trước khi công bố (số ngày, tỷ lệ hoàn tiền, thông tin pháp nhân, email liên hệ). Chưa có ảnh ref nên bố cục theo cấu trúc đề xuất; chưa xem bằng trình duyệt/WordPress thật.
