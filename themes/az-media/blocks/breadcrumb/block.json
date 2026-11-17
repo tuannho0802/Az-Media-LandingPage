@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "az-media/breadcrumb",
+  "title": "Breadcrumb",
+  "category": "theme",
+  "icon": "arrow-right-alt",
+  "description": "Đường dẫn Trang chủ / ... / Trang hiện tại, tự lấy theo cây trang.",
+  "textdomain": "az-media",
+  "usesContext": [ "postId" ],
+  "supports": { "html": false, "align": false, "autoRegister": true },
+  "render": "file:./render.php"
+}

@@ -18,6 +18,13 @@ function az_core_meta_fields() {
 			'az_price'   => array( 'label' => 'Giá (hiển thị)', 'placeholder' => '4.900.000đ' ),
 			'az_period'  => array( 'label' => 'Chu kỳ', 'placeholder' => '/tháng' ),
 			'az_summary' => array( 'label' => 'Đoạn mô tả gói', 'type' => 'textarea' ),
+			'az_features' => array(
+				'label'       => 'Tính năng của gói',
+				'type'        => 'textarea',
+				'rows'        => 8,
+				'placeholder' => "Kênh quản trị: 2 kênh\nBáo cáo hiệu quả: Hằng tháng\nSản xuất video",
+				'help'        => 'Mỗi dòng một tính năng. Dạng "Tên: giá trị" (có dấu cách sau dấu hai chấm) hiện thành giá trị riêng ở bảng so sánh; chỉ viết tên thì bảng hiện dấu tích. Cùng một tính năng ở các gói phải gõ tên giống hệt nhau.',
+			),
 		),
 		'testimonial'  => array(
 			'az_role'     => array( 'label' => 'Vai trò / công ty', 'placeholder' => 'Giám đốc Marketing, Công ty A' ),
@@ -75,7 +82,8 @@ add_action( 'init', function () {
 				'type'              => 'string',
 				'single'            => true,
 				'show_in_rest'      => true,
-				'sanitize_callback' => 'sanitize_text_field',
+				// Ô nhiều dòng giữ xuống dòng; sanitize_text_field sẽ gộp mọi dòng thành một.
+				'sanitize_callback' => 'textarea' === ( $fields[ $key ]['type'] ?? '' ) ? 'sanitize_textarea_field' : 'sanitize_text_field',
 				'auth_callback'     => function () {
 					return current_user_can( 'edit_posts' );
 				},

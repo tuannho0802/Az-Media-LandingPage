@@ -21,7 +21,8 @@ Bộ tài liệu cho Ngan · Phiên bản 0.1 · Nguồn tham chiếu: https://r
 | Hạng mục | Trạng thái |
 |---|---|
 | Trang chủ (thứ tự section, nội dung, menu, footer) | Đã đọc từ demo |
-| Trang chủ AZ Media so với `OG-Home.png` (17/11/2026) | Đạt 9/15 mục review (render HTML tĩnh). Còn Pricing, Testimonials, FAQ, hamburger, Lighthouse: cần kiểm trên WordPress thật. Chi tiết: `docs/pages/01-home.md` mục 7 |
+| Trang chủ AZ Media so với `OG-Home.png` (17/11/2026) | Đạt (chủ dự án xác nhận 17/11/2026). Chi tiết và phần chưa có số đo: `docs/pages/01-home.md` mục 7 |
+| Trang Bảng giá `/pricing/` (17/11/2026) | Đã dựng, chờ review. Chưa đối chiếu với demo vì chưa đọc được trang demo. Chi tiết: `docs/pages/02-pricing.md` |
 | Ảnh chụp hero (bố cục, kích thước tương đối, màu) | Đã xem qua ảnh bạn gửi |
 | Các trang con (Pricing, Services, About, Blog, FAQs, Career, Contact, Maintenance, pháp lý) | **Chưa đọc được** (công cụ chặn URL con). Mục 5 là cấu trúc đề xuất, cần đối chiếu khi bạn gửi ảnh chụp hoặc HTML |
 | Mã màu, font, spacing chính xác | **Chưa có**. Mục 3 là giá trị đề xuất cho AZ Media, cần đo lại bằng DevTools nếu muốn bám sát |

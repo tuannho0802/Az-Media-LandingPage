@@ -8,7 +8,7 @@
 | Độ tin cậy nguồn | ✅ Thứ tự section và nội dung đã đọc · ⚠️ màu, font, kích thước là đề xuất, cần đo lại bằng DevTools |
 | Pattern dùng | `az-hero`, `az-logos`, `az-why-us`, `az-specialization`, `az-solutions`, `az-pricing`, `az-testimonials`, `az-cta`, `az-faq` |
 | Dữ liệu (CPT/plugin) | CPT `pricing_plan`, `testimonial`, `faq`; plugin: Contact Form 7 (nếu hero có form) |
-| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt (còn xác nhận Pricing/Testimonials/FAQ, hamburger, Lighthouse trên WordPress thật) |
+| Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☐ Chờ review · ☑ Đạt (chủ dự án xác nhận 17/11/2026, commit `a948a4e`) |
 | Ngày truy cập demo | 17/11/2026 |
 
 ## 1. Mục đích
@@ -72,12 +72,12 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 |---|---|---|---|
 | ☑ | Thứ tự section khớp demo | Mở demo, đếm và so từ trên xuống dưới | 9 section đúng thứ tự `OG-Home.png`; kiểm bằng HTML render trên WordPress thật |
 | ☑ | Bố cục cột và tỉ lệ | Đặt hai cửa sổ cạnh nhau ở 1440px, so cột trái/phải | 17/11 review lại: render HTML ở 1440px, khớp `OG-Home.png` ở Hero, Trusted by, Why us (ảnh + 2×2), Specialization, Solutions (ảnh trái + lưới 2×3), CTA, Footer. Pricing, Testimonials, FAQ lấy dữ liệu từ CPT nên chưa xem được trong bản render này (xem ghi chú mục 9) |
-| ☐ | Khoảng cách trong và giữa các khối | Đo padding/margin bằng DevTools | Chưa đo |
-| ☐ | Typography (cỡ, độ đậm, line-height) | DevTools, tab Computed | Chưa đo. Font ref trông như DM Sans, AZ dùng Plus Jakarta Sans (có subset tiếng Việt) nên khác nét chữ là chủ ý |
+| ☑ | Khoảng cách trong và giữa các khối | Đo padding/margin bằng DevTools | Chưa đo **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Typography (cỡ, độ đậm, line-height) | DevTools, tab Computed | Chưa đo. Font ref trông như DM Sans, AZ dùng Plus Jakarta Sans (có subset tiếng Việt) nên khác nét chữ là chủ ý **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
 | ☑ | Màu đã đổi từ tím sang xanh đậm theo token | Không còn mã màu tím nào trong CSS của trang | Đã rà `themes/`, không còn mã tím; section đậm dùng `primary-dark` |
-| ☐ | Component (nút, card, badge) và trạng thái hover/focus | Di chuột và Tab qua từng phần tử | Chưa thử. Badge đã đổi sang kiểu nền nhạt + viền trái như ref; nút viền đổi sang nền trắng viền xám |
-| ☐ | Tương tác và animation | So hành vi với demo (counter, slider, accordion...) | Counter, accordion, nút đóng announcement chạy đúng trên HTML thật (jsdom). Chưa thử trên trình duyệt |
-| ☐ | Responsive 1200 / 1024 / 768 / 480 | Thu nhỏ trình duyệt, không cuộn ngang, nút đủ lớn | Đã đo ở 1440/1024/768/480/390: `main` và footer không tràn ngang. Chưa thử hamburger 600–1023px và nút ≥44px trên WordPress thật |
+| ☑ | Component (nút, card, badge) và trạng thái hover/focus | Di chuột và Tab qua từng phần tử | Chưa thử. Badge đã đổi sang kiểu nền nhạt + viền trái như ref; nút viền đổi sang nền trắng viền xám **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Tương tác và animation | So hành vi với demo (counter, slider, accordion...) | Counter, accordion, nút đóng announcement chạy đúng trên HTML thật (jsdom). Chưa thử trên trình duyệt **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
+| ☑ | Responsive 1200 / 1024 / 768 / 480 | Thu nhỏ trình duyệt, không cuộn ngang, nút đủ lớn | Đã đo ở 1440/1024/768/480/390: `main` và footer không tràn ngang. Chưa thử hamburger 600–1023px và nút ≥44px trên WordPress thật **Chủ dự án xác nhận Đạt 17/11/2026; chưa có số đo.** |
 | ☑ | Không dùng lại ảnh, logo, tên, nội dung của demo | Rà ảnh, alt, tên người, số liệu | Ảnh là SVG tự vẽ (placeholder), nội dung tiếng Việt tự viết |
 | ☑ | Hero: tỉ lệ cột chữ/ảnh, cỡ H1, vị trí card nổi | So ảnh chụp ở 1440px | Ảnh chạm đáy section, card khách hàng giữa-phải, card rating dưới-trái, H1 hai dòng như ref |
 | ☑ | Lưới nền hero (độ đậm, kích thước ô) | Phóng to ảnh chụp | Lưới nhạt, hiện ở Hero, Why us, Pricing, Testimonials, CTA, footer, độ đậm tương đương ref |
@@ -90,10 +90,10 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 ## 8. Tiêu chí nghiệm thu
 
 - [x] Đủ 9 section nội dung (từ Hero đến FAQ) cùng header, footer, đúng thứ tự demo.
-- [ ] Counter, accordion hoạt động (đã chạy đúng trên jsdom, cần thử trên trình duyệt). Slider đã đổi thành lưới 3×2 theo ref.
+- [x] Counter, accordion hoạt động. Slider đã đổi thành lưới 3×2 theo ref. (Accordion đã chạy lại trong Chromium trên WordPress thật 17/11: mở một mục tại một thời điểm.)
 - [x] Pricing, Testimonials, FAQ lấy dữ liệu từ CPT, sửa nội dung không cần sửa code. (Đã kiểm: 3 gói, 6 nhận xét, 5 FAQ. Nếu plugin chưa bật, các khối rỗng và admin thấy cảnh báo.)
-- [ ] Lighthouse mobile ≥ 90 (Performance, SEO, Accessibility).
-- [ ] Toàn bộ mục 7 đã tích hoặc có ghi chú lý do chênh lệch. (Đã tích 9/15, các mục còn lại đều có ghi chú lý do chưa tích.)
+- [x] Lighthouse mobile ≥ 90 (Performance, SEO, Accessibility). **Chủ dự án xác nhận Đạt; chưa có điểm Lighthouse ghi lại.** Nên chạy và ghi điểm vào đây trước khi public.
+- [x] Toàn bộ mục 7 đã tích hoặc có ghi chú lý do chênh lệch. (14/14 đã tích; 9 mục tích từ review 17/11 (bản cũ ghi nhầm là 9/15), 5 mục còn lại (khoảng cách, typography, component, tương tác, responsive) tích theo xác nhận của chủ dự án và chưa có số đo.)
 - [x] Đã ghi thay đổi vào `CHANGELOG.md` với tag `[home]`.
 
 ## 9. Nhật ký trang
@@ -103,7 +103,9 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 | 17/11/2026 | Dựng khung theme, phần dùng chung (00-global) và 9 section trang chủ, plugin `az-media-core`, script seed. Chờ review thiết kế | |
 | 17/11/2026 | Làm lại layout theo `OG-Home.png`: hero, Trusted by, Why us (nền đậm), Specialization, Solutions (icon), Pricing, Testimonials (lưới 3×2), CTA (không ảnh), FAQ, footer. Sửa header bị xuống dòng. Thêm guard khi plugin chưa bật | `0e7d8a1` |
 
-| 17/11/2026 | Design review lần 1: render HTML tĩnh ở 1440/1024/768/480/390, so với `OG-Home.png`. Sửa lỗi card Why us không đọc được. Tích 9/15 mục kiểm tra | |
+| 17/11/2026 | Design review lần 1: render HTML tĩnh ở 1440/1024/768/480/390, so với `OG-Home.png`. Sửa lỗi card Why us không đọc được. Tích 9/14 mục kiểm tra | |
+| 17/11/2026 | Thêm nút seed trong wp-admin (không cần WP-CLI) và panel "Thông tin hiển thị" ở thanh bên phải trình soạn thảo | `a770b86`, `a948a4e` |
+| 17/11/2026 | **Đạt.** Chủ dự án xác nhận hoàn thành trang chủ (commit `a948a4e`). Khi dựng trang Bảng giá trên WordPress thật, sửa thêm lỗi header: 2 nút Bảng giá/Liên hệ không ẩn dưới 1024px, làm trang tràn ngang trên mobile (ảnh hưởng cả trang chủ) | |
 
 ### Ghi chú triển khai (cần bạn xác nhận khi review)
 

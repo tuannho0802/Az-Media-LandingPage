@@ -25,7 +25,13 @@ function az_core_render_meta_box( $post ) {
 		$value = get_post_meta( $post->ID, $key, true );
 		printf( '<tr><th scope="row"><label for="%1$s">%2$s</label></th><td>', esc_attr( $key ), esc_html( $field['label'] ) );
 		if ( ( $field['type'] ?? '' ) === 'textarea' ) {
-			printf( '<textarea id="%1$s" name="%1$s" rows="3" class="large-text">%2$s</textarea>', esc_attr( $key ), esc_textarea( $value ) );
+			printf(
+				'<textarea id="%1$s" name="%1$s" rows="%3$d" placeholder="%4$s" class="large-text">%2$s</textarea>',
+				esc_attr( $key ),
+				esc_textarea( $value ),
+				(int) ( $field['rows'] ?? 3 ),
+				esc_attr( $field['placeholder'] ?? '' )
+			);
 		} else {
 			printf(
 				'<input type="text" id="%1$s" name="%1$s" value="%2$s" placeholder="%3$s" class="regular-text">',
@@ -33,6 +39,9 @@ function az_core_render_meta_box( $post ) {
 				esc_attr( $value ),
 				esc_attr( $field['placeholder'] ?? '' )
 			);
+		}
+		if ( ! empty( $field['help'] ) ) {
+			printf( '<p class="description">%s</p>', esc_html( $field['help'] ) );
 		}
 		echo '</td></tr>';
 	}
@@ -50,9 +59,11 @@ add_action( 'save_post', function ( $post_id ) {
 		return;
 	}
 	$fields = az_core_meta_fields()[ get_post_type( $post_id ) ] ?? array();
-	foreach ( array_keys( $fields ) as $key ) {
+	foreach ( $fields as $key => $field ) {
 		if ( isset( $_POST[ $key ] ) ) {
-			update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) );
+			$raw   = wp_unslash( $_POST[ $key ] );
+			$clean = 'textarea' === ( $field['type'] ?? '' ) ? sanitize_textarea_field( $raw ) : sanitize_text_field( $raw );
+			update_post_meta( $post_id, $key, $clean );
 		}
 	}
 } );

@@ -40,7 +40,8 @@
 					label: field.label,
 					placeholder: field.placeholder || '',
 					value: meta[ field.key ] || '',
-					rows: 'textarea' === field.type ? 4 : undefined,
+					rows: 'textarea' === field.type ? field.rows || 4 : undefined,
+					help: field.help || undefined,
 					__nextHasNoMarginBottom: true,
 					onChange: function ( value ) {
 						var next = {};

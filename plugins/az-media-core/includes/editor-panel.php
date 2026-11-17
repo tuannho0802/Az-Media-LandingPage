@@ -24,6 +24,8 @@ add_action( 'enqueue_block_editor_assets', function () {
 				'label'       => $field['label'],
 				'placeholder' => $field['placeholder'] ?? '',
 				'type'        => $field['type'] ?? 'text',
+				'help'        => $field['help'] ?? '',
+				'rows'        => $field['rows'] ?? 4,
 			);
 		}
 	}

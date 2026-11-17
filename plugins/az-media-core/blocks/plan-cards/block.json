@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "az-media/plan-cards",
+  "title": "Thẻ gói giá",
+  "category": "widgets",
+  "icon": "money-alt",
+  "description": "Các thẻ gói giá kèm danh sách tính năng, lấy từ mục Gói giá. Nút dẫn tới trang Liên hệ kèm tham số gói.",
+  "textdomain": "az-media-core",
+  "attributes": {
+    "limit": { "type": "number", "default": 3 }
+  },
+  "supports": { "html": false, "align": false },
+  "editorScript": "file:./edit.js",
+  "render": "file:./render.php"
+}

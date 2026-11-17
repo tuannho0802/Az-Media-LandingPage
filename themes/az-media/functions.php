@@ -26,6 +26,13 @@ add_action( 'init', function () {
 } );
 
 /**
+ * Block phía server của theme (breadcrumb). Không có JS riêng: editor tự dựng bản xem trước qua ServerSideRender.
+ */
+add_action( 'init', function () {
+	register_block_type( get_theme_file_path( 'blocks/breadcrumb' ) );
+} );
+
+/**
  * CSS và JS. Font tự host qua theme.json (fontFace), không dùng CDN.
  */
 add_action( 'wp_enqueue_scripts', function () {
