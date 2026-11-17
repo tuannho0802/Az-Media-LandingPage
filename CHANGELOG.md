@@ -14,6 +14,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [maintenance] Trang bảo trì `/maintenance-mode/` làm **khác demo có chủ đích**: toàn màn hình, nền đậm có lưới, căn giữa, không ảnh, không announcement/header/footer; gồm nhãn trạng thái nhấp nháy, H1, thời gian dự kiến, tiến độ 3 bước, nút liên hệ gấp. Template `page-maintenance-mode.html`, pattern mới `az-maintenance`.
+- [maintenance] Chế độ bảo trì thật trong plugin `az-media-core` (`includes/maintenance.php`): bật/tắt ở Công cụ → AZ Media Bảo trì hoặc `wp option update az_maintenance_on 1`; khách thấy trang bảo trì với HTTP 503, `Retry-After`, `noindex`; quản trị viên vào bình thường; có nhắc ở wp-admin và admin bar.
 - [career] Trang chi tiết vị trí `/career/{slug}/` (template `single-career.html`): hero (tên vị trí, chip hình thức/lương/địa điểm, nút Ứng tuyển), thân trang (nội dung bài + thẻ Thông tin vị trí dính khi cuộn), mục Vị trí khác. Pattern `az-career-detail-hero`, `az-career-detail-body`, `az-career-other`. Cấu trúc theo đề xuất (ref chỉ có trang danh sách).
 - [career] Schema JobPosting (JSON-LD) trong `functions.php`, lấy địa điểm và hạn nộp từ meta.
 - [core] Meta `az_location` (địa điểm) và `az_deadline` (hạn nộp dd/mm/yyyy) cho CPT `career`.
@@ -41,6 +43,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [global] Gỡ mục "Bảo trì" khỏi dropdown Trang ở header (trang bảo trì không đưa vào menu công khai).
+- [docs] Viết lại plan `docs/pages/11-maintenance.md` theo hướng trang bảo trì dùng thật, khác demo.
 - [career] CPT `career` có URL công khai `/career/{slug}/` (rewrite tự làm mới một lần, `az_core_rewrite_ver` lên 2). Thẻ việc làm ở `/career/` bấm được toàn khung và có "Xem chi tiết".
 - [career] Thẻ việc làm dùng block `az-media/post-updated` thay cho `core/post-date`, sửa lỗi dòng "Cập nhật:" không hiện ngày trên WordPress thật; ngày cập nhật giờ tự đổi khi sửa vị trí ở wp-admin. Seed vị trí tuyển lùi ngày tạo 2, 4, 6, 1 ngày để demo (chỉ áp dụng cho vị trí tạo mới).
 - [global] Announcement bar theo ref: câu ngắn một dòng "Tăng tốc và nâng tầm thương hiệu của bạn cùng AZ Media.", chữ xanh nhạt trên nền navy đậm, cao 40px. Bỏ nút đóng (`az-announcement__close`) cùng CSS, JS và script lưu trạng thái đóng, bar luôn hiển thị như ref; JS chỉ còn đo chiều cao bar cho header dính.
@@ -74,6 +78,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
+- [maintenance] Chưa xem bằng trình duyệt/WordPress thật; chưa thử bật chế độ bảo trì với khách ẩn danh. Thời gian dự kiến, 3 bước tiến độ, email, điện thoại là nội dung mẫu cần sửa tay cho từng đợt bảo trì. Chưa có ô đăng ký nhận tin.
 - [global] Header mới (nền mờ, bar dính) chưa xem bằng trình duyệt/WordPress thật: cần kiểm blur khi cuộn qua ảnh/khối đậm, menu mobile mở hết màn hình, bar 2 dòng trên mobile, và khi đăng nhập có admin bar.
 - [about] Chưa xem bằng trình duyệt/WordPress thật (khoảng cách, typography, responsive 1200/1024/768/480). Ref dùng slider đội ngũ có chấm phân trang, bản dựng là lưới 2×2 tĩnh. Số liệu, tên thành viên, mô tả, ảnh là PLACEHOLDER.
 - [service-detail] Bố cục theo plan đề xuất (không có ảnh ref). Chưa có form báo giá (chờ Contact Form 7 và trang Liên hệ). Nội dung dịch vụ là PLACEHOLDER.

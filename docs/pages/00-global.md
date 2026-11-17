@@ -20,7 +20,7 @@ Các thành phần xuất hiện ở mọi trang. Làm và nghiệm thu trước
 | # | Section | Nội dung / hành vi | Pattern | Dữ liệu | Xác minh |
 |---|---|---|---|---|---|
 | 1 | Announcement bar | Thanh mỏng trên cùng, nền đậm, một dòng chữ sáng căn giữa, không có nút đóng | az-announcement | Option bật/tắt + nội dung | ✅ |
-| 2 | Header | Logo trái, menu **căn trái ngay cạnh logo**: Home, Pricing, Services, Pages (dropdown: Blog, FAQs, Career, Contact, Maintenance Mode), About; hai nút phải: Pricing (viền) và Contact (đặc). Sticky, nền trắng trong suốt có blur; announcement bar cũng dính trên cùng, header dính ngay dưới bar | parts/header | Menu Primary | ✅ |
+| 2 | Header | Logo trái, menu **căn trái ngay cạnh logo**: Home, Pricing, Services, Pages (dropdown: Blog, FAQs, Career, Contact; trang Bảo trì không đưa vào menu công khai), About; hai nút phải: Pricing (viền) và Contact (đặc). Sticky, nền trắng trong suốt có blur; announcement bar cũng dính trên cùng, header dính ngay dưới bar | parts/header | Menu Primary | ✅ |
 | 3 | Hero trang con | Mỗi trang con có hero riêng theo ref demo (Bảng giá: `az-pricing-hero`). Không có pattern/breadcrumb dùng chung | az-pricing-hero | — | ✅ |
 | 4 | CTA cuối trang | Eyebrow, H2, mô tả, nút, ảnh bên cạnh. Tái sử dụng nhiều trang | az-cta | Nội dung pattern | ✅ |
 | 5 | Footer | Dải trên nền nhạt: tagline trái, email + điện thoại (icon tròn) phải; lưới 5 cột link có mũi tên (Công ty, Hỗ trợ, Liên kết nhanh, Tài nguyên, Mạng xã hội); thanh dưới nền đậm: copyright trái, 3 link pháp lý phải | parts/footer | Menu Footer 1-4 | ✅ |
@@ -86,3 +86,4 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 | 17/11/2026 | Dựng announcement bar, header, footer. Chờ review thiết kế | |
 | 17/11/2026 | Header: logo và menu không xuống dòng, ẩn nút Bảng giá/Liên hệ dành cho mobile ở desktop. Footer làm lại theo ref (dải tagline + 5 cột + thanh đậm) | |
 | 17/11/2026 | Sửa header theo ref: nền trong suốt (trắng 78%) có blur 10px, announcement bar và header cùng dính khi cuộn (header nằm dưới bar), menu căn trái cạnh logo thay vì căn giữa, chiều cao 70px không co khi cuộn, mũi tên dropdown sát chữ. Chưa xem bằng trình duyệt | |
+| 17/11/2026 | Gỡ mục "Bảo trì" khỏi dropdown Trang: trang bảo trì chỉ hiện khi bật chế độ bảo trì hoặc xem trước bằng URL, xem `11-maintenance.md` | |
