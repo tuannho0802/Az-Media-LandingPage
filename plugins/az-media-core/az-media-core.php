@@ -19,7 +19,6 @@ require_once AZ_CORE_DIR . 'includes/post-types.php';
 require_once AZ_CORE_DIR . 'includes/meta-boxes.php';
 require_once AZ_CORE_DIR . 'includes/editor-panel.php';
 require_once AZ_CORE_DIR . 'includes/faq-block.php';
-require_once AZ_CORE_DIR . 'includes/plan-blocks.php';
 
 require_once AZ_CORE_DIR . 'cli/seed.php';
 

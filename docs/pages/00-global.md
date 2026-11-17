@@ -6,7 +6,7 @@
 | Template WordPress | `parts/header.html, parts/footer.html, parts/announcement-bar.html` |
 | Trang demo tham chiếu | https://reachout.nexmotivedemo.com/ |
 | Độ tin cậy nguồn | ✅ Cấu trúc đã đọc từ trang chủ demo · ⚠️ màu, font, kích thước là đề xuất |
-| Pattern dùng | `az-announcement`, `az-page-hero`, `az-cta`, `az-faq` |
+| Pattern dùng | `az-announcement`, `az-cta`, `az-faq` |
 | Dữ liệu (CPT/plugin) | Menu WordPress (Primary, Footer 1-4), Customizer/Site Options cho email, điện thoại, social |
 | Trạng thái | ☐ Chưa bắt đầu · ☐ Đang làm · ☑ Chờ review · ☐ Đạt |
 | Ngày truy cập demo | 17/11/2026 |
@@ -21,7 +21,7 @@ Các thành phần xuất hiện ở mọi trang. Làm và nghiệm thu trước
 |---|---|---|---|---|---|
 | 1 | Announcement bar | Thanh mỏng trên cùng, nền đậm, một dòng chữ sáng căn giữa, có nút đóng | az-announcement | Option bật/tắt + nội dung | ✅ |
 | 2 | Header | Logo trái; menu: Home, Pricing, Services, Pages (dropdown: Blog, FAQs, Career, Contact, Maintenance Mode), About; hai nút phải: Pricing (viền) và Contact (đặc). Sticky | parts/header | Menu Primary | ✅ |
-| 3 | Page hero (trang con) | Tiêu đề trang + breadcrumb, nền nhạt/lưới. Dùng cho mọi trang con | az-page-hero | Tiêu đề trang | ✅ |
+| 3 | Hero trang con | Mỗi trang con có hero riêng theo ref demo (Bảng giá: `az-pricing-hero`). Không có pattern/breadcrumb dùng chung | az-pricing-hero | — | ✅ |
 | 4 | CTA cuối trang | Eyebrow, H2, mô tả, nút, ảnh bên cạnh. Tái sử dụng nhiều trang | az-cta | Nội dung pattern | ✅ |
 | 5 | Footer | Dải trên nền nhạt: tagline trái, email + điện thoại (icon tròn) phải; lưới 5 cột link có mũi tên (Công ty, Hỗ trợ, Liên kết nhanh, Tài nguyên, Mạng xã hội); thanh dưới nền đậm: copyright trái, 3 link pháp lý phải | parts/footer | Menu Footer 1-4 | ✅ |
 

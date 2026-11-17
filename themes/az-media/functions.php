@@ -26,11 +26,28 @@ add_action( 'init', function () {
 } );
 
 /**
- * Block phía server của theme (breadcrumb). Không có JS riêng: editor tự dựng bản xem trước qua ServerSideRender.
+ * WordPress (6.4+) cache danh sách pattern của theme và chỉ làm mới khi số phiên bản theme đổi.
+ * Thêm hoặc sửa file trong patterns/ mà không đổi version thì pattern mới KHÔNG được đăng ký:
+ * template gọi pattern đó sẽ hiện rỗng (trang Bảng giá chỉ còn khối CTA). Tự xóa cache khi
+ * danh sách hoặc thời gian sửa file pattern thay đổi, để git pull xong là chạy ngay.
  */
-add_action( 'init', function () {
-	register_block_type( get_theme_file_path( 'blocks/breadcrumb' ) );
-} );
+add_action( 'after_setup_theme', function () {
+	$files = glob( get_theme_file_path( 'patterns/*.php' ) );
+	$files = $files ? $files : array();
+	$mtime = 0;
+	foreach ( $files as $file ) {
+		$mtime = max( $mtime, (int) filemtime( $file ) );
+	}
+	$signature = count( $files ) . '|' . $mtime;
+	if ( get_option( 'az_media_pattern_sig' ) === $signature ) {
+		return;
+	}
+	$theme = wp_get_theme();
+	if ( method_exists( $theme, 'delete_pattern_cache' ) ) {
+		$theme->delete_pattern_cache();
+	}
+	update_option( 'az_media_pattern_sig', $signature, true );
+}, 1 );
 
 /**
  * CSS và JS. Font tự host qua theme.json (fontFace), không dùng CDN.

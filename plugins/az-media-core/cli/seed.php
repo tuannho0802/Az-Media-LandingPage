@@ -99,29 +99,20 @@ class AZ_Core_Seed_Command {
 		$plans = array(
 			array(
 				'Starter', 'Cho thương hiệu mới bắt đầu', '4.900.000đ', 'Quản trị 2 kênh, 12 bài nội dung mỗi tháng và báo cáo hiệu quả hằng tháng.',
-				"Kênh quản trị: 2 kênh\nBài nội dung mỗi tháng: 12 bài\nBáo cáo hiệu quả: Hằng tháng\nHỗ trợ: Qua email",
 			),
 			array(
 				'Standard', 'Cho thương hiệu đang tăng trưởng', '9.900.000đ', 'Quản trị 4 kênh, 24 bài nội dung, quảng cáo cơ bản và báo cáo hai tuần một lần.',
-				"Kênh quản trị: 4 kênh\nBài nội dung mỗi tháng: 24 bài\nBáo cáo hiệu quả: Hai tuần một lần\nHỗ trợ: Email và chat\nQuảng cáo trả phí: Cơ bản",
 			),
 			array(
 				'Premium', 'Cho thương hiệu muốn dẫn đầu', '19.900.000đ', 'Chiến lược đa kênh, sản xuất video, quảng cáo nâng cao và một chuyên viên phụ trách riêng.',
-				"Kênh quản trị: Đa kênh\nBài nội dung mỗi tháng: 40 bài\nBáo cáo hiệu quả: Hằng tuần\nHỗ trợ: Ưu tiên\nQuảng cáo trả phí: Nâng cao\nSản xuất video\nChuyên viên phụ trách riêng",
 			),
 		);
 		foreach ( $plans as $i => $p ) {
-			$id = $this->upsert( 'pricing_plan', $p[0], '', $p[1], $i + 1, array(
-				'az_price'    => $p[2],
-				'az_period'   => '/tháng',
-				'az_summary'  => $p[3],
-				'az_features' => $p[4],
+			$this->upsert( 'pricing_plan', $p[0], '', $p[1], $i + 1, array(
+				'az_price'   => $p[2],
+				'az_period'  => '/tháng',
+				'az_summary' => $p[3],
 			) );
-			// Site đã seed từ trước chưa có tính năng: bổ sung, nhưng không ghi đè nếu bạn đã tự nhập.
-			if ( $id && '' === (string) get_post_meta( $id, 'az_features', true ) ) {
-				update_post_meta( $id, 'az_features', $p[4] );
-				$this->out( "Đã thêm tính năng cho gói: {$p[0]}" );
-			}
 		}
 	}
 
@@ -149,21 +140,6 @@ class AZ_Core_Seed_Command {
 		);
 		foreach ( $items as $i => $f ) {
 			$this->upsert( 'faq', $f[0], '<p>' . $f[1] . '</p>', '', $i + 1, array(), array( 'faq_group' => array( 'Chung' ) ) );
-		}
-
-		// FAQ riêng cho trang Bảng giá (nhóm "bang-gia"). menu_order từ 6 để không chen vào 5 câu đầu của trang chủ.
-		if ( ! term_exists( 'bang-gia', 'faq_group' ) ) {
-			wp_insert_term( 'Bảng giá', 'faq_group', array( 'slug' => 'bang-gia' ) );
-		}
-		$pricing = array(
-			array( 'Giá trên trang đã bao gồm VAT chưa?', 'Giá hiển thị là giá trước thuế. Thuế VAT được cộng thêm theo quy định hiện hành và ghi rõ trong báo giá chính thức.' ),
-			array( 'Ngân sách quảng cáo có nằm trong giá gói không?', 'Không. Giá gói là phí dịch vụ của AZ Media. Ngân sách chạy quảng cáo do bạn quyết định và thanh toán trực tiếp cho nền tảng.' ),
-			array( 'Hợp đồng tối thiểu là bao lâu?', 'Thông thường là 3 tháng để có đủ thời gian đo lường và tối ưu. Điều khoản cụ thể sẽ được thống nhất trong hợp đồng.' ),
-			array( 'Thanh toán theo hình thức nào?', 'Bạn thanh toán đầu mỗi chu kỳ bằng chuyển khoản. Chúng tôi xuất hóa đơn theo thông tin doanh nghiệp bạn cung cấp.' ),
-			array( 'Tôi cần một gói riêng thì sao?', 'Hãy gửi yêu cầu qua trang Liên hệ. Chúng tôi sẽ đề xuất gói tùy chỉnh theo mục tiêu và ngân sách của bạn.' ),
-		);
-		foreach ( $pricing as $i => $f ) {
-			$this->upsert( 'faq', $f[0], '<p>' . $f[1] . '</p>', '', $i + 6, array(), array( 'faq_group' => array( 'bang-gia' ) ) );
 		}
 	}
 

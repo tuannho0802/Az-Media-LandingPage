@@ -14,11 +14,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
-- [pricing] Trang `/pricing/`: template `page-pricing.html` ghép page hero, thẻ gói kèm danh sách tính năng, bảng so sánh gói, FAQ về giá và CTA. Nút mỗi gói dẫn tới `/contact/?plan={slug}`.
-- [pricing] 3 pattern mới `az-pricing-plans`, `az-compare`, `az-faq-pricing`.
-- [global] Pattern `az-page-hero` (breadcrumb + H1) và block `az-media/breadcrumb` (theme, tự lấy theo cây trang), dùng chung cho mọi trang con sau này.
-- [core] Meta `az_features` (Tính năng của gói, mỗi dòng một mục, dạng `Tên: giá trị`) trong panel thanh bên phải; block `az-media/plan-cards` và `az-media/plan-compare` render từ CPT `pricing_plan`.
-- [core] Seed thêm tính năng cho 3 gói (bổ sung vào gói đã có nếu ô còn trống, không ghi đè) và 5 FAQ về giá trong nhóm `bang-gia`.
+- [pricing] Trang `/pricing/` dựng theo ảnh ref `docs/reference-images/OG-Pricing.png`: hero (badge, H1, mô tả), Trusted by, 3 thẻ gói (gói giữa nền đậm), Why choose us, FAQ. Template `page-pricing.html`; pattern mới `az-pricing-hero`, `az-pricing-list`, dùng lại `az-logos`, `az-why-us`, `az-faq`.
 - [core] Trang wp-admin Công cụ → AZ Media Seed: tạo dữ liệu mẫu bằng một nút bấm khi không có WP-CLI (Local WP trên Windows), kèm nhắc khi chưa có gói giá. Logic seed tách khỏi WP-CLI, `wp az seed` vẫn dùng được.
 - [theme] Khung block theme `az-media`: `theme.json` (palette xanh đậm, font Plus Jakarta Sans tự host kèm subset tiếng Việt), `functions.php`, `assets/css/az.css`, `assets/js/az.js`, template `front-page`, `index`, `page`, `single`, `404`.
 - [global] Part `announcement-bar` (nút đóng, nhớ trạng thái bằng localStorage), `header` (sticky, dropdown Trang, hamburger dưới 1024px), `footer` (dải tagline + liên hệ, lưới 5 cột link, thanh copyright và link pháp lý).
@@ -29,7 +25,6 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 
 ### Changed
 - [docs] `[home] Đạt design review`: chủ dự án xác nhận hoàn thành trang chủ (17/11/2026). 5 mục review và Lighthouse tích theo xác nhận, chưa có số đo; xem `docs/pages/01-home.md`.
-- [docs] Plan `02-pricing.md` cập nhật theo trang đã dựng, chuyển sang Chờ review; bảng trạng thái trong `docs/pages/README.md` cập nhật.
 - [core] Giá, chu kỳ, mô tả gói (Gói giá) và vai trò, chữ avatar (Nhận xét) chuyển từ meta box ở đáy màn hình lên panel "Thông tin hiển thị" ở thanh bên phải trình soạn thảo. Meta box cũ chỉ còn dùng cho Classic Editor.
 - [home] Làm lại layout theo ảnh ref `docs/reference-images/OG-Home.png`: hero (ảnh chạm đáy, card khách hàng và card rating chồng góc), Trusted by (nền tint, logo trong thẻ), Why choose us (nền đậm có lưới, ảnh kèm 3 counter, 4 card 2×2), Specialization (tầm nhìn trái, 4 thẻ sứ mệnh có icon phải), Solutions (ảnh trái, lưới 2×3 thẻ có icon mạng xã hội), Pricing (thẻ căn giữa, gói giữa nền đậm, không nâng lên), Testimonials (lưới 3×2, sao ở đáy thẻ, mobile vuốt ngang), CTA (khối đậm không ảnh), FAQ (ô câu hỏi nền nhạt, câu trả lời bên dưới).
 - [global] Footer làm lại theo ref: dải tagline + email/điện thoại, lưới 5 cột link có mũi tên (thêm cột Mạng xã hội), thanh copyright nền đậm.
@@ -37,7 +32,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [theme] Ảnh tạm: thêm `placeholder-team.svg`, `placeholder-solutions.svg` cho các chỗ cần ảnh.
 
 ### Fixed
-- [core] Ô nhiều dòng (mô tả gói, tính năng) bị `sanitize_text_field` gộp thành một dòng khi lưu. Dùng `sanitize_textarea_field` cho ô loại textarea, cả ở REST lẫn meta box Classic Editor.
+- [pricing] Local chỉ hiện khối CTA: WordPress cache danh sách pattern theo version theme, nên pattern mới thêm bằng `git pull` không được đăng ký. `functions.php` tự xóa cache khi danh sách hoặc thời gian sửa file trong `patterns/` đổi. Đã tái hiện và kiểm trên WordPress thật.
+- [core] Ô nhiều dòng (mô tả gói) bị `sanitize_text_field` gộp thành một dòng khi lưu. Dùng `sanitize_textarea_field` cho ô loại textarea, cả ở REST lẫn meta box Classic Editor.
 - [global] Dưới 1024px, 2 nút Bảng giá/Liên hệ ở header không ẩn (`.is-layout-flex` của core đè `display: none`), làm mọi trang tràn ngang trên mobile. Tăng độ ưu tiên selector. Phát hiện khi kiểm trang Bảng giá trên WordPress thật; ảnh hưởng cả trang chủ.
 - [home] 4 card đánh số ở Why us bị trắng, chữ trắng trên nền trắng nên không đọc được: selector `.az-section .az-why-us .az-card` không khớp (cùng một phần tử). Đổi thành `.az-why-us .az-card`.
 - [global] Header bị xuống dòng (logo "az-/media", menu hai hàng, nút gãy chữ) và nút Bảng giá/Liên hệ dành cho mobile hiện nhầm ở desktop.
@@ -46,14 +42,13 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [theme] Chữ nhấn dùng token `accent-text` (`#1D4ED8`) thay vì `accent` để đạt WCAG AA (accent chỉ dùng cho nền, icon, trang trí).
 
 ### Removed
+- [pricing] Phần bản dựng đầu tự thêm khi chưa có ảnh ref mà demo không có: breadcrumb, danh sách tính năng trong thẻ gói, bảng so sánh, FAQ về giá, CTA cuối. Gỡ pattern `az-page-hero`, `az-pricing-plans`, `az-compare`, `az-faq-pricing`, block `az-media/breadcrumb`, `az-media/plan-cards`, `az-media/plan-compare`, meta `az_features` và phần seed tương ứng.
 - [home] Code slider testimonials trong `az.js` và CSS tương ứng (ref dùng lưới 3×2).
 - [home] Ảnh `cta-visual.svg` (CTA của ref không có ảnh).
 - [home] Icon +/- của accordion FAQ (ref không có).
 
 ### Known issues
-- [pricing] Chưa đối chiếu với demo vì chưa đọc được trang `/pricing/` của demo: bố cục, công tắc tháng/năm, nhãn gói nổi bật có thể lệch. Toàn bộ giá, tính năng, câu FAQ là PLACEHOLDER.
-- [pricing] Chưa có schema Offer/Product (giá là chuỗi tự do) và chưa kiểm trên thiết bị thật.
-- [pricing] Form Liên hệ chưa có nên tham số `?plan=` chưa điền sẵn được; làm ở trang `10-contact`.
+- [pricing] Mục 7 trong `02-pricing.md` còn vài hạng mục chờ so bằng mắt trên Local WP (khoảng cách, typography, responsive 1200/1024/768/480). Giá, mô tả, logo là PLACEHOLDER.
 - [home] Toàn bộ số liệu, lời nhận xét, giá, logo, email, điện thoại là PLACEHOLDER, cần thay bằng dữ liệu thật trước khi public.
 - [home] Layout đã làm lại theo ref nhưng chưa được xem bằng trình duyệt: các mục khoảng cách, typography, hover, responsive (đặc biệt 600–1023px) trong Design Fidelity Review của `01-home.md` còn để trống, chờ bạn xác nhận.
 - [home] CTA vẫn giữ nút "Đặt lịch tư vấn" dù ref không có nút.
