@@ -1,0 +1,15 @@
+/*
+!/.gitignore
+!/README.md
+!/docs/
+!/.github/
+!/themes/
+/themes/*
+!/themes/az-media/
+!/plugins/
+/plugins/*
+!/plugins/az-media-core/
+
+node_modules/
+.env
+*.log
