@@ -385,10 +385,8 @@ html { scroll-behavior: smooth; }
 .az-section .az-svc-grid__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
 .az-svc-grid__list > li { margin: 0; display: flex; }
 .az-section .az-svc-grid .az-head { margin-bottom: 40px; }
-.az-section .az-service { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; padding: 28px 24px; background: #fff; border: 1px solid var(--az-border); border-radius: var(--az-radius); box-shadow: var(--az-shadow); transition: transform .2s, border-color .2s; }
-.az-service:hover { transform: translateY(-3px); border-color: var(--az-accent); }
-.az-service::before { content: ""; width: 44px; height: 44px; margin-bottom: .5rem; background: var(--az-primary-dark); transition: background-color .2s; }
-.az-service:hover::before { background: var(--az-accent); }
+.az-section .az-service { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: .75rem; padding: 28px 24px; background: #fff; border: 1px solid var(--az-border); border-radius: var(--az-radius); box-shadow: var(--az-shadow); transition: transform .45s var(--az-ease), box-shadow .45s var(--az-ease), border-color .3s ease; }
+.az-service::before { content: ""; width: 44px; height: 44px; margin-bottom: .5rem; background: var(--az-primary-dark); transition: background-color .3s ease, transform .45s var(--az-ease); }
 .az-service__title { margin: 0; font-size: 1.125rem; }
 .az-service__text { margin: 0; color: var(--az-muted); font-size: .9375rem; }
 .az-svc-grid__list > li:nth-child(6n+1) .az-service::before { -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 20h4L19 9l-4-4L4 16v4Z'/%3E%3Cpath d='M13.5 6.5l4 4'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 20h4L19 9l-4-4L4 16v4Z'/%3E%3Cpath d='M13.5 6.5l4 4'/%3E%3C/svg%3E") center / contain no-repeat; }
@@ -578,6 +576,31 @@ html { scroll-behavior: smooth; }
 }
 @media (prefers-reduced-motion: reduce) {
 	.az-about-intro__img:hover img, .az-about-stats__box .az-stat:hover, .az-section .az-member:hover, .az-member:hover .az-member__img img { transform: none !important; }
+}
+
+/* Hover trang Tất cả dịch vụ (/all-services/) và Dịch vụ khác (trang chi tiết dịch vụ):
+   - Thẻ dịch vụ: nhấc 4px, viền xanh + bóng đổ, icon đổi xanh và phóng nhẹ, tiêu đề đổi xanh.
+   - Khối "Vì sao chọn" (nền tối): trích dẫn và 3 thẻ nhấc 4px, sáng nền và viền (giống thẻ Why us ở trang chủ).
+   - Hàng ảnh–chữ: ảnh zoom chậm trong khung bo góc; dấu tick phóng nhẹ và chữ đổi xanh.
+   Dấu tick chỉ phóng ::before (không dịch chuyển cả dòng) để vùng hover không trượt khỏi con trỏ. */
+.az-service__title a { transition: color .3s ease; }
+.az-section .az-svc-quote, .az-section .az-svc-card { transition: transform .45s var(--az-ease), background-color .3s ease, border-color .3s ease, box-shadow .45s var(--az-ease); }
+.az-svc-row__img { overflow: hidden; border-radius: var(--az-radius-lg); }
+.az-svc-row__img img { transition: transform .9s var(--az-ease); }
+.az-svc-row__checks .az-check { transition: color .3s ease; }
+.az-svc-row__checks .az-check::before { transition: transform .4s var(--az-ease); }
+@media (hover: hover) and (pointer: fine) {
+	.az-section .az-service:hover { transform: translateY(-4px); border-color: var(--az-accent); box-shadow: var(--az-shadow-hover); }
+	.az-service:hover::before { background: var(--az-accent); transform: scale(1.08); }
+	.az-service:hover .az-service__title a { color: var(--az-accent-text); }
+	.az-section :is(.az-svc-quote, .az-svc-card):hover { transform: translateY(-4px); background: rgba(255, 255, 255, .11); border-color: rgba(255, 255, 255, .34); box-shadow: 0 16px 32px rgba(0, 0, 0, .22); }
+	.az-svc-row__media:hover .az-svc-row__img img { transform: scale(1.045); }
+	.az-svc-row__checks .az-check:hover { color: var(--az-accent-text); }
+	.az-svc-row__checks .az-check:hover::before { transform: scale(1.2); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.az-section .az-service:hover, .az-service:hover::before, .az-section :is(.az-svc-quote, .az-svc-card):hover,
+	.az-svc-row__media:hover .az-svc-row__img img, .az-svc-row__checks .az-check:hover::before { transform: none !important; }
 }
 .az-section.az-career-other .az-head { margin-bottom: 40px; }
 
