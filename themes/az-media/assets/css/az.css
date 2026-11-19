@@ -522,30 +522,62 @@ html { scroll-behavior: smooth; }
 	.az-job:hover .az-job__more::after { transform: none !important; }
 }
 
-/* Hover khối Cách ứng tuyển (/career): thẻ bước nhấc 4px với viền xanh + bóng đổ hiện dần, nền trắng; ô số 01-03
-   đổi sang nền xanh chữ trắng và nhích phải; tiêu đề đổi xanh; ảnh bên phải zoom chậm trong khung bo góc.
-   Giới hạn trong .az-apply vì .az-value/.az-values__img còn dùng ở trang Giới thiệu.
-   (.az-section và .az-apply cùng nằm trên một thẻ <section> nên không viết ".az-section .az-apply".) */
-.az-apply .az-value {
+/* Hover khối giá trị / các bước (.az-values): dùng chung cho Cách ứng tuyển (/career) và Giá trị (/about).
+   Thẻ nhấc 4px với viền xanh + bóng đổ hiện dần, nền trắng; ô số/nhãn đổi sang nền xanh chữ trắng và nhích phải;
+   tiêu đề đổi xanh; ảnh bên phải zoom chậm trong khung bo góc.
+   (Khối Cách ứng tuyển có cả .az-values lẫn .az-apply trên cùng một <section>, nên chọn theo .az-values là phủ cả hai.) */
+.az-values .az-value {
 	box-shadow: 0 0 0 1px transparent, 0 0 0 0 rgba(10, 42, 102, 0), 0 0 0 0 rgba(10, 42, 102, 0);
 	transition: transform .45s var(--az-ease), box-shadow .45s var(--az-ease), background-color .3s ease;
 }
-.az-apply .az-value .az-eyebrow { transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .4s var(--az-ease); }
-.az-apply .az-value__title { transition: color .3s ease; }
-.az-apply .az-values__img { overflow: hidden; border-radius: var(--az-radius); }
-.az-apply .az-values__img img { transition: transform .9s var(--az-ease); }
+.az-values .az-value .az-eyebrow { transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .4s var(--az-ease); }
+.az-values .az-value__title { transition: color .3s ease; }
+.az-values .az-values__img { overflow: hidden; border-radius: var(--az-radius); }
+.az-values .az-values__img img { transition: transform .9s var(--az-ease); }
 @media (hover: hover) and (pointer: fine) {
-	.az-apply .az-value:hover {
+	.az-values .az-value:hover {
 		transform: translateY(-4px);
 		background: #fff;
 		box-shadow: 0 0 0 1px var(--az-accent), 0 2px 4px rgba(10, 42, 102, .08), 0 16px 36px rgba(10, 42, 102, .12);
 	}
-	.az-apply .az-value:hover .az-eyebrow { color: #fff; background: var(--az-accent); border-left-color: var(--az-primary-dark); transform: translateX(3px); }
-	.az-apply .az-value:hover .az-value__title { color: var(--az-accent-text); }
-	.az-apply .az-values__img:hover img { transform: scale(1.045); }
+	.az-values .az-value:hover .az-eyebrow { color: #fff; background: var(--az-accent); border-left-color: var(--az-primary-dark); transform: translateX(3px); }
+	.az-values .az-value:hover .az-value__title { color: var(--az-accent-text); }
+	.az-values .az-values__img:hover img { transform: scale(1.045); }
 }
 @media (prefers-reduced-motion: reduce) {
-	.az-apply .az-value:hover, .az-apply .az-value:hover .az-eyebrow, .az-apply .az-values__img:hover img { transform: none !important; }
+	.az-values .az-value:hover, .az-values .az-value:hover .az-eyebrow, .az-values .az-values__img:hover img { transform: none !important; }
+}
+
+/* Hover trang Giới thiệu (/about): ảnh giới thiệu zoom chậm trong khung bo góc; ô số liệu nhấc nhẹ và số đổi xanh;
+   thẻ thành viên nhấc 4px kèm viền xanh + bóng đổ, ảnh zoom, nhãn vai trò đổi xanh, tên đổi xanh.
+   (Thẻ Sứ mệnh .az-mission__item đã có hover ở phần hover trang chủ nên dùng chung.) */
+.az-about-intro__img { overflow: hidden; border-radius: var(--az-radius); }
+.az-about-intro__img img { transition: transform .9s var(--az-ease); }
+.az-about-stats__box .az-stat { transition: transform .45s var(--az-ease); }
+.az-about-stats__box .az-stat__num { transition: color .3s ease; }
+.az-section .az-member {
+	box-shadow: 0 0 0 1px transparent, 0 0 0 0 rgba(10, 42, 102, 0), 0 0 0 0 rgba(10, 42, 102, 0);
+	transition: transform .45s var(--az-ease), box-shadow .45s var(--az-ease), background-color .3s ease;
+}
+.az-section .az-member__photo { overflow: hidden; }   /* cắt ảnh khi zoom để không tràn sang cột chữ */
+.az-member__img img { transition: transform .9s var(--az-ease); }
+.az-section .az-member__role { transition: background-color .3s ease, color .3s ease, border-color .3s ease; }
+.az-member__name { transition: color .3s ease; }
+@media (hover: hover) and (pointer: fine) {
+	.az-about-intro__img:hover img { transform: scale(1.04); }
+	.az-about-stats__box .az-stat:hover { transform: translateY(-4px); }
+	.az-about-stats__box .az-stat:hover .az-stat__num { color: var(--az-accent-text); }
+	.az-section .az-member:hover {
+		transform: translateY(-4px);
+		background: #fff;
+		box-shadow: 0 0 0 1px var(--az-accent), 0 2px 4px rgba(10, 42, 102, .08), 0 16px 36px rgba(10, 42, 102, .12);
+	}
+	.az-member:hover .az-member__img img { transform: scale(1.06); }
+	.az-section .az-member:hover .az-member__role { color: #fff; background: var(--az-accent); border-left-color: var(--az-primary-dark); }
+	.az-member:hover .az-member__name { color: var(--az-accent-text); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.az-about-intro__img:hover img, .az-about-stats__box .az-stat:hover, .az-section .az-member:hover, .az-member:hover .az-member__img img { transform: none !important; }
 }
 .az-section.az-career-other .az-head { margin-bottom: 40px; }
 
