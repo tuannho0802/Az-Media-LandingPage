@@ -13,6 +13,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 
 ## [Unreleased]
 
+- [career] Hover thẻ việc làm (trang `/career` và mục "Vị trí khác" ở trang chi tiết): thẻ nhấc 4px, viền xanh và bóng đổ hiện dần (viền bằng `box-shadow` nên thẻ không đổi kích thước), nền đổi trắng, tiêu đề và icon đổi xanh, mũi tên "Xem chi tiết" trượt sang phải 5px thay cho gạch chân. Cùng đường cong `--az-ease` với các hover khác, chỉ bật khi có chuột, bỏ nhấc và mũi tên trượt khi `prefers-reduced-motion`.
+- [career] Hover khối "Cách ứng tuyển": thẻ bước 01-03 nhấc 4px, viền xanh và bóng đổ hiện dần, nền trắng; ô số đổi nền xanh chữ trắng và nhích phải; tiêu đề đổi xanh; ảnh bên phải zoom chậm 1,045 trong khung bo góc. Giới hạn trong `.az-apply` (class `.az-value`/`.az-values__img` còn dùng ở trang Giới thiệu nên không đổi). Chỉ bật khi có chuột, bỏ nhấc/zoom khi `prefers-reduced-motion`.
 ### Added
 - [global] Scroll reveal: các khối dưới màn hình đầu (tiêu đề, thẻ, ảnh lớn) mờ → rõ và trượt lên nhẹ khi cuộn tới; các khối cùng lượt hiện nối nhau (tối đa 6 bậc, 80ms). `az.js` tự gắn class theo danh sách selector nên không phải sửa pattern; khối đã thấy lúc tải, đã cuộn qua hoặc nhảy neo thì hiện luôn, không nháy. Xong animation thì gỡ hết class, hover của thẻ không đổi. Tắt khi `prefers-reduced-motion`.
 - [global] Animation vào trang cho hero, hero trang con và đầu bài viết bằng CSS thuần (class `az-js` đặt sớm trong `<head>`).

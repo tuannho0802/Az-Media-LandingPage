@@ -493,9 +493,60 @@ html { scroll-behavior: smooth; }
 .az-job:has(.az-job__title a:focus-visible) { outline: 2px solid var(--az-accent); outline-offset: 3px; }
 .az-section .az-job__foot { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-top: auto; }
 .az-job__more { font-size: .9375rem; font-weight: 600; color: var(--az-accent-text); text-decoration: none; }
-.az-job__more::after { content: " \2192"; }
-.az-job:hover .az-job__more { text-decoration: underline; }
+.az-job__more::after { content: "\2192"; display: inline-block; margin-left: .35em; transition: transform .4s var(--az-ease); } /* inline-block để mũi tên nhích được; khoảng trắng chuyển sang margin vì khoảng trắng đầu inline-block bị nuốt */
 .az-section--tint .az-job { background: #fff; }
+
+/* Hover thẻ việc làm (/career và "Vị trí khác"): thẻ nhấc 4px, viền xanh + bóng đổ hiện dần, tiêu đề đổi xanh,
+   icon đổi xanh, mũi tên "Xem chi tiết" trượt sang phải. Cùng đường cong --az-ease với các hover khác.
+   Viền dùng box-shadow (không dùng border) để thẻ không bị đổi kích thước; 3 lớp shadow ở cả hai trạng thái
+   để trình duyệt nội suy mượt. Chỉ bật khi có chuột (hover + pointer: fine) để trên cảm ứng không kẹt hover. */
+.az-section .az-job {
+	box-shadow: 0 0 0 1px transparent, 0 0 0 0 rgba(10, 42, 102, 0), 0 0 0 0 rgba(10, 42, 102, 0);
+	transition: transform .45s var(--az-ease), box-shadow .45s var(--az-ease), background-color .3s ease;
+}
+.az-job__title a { transition: color .3s ease; }
+.az-job__tag::before, .az-job__updated::before { transition: background-color .3s ease; }
+@media (hover: hover) and (pointer: fine) {
+	.az-section .az-job:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 0 0 1px var(--az-accent), 0 2px 4px rgba(10, 42, 102, .08), 0 16px 36px rgba(10, 42, 102, .12);
+	}
+	.az-section:not(.az-section--tint) .az-job:hover { background: #fff; }
+	.az-job:hover .az-job__title a { color: var(--az-accent-text); }
+	.az-job:hover :is(.az-job__tag, .az-job__updated)::before { background: var(--az-accent); }
+	.az-job:hover .az-job__more::after { transform: translateX(5px); }
+}
+/* Giảm chuyển động: giữ đổi màu/viền/bóng, bỏ nhấc và mũi tên trượt */
+@media (prefers-reduced-motion: reduce) {
+	.az-section .az-job:hover { transform: none !important; }
+	.az-job:hover .az-job__more::after { transform: none !important; }
+}
+
+/* Hover khối Cách ứng tuyển (/career): thẻ bước nhấc 4px với viền xanh + bóng đổ hiện dần, nền trắng; ô số 01-03
+   đổi sang nền xanh chữ trắng và nhích phải; tiêu đề đổi xanh; ảnh bên phải zoom chậm trong khung bo góc.
+   Giới hạn trong .az-apply vì .az-value/.az-values__img còn dùng ở trang Giới thiệu.
+   (.az-section và .az-apply cùng nằm trên một thẻ <section> nên không viết ".az-section .az-apply".) */
+.az-apply .az-value {
+	box-shadow: 0 0 0 1px transparent, 0 0 0 0 rgba(10, 42, 102, 0), 0 0 0 0 rgba(10, 42, 102, 0);
+	transition: transform .45s var(--az-ease), box-shadow .45s var(--az-ease), background-color .3s ease;
+}
+.az-apply .az-value .az-eyebrow { transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .4s var(--az-ease); }
+.az-apply .az-value__title { transition: color .3s ease; }
+.az-apply .az-values__img { overflow: hidden; border-radius: var(--az-radius); }
+.az-apply .az-values__img img { transition: transform .9s var(--az-ease); }
+@media (hover: hover) and (pointer: fine) {
+	.az-apply .az-value:hover {
+		transform: translateY(-4px);
+		background: #fff;
+		box-shadow: 0 0 0 1px var(--az-accent), 0 2px 4px rgba(10, 42, 102, .08), 0 16px 36px rgba(10, 42, 102, .12);
+	}
+	.az-apply .az-value:hover .az-eyebrow { color: #fff; background: var(--az-accent); border-left-color: var(--az-primary-dark); transform: translateX(3px); }
+	.az-apply .az-value:hover .az-value__title { color: var(--az-accent-text); }
+	.az-apply .az-values__img:hover img { transform: scale(1.045); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.az-apply .az-value:hover, .az-apply .az-value:hover .az-eyebrow, .az-apply .az-values__img:hover img { transform: none !important; }
+}
 .az-section.az-career-other .az-head { margin-bottom: 40px; }
 
 /* 7.16 Trang chi tiết vị trí tuyển dụng (single-career): hero dùng lại .az-page-hero, nội dung dùng lại .az-svc-content */
