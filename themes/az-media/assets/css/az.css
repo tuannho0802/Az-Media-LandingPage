@@ -336,7 +336,7 @@ html { scroll-behavior: smooth; }
 /* 7.9 FAQ: ô câu hỏi nền nhạt, câu trả lời hiện bên dưới ô */
 .az-section .az-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 72px); align-items: start; }
 .az-section .az-split__main { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
-.az-faq__list { display: flex; flex-direction: column; gap: 12px; }
+.az-faq__list { display: flex; flex-direction: column; gap: 12px; overflow-anchor: none; } /* không để trình duyệt tự cuộn bù khi mục phía trên co lại */
 .az-faq__item { background: none; border: 0; }
 .az-faq__summary { display: flex; align-items: center; gap: 10px; padding: 16px 20px; cursor: pointer; list-style: none; font-weight: 700; font-size: .9375rem; color: var(--az-primary-dark); background: var(--az-soft); border: 1px solid var(--az-border); border-radius: 8px; transition: border-color .2s; }
 .az-faq__summary::-webkit-details-marker { display: none; }
@@ -700,7 +700,8 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 .az-sol__icon, .az-sol__icon .wp-social-link { transition: transform .4s var(--az-ease), color .3s ease; }
 .az-why-us__img img, .az-solutions__img img { transition: transform .9s var(--az-ease); }
 .az-solutions__img { overflow: hidden; border-radius: var(--az-radius-lg); }
-.az-faq__summary { transition: border-color .25s ease, background-color .25s ease, transform .35s var(--az-ease); }
+.az-faq__summary { transition: border-color .25s ease, background-color .25s ease; }
+.az-faq__summary > * { transition: transform .35s var(--az-ease); }
 .az-footer__nav .wp-block-navigation-item__content { transition: color .25s ease, transform .35s var(--az-ease); }
 .az-contact::before { transition: transform .35s var(--az-ease), background-color .3s ease; }
 .az-section .wp-block-button__link:active { transform: translateY(0) scale(.98); box-shadow: none; }
@@ -726,8 +727,10 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 	.az-section .az-logos__item:hover { transform: translateY(-2px); background: #fff; border-color: rgba(10, 42, 102, .22); box-shadow: var(--az-shadow-hover); }
 	/* Ảnh lớn: zoom chậm trong khung */
 	.az-why-us__media:hover .az-why-us__img img, .az-solutions__img:hover img { transform: scale(1.045); }
-	/* FAQ: ô câu hỏi nhích sang phải và đổi nền */
-	.az-faq__summary:hover { transform: translateX(4px); background: var(--az-tint); }
+	/* FAQ: đổi nền ô, chữ bên trong nhích sang phải. Không dịch chuyển chính ô summary: ô trượt khỏi con trỏ
+	   ở mép trái làm mất hover rồi trượt lại → rung liên tục. */
+	.az-faq__summary:hover { background: var(--az-tint); }
+	.az-faq__summary:hover > * { transform: translateX(4px); }
 	/* Footer: link nhích sang phải, icon liên hệ phóng nhẹ */
 	.az-footer__nav .wp-block-navigation-item__content:hover { transform: translateX(4px); text-decoration: none; }
 	.az-footer .az-contact:hover::before { transform: scale(1.1); background: var(--az-primary); }
@@ -735,8 +738,9 @@ textarea.az-form__control { min-height: 140px; resize: vertical; }
 
 /* Giảm chuyển động: giữ đổi màu, bỏ nhấc/zoom/nhích */
 @media (prefers-reduced-motion: reduce) {
-	.az-section :is(.az-card, .az-mission__item, .az-sol, .az-quote, .az-plan, .az-hero__card, .az-hero__rating, .az-logos__item, .az-faq__summary):hover,
-	.az-section .az-plan:focus-within, .az-footer__nav .wp-block-navigation-item__content:hover { transform: none !important; }
+	.az-section :is(.az-card, .az-mission__item, .az-sol, .az-quote, .az-plan, .az-hero__card, .az-hero__rating, .az-logos__item):hover,
+	.az-section .az-plan:focus-within, .az-footer__nav .wp-block-navigation-item__content:hover,
+	.az-faq__summary:hover > * { transform: none !important; }
 	.az-why-us__img img, .az-solutions__img img { transform: none !important; }
 }
 

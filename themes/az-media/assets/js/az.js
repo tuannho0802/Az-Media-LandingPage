@@ -160,12 +160,92 @@
 		targets.forEach( function ( el ) { io.observe( el ); } );
 	}
 
-	/* FAQ: chỉ mở một mục tại một thời điểm trong cùng danh sách. */
+	/* FAQ: chỉ mở một mục tại một thời điểm trong cùng danh sách, có animation đóng/mở.
+	 * Lỗi cũ: <details> mở tức thì, còn việc đóng mục đang mở nằm ở sự kiện `toggle` (chạy sau) nên layout đổi
+	 * 2 nhịp liên tiếp (mục vừa bấm nhảy xuống rồi nảy lên hàng trăm px) → giật màn hình.
+	 * Giờ bấm là xử lý mục mở và mục đóng trong CÙNG một lượt, chiều cao câu trả lời chạy mượt bằng Web Animations API.
+	 * Không có JS / không có WAAPI thì <details> vẫn hoạt động như mặc định của trình duyệt. */
 	function initFaq() {
+		var DURATION = 340;
+		var EASING = 'cubic-bezier(.22, 1, .36, 1)';
+		var HIDDEN = { height: '0px', paddingTop: '0px', paddingBottom: '0px', opacity: '0' };
+
+		function snapshot( el ) {
+			var cs = window.getComputedStyle( el );
+			return { height: cs.height, paddingTop: cs.paddingTop, paddingBottom: cs.paddingBottom, opacity: cs.opacity };
+		}
+
+		function isOpen( item ) { return item.open && ! item._azClosing; }
+
+		/* Mở/đóng một mục. Gọi lại giữa chừng thì đảo chiều từ đúng chiều cao hiện tại (không nhảy). */
+		function setState( item, opening ) {
+			var panel = item.querySelector( '.az-faq__a' );
+			if ( ! panel || reduceMotion || ! panel.animate ) {
+				item._azClosing = false;
+				item.open = opening;
+				return;
+			}
+
+			var from = null;
+			if ( item._azAnim ) {
+				from = snapshot( panel );
+				item._azAnim.cancel();
+				item._azAnim = null;
+			}
+
+			var to;
+			if ( opening ) {
+				if ( ! item.open ) { item._azSkipToggle = true; item.open = true; }
+				item._azClosing = false;
+				to = snapshot( panel );              /* trạng thái tự nhiên của panel khi mở */
+				from = from || HIDDEN;
+			} else {
+				item._azClosing = true;
+				from = from || snapshot( panel );
+				to = HIDDEN;
+			}
+
+			panel.style.overflow = 'hidden';
+			var anim = panel.animate( [ from, to ], { duration: DURATION, easing: EASING, fill: 'forwards' } );
+			item._azAnim = anim;
+			anim.onfinish = function () {
+				if ( item._azAnim !== anim ) { return; }
+				item._azAnim = null;
+				if ( ! opening ) { item._azClosing = false; item.open = false; }
+				panel.style.overflow = '';
+				anim.cancel();
+			};
+		}
+
 		document.querySelectorAll( '.az-faq__list' ).forEach( function ( list ) {
+			list.addEventListener( 'click', function ( e ) {
+				var summary = e.target.closest && e.target.closest( '.az-faq__summary' );
+				if ( ! summary || ! list.contains( summary ) ) { return; }
+				var item = summary.parentElement;
+				if ( ! item || ! item.matches( '.az-faq__item' ) ) { return; }
+				e.preventDefault();                  /* tự điều khiển open để chạy animation */
+
+				var opening = ! isOpen( item );
+				if ( opening ) {
+					list.querySelectorAll( '.az-faq__item' ).forEach( function ( other ) {
+						if ( other !== item && isOpen( other ) ) { setState( other, false ); }
+					} );
+				}
+				setState( item, opening );
+			} );
+
+			/* Dự phòng khi mục được mở không qua click (tìm trong trang, #hash...): vẫn chỉ mở một mục. */
 			list.addEventListener( 'toggle', function ( e ) {
-				if ( ! e.target.open ) { return; }
-				list.querySelectorAll( 'details[open]' ).forEach( function ( d ) { if ( d !== e.target ) { d.open = false; } } );
+				var item = e.target;
+				if ( ! item.open ) { return; }
+				if ( item._azSkipToggle ) { item._azSkipToggle = false; return; }
+				list.querySelectorAll( '.az-faq__item' ).forEach( function ( other ) {
+					if ( other !== item && other.open ) {
+						if ( other._azAnim ) { other._azAnim.cancel(); other._azAnim = null; }
+						other._azClosing = false;
+						other.open = false;
+					}
+				} );
 			}, true );
 		} );
 	}

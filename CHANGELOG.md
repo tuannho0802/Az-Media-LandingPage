@@ -93,6 +93,8 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [theme] Ảnh tạm: thêm `placeholder-team.svg`, `placeholder-solutions.svg` cho các chỗ cần ảnh.
 
 ### Fixed
+- [faqs] Accordion FAQ không còn giật màn hình khi bấm mở/đóng và có animation đóng/mở chiều cao (340ms, cùng đường cong với phần còn lại). Nguyên nhân: mục cũ chỉ được đóng ở sự kiện `toggle` (chạy sau khi mục mới đã mở) nên layout đổi hai nhịp liên tiếp; nay đóng mục cũ và mở mục mới trong cùng một lượt, bấm nhanh giữa chừng thì đảo chiều từ đúng chiều cao hiện tại. Tắt animation khi `prefers-reduced-motion`.
+- [home] [faqs] Hover ô FAQ không còn rung khi rê chuột sát mép trái: hiệu ứng nhích phải chuyển từ cả ô `summary` sang phần chữ bên trong, ô không còn trượt khỏi con trỏ.
 - [home] Counter không còn nháy “số cuối → 0 → đếm” khi cuộn tới (đặt về 0 trước khi vào màn hình).
 - [global] Mobile: ô nhập (form Liên hệ, ô tìm kiếm ở Search và 404) đặt `font-size: 16px` dưới 900px để Safari iOS không tự phóng to khi focus.
 - [global] Mobile/xoay ngang (dưới 1024px): announcement bar không còn dính, chỉ header dính, tiết kiệm khoảng 40–55px chiều cao màn hình. `az.js` chỉ đo `--az-announce-h` khi bar thực sự `sticky`, nên header bám sát mép trên.
