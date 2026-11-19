@@ -79,7 +79,85 @@
 				if ( entry.isIntersecting ) { io.unobserve( entry.target ); run( entry.target ); }
 			} );
 		}, { threshold: 0.4 } );
-		nodes.forEach( function ( n ) { io.observe( n ); } );
+		nodes.forEach( function ( n ) {
+			/* Số nằm dưới màn hình: về 0 ngay từ đầu để lúc cuộn tới không bị nháy "số cuối → 0 → đếm". */
+			var r = n.getBoundingClientRect();
+			if ( r.top > window.innerHeight ) { n.textContent = '0' + ( n.getAttribute( 'data-az-suffix' ) || '' ); }
+			io.observe( n );
+		} );
+	}
+
+	/* Scroll reveal: mỗi khối hiện (mờ → rõ, trượt lên nhẹ) khi cuộn tới, các khối cùng lúc hiện lần lượt.
+	 * - Tự gắn class cho các khối theo danh sách bên dưới nên không phải sửa từng pattern.
+	 * - Khối đã nằm trong màn hình lúc tải trang hoặc đã cuộn qua thì để nguyên (không ẩn rồi hiện → không nháy).
+	 * - Section đầu trang (hero) dùng animation CSS riêng (html.az-js), không đi qua đây.
+	 * - Xong animation thì gỡ hết class/biến: không để lại stacking context, hover vẫn dùng `transform` như cũ.
+	 * - Tắt hẳn khi prefers-reduced-motion hoặc thiếu IntersectionObserver: nội dung luôn hiển thị. */
+	function initReveal() {
+		if ( reduceMotion || ! ( 'IntersectionObserver' in window ) ) { return; }
+		var main = document.querySelector( '.az-main' );
+		if ( ! main ) { return; }
+
+		var UNITS = [
+			'.az-head', '.az-why-us__head', '.az-test__head', '.az-apply__top',
+			'.az-card', '.az-mission__item', '.az-vm__block', '.az-sol', '.az-plan', '.az-quote',
+			'.az-service', '.az-svc-card', '.az-svc-quote', '.az-svc-row__body',
+			'.az-job', '.az-value', '.az-member', '.az-ctc-card', '.az-ctc-map',
+			'.az-post-card', '.az-legal-card', '.az-faq__item',
+			'.az-about-stats__box', '.az-cta__box', '.az-svc-why__main', '.az-contact-box'
+		];
+		var MEDIA = [
+			'.az-solutions__img', '.az-why-us__media', '.az-svc-row__media', '.az-values__img',
+			'.az-about-intro__img', '.az-contact-box__img', '.az-svc-detail__img'
+		];
+		var vh = window.innerHeight;
+		var firstSection = main.querySelector( '.az-section' );
+		var isMedia = function ( el ) { return el.matches( MEDIA.join( ',' ) ); };
+
+		var targets = [];
+		main.querySelectorAll( UNITS.concat( MEDIA ).join( ',' ) ).forEach( function ( el ) {
+			if ( firstSection && firstSection.contains( el ) ) { return; }          /* hero: animation CSS riêng */
+			var parent = el.parentElement && el.parentElement.closest( '.az-reveal' );
+			if ( parent ) { return; }                                                  /* không lồng reveal trong reveal */
+			var r = el.getBoundingClientRect();
+			if ( r.bottom <= 0 || r.top < vh * 0.92 ) { return; }                      /* đã thấy hoặc đã cuộn qua */
+			el.classList.add( 'az-reveal' );
+			if ( isMedia( el ) ) { el.classList.add( 'az-reveal--media' ); }
+			targets.push( el );
+		} );
+		if ( ! targets.length ) { return; }
+
+		function settle( el ) {
+			el.classList.remove( 'az-reveal', 'az-reveal--media', 'is-in' );
+			el.style.removeProperty( '--az-i' );
+		}
+
+		var io = new IntersectionObserver( function ( entries ) {
+			var showing = [];
+			entries.forEach( function ( entry ) {
+				var el = entry.target;
+				if ( entry.isIntersecting ) { showing.push( entry ); return; }
+				/* Nhảy cách xa (về đầu trang, neo, khôi phục vị trí cuộn): khối đã nằm phía trên thì hiện luôn, không animation. */
+				if ( entry.boundingClientRect.top < 0 ) { io.unobserve( el ); settle( el ); }
+			} );
+			/* Cùng một lượt: trên → dưới, trái → phải, tối đa 6 bậc trễ để hàng thẻ hiện nối nhau mà không chờ lâu. */
+			showing.sort( function ( a, b ) {
+				return ( a.boundingClientRect.top - b.boundingClientRect.top ) || ( a.boundingClientRect.left - b.boundingClientRect.left );
+			} );
+			showing.forEach( function ( entry, i ) {
+				var el = entry.target;
+				io.unobserve( el );
+				el.style.setProperty( '--az-i', Math.min( i, 5 ) );
+				el.classList.add( 'is-in' );
+				var done = false;
+				function finish() { if ( done ) { return; } done = true; el.removeEventListener( 'animationend', onEnd ); settle( el ); }
+				function onEnd( e ) { if ( e.target === el && e.animationName.indexOf( 'az-rise' ) === 0 ) { finish(); } }
+				el.addEventListener( 'animationend', onEnd );
+				window.setTimeout( finish, 2200 ); /* dự phòng nếu animationend không bắn (tab ẩn...) */
+			} );
+		}, { rootMargin: '0px 0px -8% 0px', threshold: 0 } );
+
+		targets.forEach( function ( el ) { io.observe( el ); } );
 	}
 
 	/* FAQ: chỉ mở một mục tại một thời điểm trong cùng danh sách. */
@@ -263,6 +341,7 @@
 		initHeader();
 		initMobileMenu();
 		initCounters();
+		initReveal();
 		initFaq();
 		initCursor();
 		initBackToTop();

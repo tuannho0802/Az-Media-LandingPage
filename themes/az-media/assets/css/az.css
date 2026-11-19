@@ -972,3 +972,39 @@ html.has-modal-open .az-site-header { z-index: 100001; }
 @media (prefers-reduced-motion: reduce) {
 	.az-site-header .az-nav.az-nav .wp-block-navigation__responsive-container .wp-block-navigation__container > .wp-block-navigation-item { opacity: 1; transform: none; }
 }
+
+/* 14. SCROLL REVEAL + CHUYỂN TRANG
+   - Reveal: az.js gắn .az-reveal cho các khối dưới màn hình đầu, thêm .is-in khi cuộn tới, rồi tự gỡ class sau khi chạy xong.
+     Dùng thuộc tính `translate`/`scale` (không dùng `transform`) để không đụng hover của thẻ (hover dùng `transform`).
+   - Hero / hero trang con: animation vào trang bằng CSS thuần, chỉ cần html.az-js (đặt sớm trong <head>) nên không bị nháy.
+   - Chuyển trang: View Transitions đa tài liệu (Chrome/Edge, Safari 18.2+). Trình duyệt chưa hỗ trợ thì html.az-no-vt → fade-in nhẹ.
+   Toàn bộ nằm trong prefers-reduced-motion: no-preference. Editor không có html.az-js nên không bị ảnh hưởng. */
+@media (prefers-reduced-motion: no-preference) {
+	@keyframes az-rise { from { opacity: 0; translate: 0 28px; } to { opacity: 1; translate: 0 0; } }
+	@keyframes az-rise-media { from { opacity: 0; translate: 0 20px; scale: .97; } to { opacity: 1; translate: 0 0; scale: 1; } }
+	@keyframes az-fade { from { opacity: 0; } to { opacity: 1; } }
+
+	/* Reveal khi cuộn */
+	.az-reveal { opacity: 0; }
+	.az-reveal.is-in { animation: az-rise .75s var(--az-ease) both; animation-delay: calc(var(--az-i, 0) * 80ms); }
+	.az-reveal--media.is-in { animation-name: az-rise-media; }
+
+	/* Vào trang: hero (trang chủ), hero trang con, đầu bài viết */
+	.az-js :is(.az-hero__content, .az-page-hero__inner, .az-post-head__inner) > *,
+	.az-js .az-hero__visual,
+	.az-js .az-post-head__img { animation: az-rise .8s var(--az-ease) both; }
+	.az-js :is(.az-hero__content, .az-page-hero__inner, .az-post-head__inner) > :nth-child(1) { animation-delay: .04s; }
+	.az-js :is(.az-hero__content, .az-page-hero__inner, .az-post-head__inner) > :nth-child(2) { animation-delay: .12s; }
+	.az-js :is(.az-hero__content, .az-page-hero__inner, .az-post-head__inner) > :nth-child(3) { animation-delay: .2s; }
+	.az-js :is(.az-hero__content, .az-page-hero__inner, .az-post-head__inner) > :nth-child(4) { animation-delay: .28s; }
+	.az-js :is(.az-hero__content, .az-page-hero__inner, .az-post-head__inner) > :nth-child(n+5) { animation-delay: .36s; }
+	.az-js .az-hero__visual { animation-delay: .22s; }
+	.az-js .az-post-head__img { animation-delay: .3s; }
+
+	/* Chuyển trang: crossfade giữa hai tài liệu cùng origin; header giống nhau ở hai trang nên gần như đứng yên */
+	@view-transition { navigation: auto; }
+	::view-transition-group(root) { animation-duration: .3s; animation-timing-function: ease; }
+
+	/* Trình duyệt chưa có View Transitions: nội dung chính hiện dần khi tải trang (chỉ opacity để không phá sticky bên trong) */
+	.az-no-vt .az-main { animation: az-fade .45s ease both; }
+}

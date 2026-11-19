@@ -14,6 +14,9 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 ## [Unreleased]
 
 ### Added
+- [global] Scroll reveal: các khối dưới màn hình đầu (tiêu đề, thẻ, ảnh lớn) mờ → rõ và trượt lên nhẹ khi cuộn tới; các khối cùng lượt hiện nối nhau (tối đa 6 bậc, 80ms). `az.js` tự gắn class theo danh sách selector nên không phải sửa pattern; khối đã thấy lúc tải, đã cuộn qua hoặc nhảy neo thì hiện luôn, không nháy. Xong animation thì gỡ hết class, hover của thẻ không đổi. Tắt khi `prefers-reduced-motion`.
+- [global] Animation vào trang cho hero, hero trang con và đầu bài viết bằng CSS thuần (class `az-js` đặt sớm trong `<head>`).
+- [global] Chuyển trang mượt: CSS View Transitions đa tài liệu (`@view-transition`), crossfade 0,3s; trình duyệt chưa hỗ trợ (`az-no-vt`) thì nội dung chính fade-in 0,45s.
 - [blog] Trang Blog mới: `templates/home.html` + `archive.html`, pattern `az-blog-hero`, `az-blog-list` (chip danh mục, bài nổi bật trang 1, lưới 3 cột, phân trang), CSS thẻ bài.
 - [blog-single] Bài chi tiết: `single.html`, pattern `az-post-header`, `az-blog-related`, cột đọc 760px.
 - [core] Block `az-media/read-time` ("N phút đọc").
@@ -63,6 +66,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [docs] File `CHANGELOG.md`.
 
 ### Changed
+- [global] `az.css`/`az.js` đánh phiên bản theo `filemtime` thay vì hằng `AZ_MEDIA_VERSION`: deploy FTP xong trình duyệt/CDN lấy bản mới ngay.
 - [global] Menu mobile (dưới 1024px) làm lại: ngăn kéo trượt từ phải trên nền mờ (blur), nút hamburger và nút đóng dạng ô bo góc (vạch xoay thành dấu X), các mục cấp 1 chữ lớn có mũi tên và hiện lần lượt, "Trang" thành nhãn + danh sách con thụt vào (bỏ thẻ nổi có bóng), hai nút CTA ghim đáy. Mở và đóng đều có animation (container luôn render, ẩn bằng `visibility` có độ trễ thay vì `display: none` của core). Bấm nền mờ để đóng (`az.js`). Chỉ ảnh hưởng dưới 1024px; desktop giữ nguyên.
 - [global] Header: “Blog” thành mục cấp 1 (đứng sau “Dịch vụ”), bỏ khỏi menu con “Trang” (còn FAQs, Tuyển dụng, Liên hệ).
 - [theme] Hover header mượt hơn (desktop): link cấp 1 đổi màu mềm kèm gạch chân chạy từ trái; mũi tên dropdown xoay; dropdown "Trang" trượt lên và hiện dần (trước đây bật lên tức thì), mở trễ 80ms, đóng trễ 150ms để rê chuột chéo không bị đóng, các mục hiện lần lượt; nút Bảng giá/Liên hệ đổi màu và nhấc nhẹ.
@@ -89,6 +93,7 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 - [theme] Ảnh tạm: thêm `placeholder-team.svg`, `placeholder-solutions.svg` cho các chỗ cần ảnh.
 
 ### Fixed
+- [home] Counter không còn nháy “số cuối → 0 → đếm” khi cuộn tới (đặt về 0 trước khi vào màn hình).
 - [global] Mobile: ô nhập (form Liên hệ, ô tìm kiếm ở Search và 404) đặt `font-size: 16px` dưới 900px để Safari iOS không tự phóng to khi focus.
 - [global] Mobile/xoay ngang (dưới 1024px): announcement bar không còn dính, chỉ header dính, tiết kiệm khoảng 40–55px chiều cao màn hình. `az.js` chỉ đo `--az-announce-h` khi bar thực sự `sticky`, nên header bám sát mép trên.
 - [404-search] Ô tìm kiếm ở 320px bị cao 62px vì nút "Tìm kiếm" xuống 2 dòng kéo giãn ô nhập: nút `nowrap`, dưới 420px nút xuống hàng riêng.

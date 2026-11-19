@@ -53,15 +53,31 @@ add_action( 'after_setup_theme', function () {
  * CSS và JS. Font tự host qua theme.json (fontFace), không dùng CDN.
  */
 add_action( 'wp_enqueue_scripts', function () {
-	wp_enqueue_style( 'az-media', get_theme_file_uri( 'assets/css/az.css' ), array(), AZ_MEDIA_VERSION );
+	// Phiên bản theo thời gian sửa file: deploy FTP xong là trình duyệt/CDN lấy ngay az.css/az.js mới,
+	// không phải nhớ tăng AZ_MEDIA_VERSION (hằng số chỉ còn là giá trị dự phòng).
+	$ver = static function ( $rel ) {
+		$path = get_theme_file_path( $rel );
+		return file_exists( $path ) ? (string) filemtime( $path ) : AZ_MEDIA_VERSION;
+	};
+	wp_enqueue_style( 'az-media', get_theme_file_uri( 'assets/css/az.css' ), array(), $ver( 'assets/css/az.css' ) );
 	wp_enqueue_script(
 		'az-media',
 		get_theme_file_uri( 'assets/js/az.js' ),
 		array(),
-		AZ_MEDIA_VERSION,
+		$ver( 'assets/js/az.js' ),
 		array( 'strategy' => 'defer', 'in_footer' => true )
 	);
 } );
+
+/**
+ * Đặt class sớm trên <html> (trước khi trình duyệt vẽ) để CSS biết có JS và có View Transitions hay không:
+ * - az-js: bật animation vào trang cho hero, không bị nháy vì class có trước lần vẽ đầu.
+ * - az-no-vt: trình duyệt chưa hỗ trợ View Transitions đa tài liệu → dùng fade-in dự phòng.
+ * Không tải được az.js thì reveal không bao giờ ẩn nội dung (class ẩn do az.js gắn).
+ */
+add_action( 'wp_head', function () {
+	echo "<script>(function(r){r.classList.add('az-js');if(!('CSSViewTransitionRule' in window)){r.classList.add('az-no-vt');}})(document.documentElement);</script>\n";
+}, 0 );
 
 /**
  * Preload font chính (latin + vietnamese).
