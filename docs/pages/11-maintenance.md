@@ -93,3 +93,4 @@ Trang này **cố ý khác demo**, nên không đối chiếu từng mục với
 | Ngày | Thay đổi | Commit/PR |
 |---|---|---|
 | 17/11/2026 | Làm lại plan: khác demo có chủ đích (trang độc lập, nền đậm, không ảnh, có tiến độ + thời gian dự kiến), thêm cơ chế bật/tắt thật. Dựng template `page-maintenance-mode.html`, pattern `az-maintenance`, `includes/maintenance.php`. Gỡ mục Bảo trì khỏi menu header. Chưa xem bằng trình duyệt/WordPress thật | |
+| 20/11/2026 | Logo AZ Media bản trắng thay chữ site-title ở đầu trang. Chưa xem bằng trình duyệt/WordPress thật | |

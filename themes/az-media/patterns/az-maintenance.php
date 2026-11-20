@@ -8,7 +8,9 @@
 ?>
 <!-- wp:group {"tagName":"section","align":"full","className":"az-maint__section","layout":{"type":"constrained"}} -->
 <section class="wp-block-group alignfull az-maint__section"><!-- wp:group {"className":"az-maint__inner"} -->
-<div class="wp-block-group az-maint__inner"><!-- wp:site-title {"level":0,"className":"az-logo az-maint__logo"} /-->
+<div class="wp-block-group az-maint__inner"><!-- wp:html -->
+<a class="az-brand az-maint__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/logo-az-media-white.png' ) ); ?>" alt="AZ Media" width="1200" height="205" decoding="async"></a>
+<!-- /wp:html -->
 
 <!-- wp:html -->
 <p class="az-maint__status" role="status"><span class="az-maint__dot" aria-hidden="true"></span>Đang bảo trì hệ thống</p>

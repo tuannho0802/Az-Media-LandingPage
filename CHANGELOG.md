@@ -13,6 +13,9 @@ Mọi thay đổi đáng chú ý của dự án AZ Media được ghi tại đâ
 
 ## [Unreleased]
 
+- [global] Logo AZ Media thật (ảnh PNG trong suốt, bản xanh đậm và bản trắng) thay chữ `site-title` ở header: pattern ẩn `az-media/site-logo` (template part `.html` không chạy PHP nên lấy URL ảnh qua pattern), cao 30px desktop, 26px mobile, bấm về trang chủ. Thay `.az-logo` (chữ + ô vuông xanh) bằng `.az-brand` trong `az.css`.
+- [maintenance] Trang Bảo trì dùng logo bản trắng trên nền đậm (cao 34–46px theo màn hình).
+- [theme] Favicon và apple-touch-icon mặc định bằng biểu tượng AZ Media (`az-media-icon-192.png`, `az-media-icon-512.png`) khi chưa đặt Site Icon trong WordPress; đã đặt thì dùng Site Icon.
 - [career] Hover thẻ việc làm (trang `/career` và mục "Vị trí khác" ở trang chi tiết): thẻ nhấc 4px, viền xanh và bóng đổ hiện dần (viền bằng `box-shadow` nên thẻ không đổi kích thước), nền đổi trắng, tiêu đề và icon đổi xanh, mũi tên "Xem chi tiết" trượt sang phải 5px thay cho gạch chân. Cùng đường cong `--az-ease` với các hover khác, chỉ bật khi có chuột, bỏ nhấc và mũi tên trượt khi `prefers-reduced-motion`.
 - [career] Hover khối "Cách ứng tuyển": thẻ bước 01-03 nhấc 4px, viền xanh và bóng đổ hiện dần, nền trắng; ô số đổi nền xanh chữ trắng và nhích phải; tiêu đề đổi xanh; ảnh bên phải zoom chậm 1,045 trong khung bo góc. Dùng chung selector `.az-values` nên khối Giá trị ở trang Giới thiệu có hiệu ứng giống hệt. Chỉ bật khi có chuột, bỏ nhấc/zoom khi `prefers-reduced-motion`.
 - [about] Hover trang Giới thiệu: ảnh giới thiệu zoom chậm 1,04 trong khung bo góc; ô số liệu nhấc 4px và số đổi xanh; khối Giá trị (thẻ + ảnh) giống khối Cách ứng tuyển; thẻ thành viên nhấc 4px kèm viền xanh + bóng đổ, ảnh zoom 1,06 (cắt trong khung ảnh), nhãn vai trò đổi nền xanh chữ trắng, tên đổi xanh. Thẻ Sứ mệnh dùng lại hover sẵn có của trang chủ. Chỉ bật khi có chuột, bỏ nhấc/zoom khi `prefers-reduced-motion`.

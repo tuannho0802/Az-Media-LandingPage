@@ -27,7 +27,7 @@ Các thành phần xuất hiện ở mọi trang. Làm và nghiệm thu trước
 
 ## 3. Nội dung AZ Media cần chuẩn bị
 
-- Logo AZ Media (SVG, bản sáng/tối), favicon.
+- Logo AZ Media (SVG, bản sáng/tối), favicon. Đã có logo PNG (bản xanh/trắng) và favicon; nếu có file SVG gốc thì thay vào `assets/img/`.
 - Menu chính thức và 4 cột link footer.
 - Email, điện thoại, địa chỉ, kênh social thật.
 - Câu announcement.
@@ -89,6 +89,7 @@ Mở song song: demo (https://reachout.nexmotivedemo.com/) và trang AZ Media lo
 | 17/11/2026 | Gỡ mục "Bảo trì" khỏi dropdown Trang: trang bảo trì chỉ hiện khi bật chế độ bảo trì hoặc xem trước bằng URL, xem `11-maintenance.md` | |
 | 17/11/2026 | Mobile: announcement bar không dính dưới 1024px, ô nhập 16px chống zoom iOS, gap footer 2 cột | |
 | 17/11/2026 | Làm lại menu mobile: nút hamburger/đóng mới, ngăn kéo trượt từ phải + nền mờ, mục hiện lần lượt, submenu thụt vào thay vì thẻ nổi, bấm nền để đóng. Chưa xem bằng trình duyệt | |
+| 20/11/2026 | Gắn logo AZ Media (ảnh, bản xanh và bản trắng) vào header qua pattern `az-site-logo`, thay chữ site-title; thêm favicon mặc định. Chưa xem bằng trình duyệt/WordPress thật | |
 
 ## Con trỏ chuột tuỳ biến
 

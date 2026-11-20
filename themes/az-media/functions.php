@@ -80,6 +80,21 @@ add_action( 'wp_head', function () {
 }, 0 );
 
 /**
+ * Favicon mặc định bằng biểu tượng AZ Media khi chưa đặt Site Icon trong Customizer / Site Editor.
+ * Đã đặt Site Icon thì WordPress tự xuất thẻ icon, không in thêm ở đây.
+ */
+add_action( 'wp_head', function () {
+	if ( has_site_icon() ) {
+		return;
+	}
+	printf(
+		'<link rel="icon" href="%1$s" type="image/png" sizes="192x192">' . "\n" . '<link rel="apple-touch-icon" href="%2$s">' . "\n",
+		esc_url( get_theme_file_uri( 'assets/img/az-media-icon-192.png' ) ),
+		esc_url( get_theme_file_uri( 'assets/img/az-media-icon-512.png' ) )
+	);
+}, 2 );
+
+/**
  * Preload font chính (latin + vietnamese).
  */
 add_action( 'wp_head', function () {
